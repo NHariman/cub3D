@@ -1,0 +1,82 @@
+the rules of the project:
+- must use miniLibX
+- window management must remain smooth, changing to another window, minimising etc.
+- must have different wall textures (4 in total)
+- must display item instead of wall
+- must set floor + ceiling to different ones
+- --save triggers a bmp screenshot if it is the second argument
+- if no second argument is supplied the image turns into a game
+	- left right arrow keys to look left and right
+	- WASD to mov the POV though the maze
+	- ESC to exit the window and quit cleanly
+	- clicking on the red cross on the window frame must also close the window and quit cleanly
+	- if declared screen size in the map is greater than the displa resolution the window siz will set depending on the current display resolution.
+	- the use of images of the miniibX is strongly recommended.
+
+THE PROGRAM ITSELF:
+0: empty space
+1: wall
+2: item
+N, S, E, W: player spawn point and orientation
+
+a valid map:
+- must be closed (surrounded by walls), if not, error.
+- except for map content, each type of element can be separated by one or more empty lines.
+- except for map content, which must be set to the last, each type of element can be
+  set in any order in the file.
+- except for the map, each type of information can be separated by one or more spaces.
+- the map must be parsed as it looks like in the file. saes are a valid part of the map!
+  must parse any kind of map, as long as it's a valid one.
+
+MAP IDENTIFIERS:
+Each element (except the map) firsts information is the type identifier, folowed by specific information for each object
+this order is STRICT.
+
+- RESOLUTION:
+R x y
+
+- NORTH TEXTURE:
+NO ./path_to_the_north_texture
+
+- SOUTH TEXTURE:
+SO ./path_to_the_south_texture
+
+- WEST TEXTURE:
+WE ./path_to_the_west_texture
+
+- EAST TEXTURE:
+EA ./path_to_the_east_texture
+
+- SPRITE TEXTURE:
+S ./path_to_the_sprite_texture
+
+- FLOOR COLOUR:
+F 220,100,0 (RGB COLOUR RANGE [0, 225]): 0, 255, 255
+
+- CEILING COLOUR:
+C 225,30,0 (DITTO, FLOOR COLOUR)
+
+VALID MAP EXAMPLE:
+
+R 1920 1080
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
+S ./path_to_the_sprite_texture
+F 220,100,0
+C 225,30,0
+1111111111111111111111111
+1000000000110000000000001
+1011000001110000002000001
+1001000000000000000000001
+111111111011000001110000000000001
+100000000011000001110111111111111
+11110111111111011100000010001
+11110111111111011101010010001
+11000000110101011100000010001
+10002000000000001100000010001
+10000000000000001101010010001
+11000001110101011111011110N0111
+11110111 1110101 101111010001
+11111111 1111111 111111111111
