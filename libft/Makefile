@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/07/13 20:14:42 by nhariman      ########   odam.nl          #
+#    Updated: 2020/07/14 00:43:27 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ COMPILE = 	gcc
 
 FLAGS = 	-Wall -Werror -Wextra
 
-CLIBFT = 	ft_atoi.c \
+CFILES = 	ft_atoi.c \
 			ft_bzero.c \
 			ft_isalnum.c \
 			ft_isalpha.c\
@@ -59,36 +59,30 @@ CBONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 ft_lstiter_bonus.c ft_lstclear_bonus.c ft_lstmap_bonus.c
 
-OLIBFT = $(CLIBFT:.c=.o)
+OFILES = $(CFILES:.c=.o)
 
-OPRINTF = $(CPRINTF:.c=.o)
+OBONUS = $(CBONUS:.c=.o)
 
-NAME = libftprintf.a
+NAME = libft.a
 
-LIBFT = libft.a
+all: $(NAME)
 
-LIBFTDIR = ./libft/
-
-all: $(LIBFT) $(NAME)
-
-$(LIBFT):
-	make -C $(LIBFTDIR)
-
-$(NAME): $(OLIBFT) $(OPRINTF)
+$(NAME): $(OFILES)
 	ar rcs $@ $^
 
-%.o: %.c libftprintf.h ft_printf.h
-	$(COMPILE) $(FLAGS) -o $@ -c $<
+%.o: %.c libft.h
+	$(COMPILE) -c $(FLAGS) -o $@ $<
 
 clean:
-	$(RM) $(OPRINTF)
-	make -s -C libft clean
+	$(RM) $(OFILES) $(OBONUS)
 
 fclean: clean
 	$(RM) $(NAME)
-	make -s -C libft fclean
 
 re: fclean all
 
 lldb: fclean
-	$(COMPILE) -g $(CLIBFT) $(CPRINTF) -I./
+	$(COMPILE) -g $(CFILES) -I./
+
+bonus: $(OFILES) $(OBONUS)
+	ar rcs $(NAME) $^

@@ -6,14 +6,14 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 16:47:58 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/10 17:48:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 00:37:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-# include "libft/libft.h"
+# include "libft.h"
 # include <stdarg.h>
 
 typedef struct	s_flag

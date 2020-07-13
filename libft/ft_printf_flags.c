@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 18:22:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/01 16:41:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 00:44:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
 void					ft_flags(const char *format, int *i, t_flag *flags)
 {

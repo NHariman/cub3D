@@ -6,12 +6,11 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/01 16:44:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 00:45:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include "ft_printf.h"
+#include "libft.h"
 
 static void			ft_format(const char c, va_list argp,
 								int *count, t_flag *flags)

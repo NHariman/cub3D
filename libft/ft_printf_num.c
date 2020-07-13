@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/01 16:42:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 00:44:21 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
 void			ft_print_hex(const char c, unsigned long nb, int *count)
 {

@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/10 17:49:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 00:44:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
 static long			ft_numlen(long n)
 {

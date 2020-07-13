@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/10 22:28:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 00:46:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_arrlen(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i] != '\0')
+	while (arr[i])
 		i++;
 	return (i);
 }
@@ -75,7 +75,7 @@ int		map_parser(t_cub *cub)
 	while (i == 1)
 	{
 		i = get_next_line(cub);
-		if (i == 1)
+		if (i == 1 && cub->cubfile)
 			cubfile_elongator(cub);
 		else if (i == -1)
 		{
