@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/07/06 16:59:39 by nhariman      ########   odam.nl          #
+#    Updated: 2020/07/10 18:59:24 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ COMPILE = gcc
 
 FLAGS = -Wall -Werror -Wextra
 
-#CFILES = 
+CFILES = main.c parser.c
 
 #CBONUS =
 

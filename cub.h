@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/08 22:20:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/10 20:14:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_cub
 	char	*cubpath;
 	int		save;
 	char	**cubfile;
-	char	filesize;
+	int		filesize;
 	int		x;
 	int		y;
 	char	*no;
@@ -59,6 +59,9 @@ typedef struct	s_gnl
 	int		newline;
 }				t_gnl;
 
-int				get_next_line(t_cub cub);
+int				get_next_line(t_cub *cub);
+void			empty_cub(t_cub *cub);
+void			free_array(char **arr);
+int				map_parser(t_cub *cub);
 
 #endif

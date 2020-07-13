@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/08 22:17:28 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/08 22:21:26 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/10 20:45:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char		*read_line(t_gnl *gnl)
 		gnl->bytes_read = read(gnl->fd, gnl->buf, 1000);
 		if (gnl->bytes_read < 0)
 			return (NULL);
-		gnl->buf[1001] = '\0';
+		gnl->buf[1000] = '\0';
 		if (!gnl->line_read)
 			gnl->line_read = ft_strdup(gnl->buf);
 		else
@@ -53,7 +53,7 @@ static char		*read_line(t_gnl *gnl)
 	return (gnl->line_read);
 }
 
-static char		*fill_line(t_gnl *gnl, t_cub *cub)
+static int		fill_line(t_gnl *gnl, t_cub *cub)
 {
 	int		newline;
 	size_t	remainder;
@@ -76,29 +76,46 @@ static char		*fill_line(t_gnl *gnl, t_cub *cub)
 	return (newline != -1 && remainder ? 1 : 0);
 }
 
+static char				*fill_leftover(char *str)
+{
+	int		newline;
+	char	*leftover;
+
+	newline = find_newline(str);
+	if (newline != -1)
+	{
+		leftover = ft_substr(str, newline + 1, ft_strlen(str) - newline - 1);
+		if (!leftover)
+			return (NULL);
+	}
+	else
+		return (NULL);
+	return (leftover);
+}
+
 int				get_next_line(t_cub *cub)
 {
 	static char		*leftover;
-	t_gnl			*gnl;
+	t_gnl			gnl;
 	int				ret;
 
-	gnl->line_read = NULL;
-	gnl->fd = open(cub->cubpath, O_RDONLY);
-	cub->cubfile = gnl->line_read;
+	gnl.line_read = NULL;
+	gnl.fd = open(cub->cubpath, O_RDONLY);
+	cub->cubfile[cub->filesize] = gnl.line_read;
 	if (leftover)
 	{
-		gnl->line_read = ft_strdup(leftover);
+		gnl.line_read = ft_strdup(leftover);
 		free(leftover);
 		leftover = NULL;
 	}
-	if (find_newline(gnl->line_read) == -1)
-		gnl->line_read = read_line(gnl);
-	if (!gnl->line_read)
+	if (find_newline(gnl.line_read) == -1)
+		gnl.line_read = read_line(&gnl);
+	if (!gnl.line_read)
 		return (-1);
-	ret = fill_line(gnl, cub->cubfile);
-	gnl->newline = find_newline(gnl->line_read);
-	if (gnl->newline != -1)
-		leftover = fill_leftover(gnl->line_read);
-	free(gnl->line_read);
-	return ((gnl->newline != -1 && !leftover) ? -1 : ret);
+	ret = fill_line(&gnl, cub);
+	gnl.newline = find_newline(gnl.line_read);
+	if (gnl.newline != -1)
+		leftover = fill_leftover(gnl.line_read);
+	free(gnl.line_read);
+	return ((gnl.newline != -1 && !leftover) ? -1 : ret);
 }

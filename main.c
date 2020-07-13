@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/08 22:25:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/10 20:46:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,29 @@ static size_t	input_check(int argc, char **argv, t_cub *cub)
 int				main(int argc, char **argv)
 {
 	t_cub	cub;
+	int		i;
 
+	i = 0;
 	empty_cub(&cub);
 	cub.cubpath = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
 	if (input_check(argc, argv, &cub))
+	{	
 		ft_printf("yay i print smth.\ncub->save: %i\n", cub.save);
+		map_parser(&cub);
+	}
+	if (cub.cubfile)
+	{
+		while (cub.cubfile[i] != '\0')
+		{
+			ft_printf("%s\n", cub.cubfile[i]);
+			i++;
+		}
+	}
+	else
+	{
+		ft_printf("lol that didn't work\n");
+	}
+	
+//	free_array(cub->cubfile);
 	return (0);
 }
