@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/14 00:47:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 00:49:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 # include "mlx/mlx.h"
 # include "libft/libft.h"
-# include "libft/ft_printf.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
