@@ -6,15 +6,15 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/08 22:17:28 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/10 20:45:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 22:21:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static int		find_newline(char *str)
+static int				find_newline(char *str)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (str && str[i] != '\0')
@@ -26,52 +26,52 @@ static int		find_newline(char *str)
 	return (-1);
 }
 
-static char		*read_line(t_gnl *gnl)
+static char				*read_line(t_gnl gnl)
 {
-	char	*tmp;
+	char		buf[1000 + 1];
+	char		*tmp;
 
-	gnl->bytes_read = 1;
-	while (gnl->bytes_read > 0)
+	gnl.bytes_read = 1;
+	while (gnl.bytes_read > 0)
 	{
-		gnl->bytes_read = read(gnl->fd, gnl->buf, 1000);
-		if (gnl->bytes_read < 0)
+		gnl.bytes_read = read(gnl.fd, buf, 1000);
+		if (gnl.bytes_read < 0)
 			return (NULL);
-		gnl->buf[1000] = '\0';
-		if (!gnl->line_read)
-			gnl->line_read = ft_strdup(gnl->buf);
+		buf[gnl.bytes_read] = '\0';
+		if (!gnl.line_read)
+			gnl.line_read = ft_strdup(buf);
 		else
 		{
-			tmp = ft_strjoin(gnl->line_read, gnl->buf);
-			gnl->line_read = !tmp ? NULL : ft_strdup(tmp);
+			tmp = ft_strjoin(gnl.line_read, buf);
+			gnl.line_read = (!tmp ? NULL : ft_strdup(tmp));
 			free(tmp);
 		}
-		if (!gnl->line_read)
+		if (!gnl.line_read)
 			return (NULL);
-		if (find_newline(gnl->buf) > -1)
+		if (find_newline(buf) > -1)
 			break ;
 	}
-	return (gnl->line_read);
+	return (gnl.line_read);
 }
 
-static int		fill_line(t_gnl *gnl, t_cub *cub)
+static int				fill_line(t_gnl gnl, char **line)
 {
 	int		newline;
 	size_t	remainder;
 
-	newline = find_newline(gnl->line_read);
+	newline = find_newline(gnl.line_read);
 	remainder = 0;
 	if (newline != -1)
 	{
 		if (newline != 0)
-			cub->cubfile[cub->filesize] =
-					ft_substr(gnl->line_read, 0, newline);
+			*line = ft_substr(gnl.line_read, 0, newline);
 		else
-			cub->cubfile[cub->filesize] = ft_strdup("");
+			*line = ft_strdup("");
 		remainder = 1;
 	}
 	else
-		cub->cubfile[cub->filesize] = ft_strdup(gnl->line_read);
-	if (!cub->cubfile[cub->filesize])
+		*line = ft_strdup(gnl.line_read);
+	if (!*line)
 		return (-1);
 	return (newline != -1 && remainder ? 1 : 0);
 }
@@ -93,15 +93,17 @@ static char				*fill_leftover(char *str)
 	return (leftover);
 }
 
-int				get_next_line(t_cub *cub)
+int						get_next_line(int fd, char **line)
 {
 	static char		*leftover;
 	t_gnl			gnl;
 	int				ret;
 
+	if (fd < 0 || line == NULL)
+		return (-1);
 	gnl.line_read = NULL;
-	gnl.fd = open(cub->cubpath, O_RDONLY);
-	cub->cubfile[cub->filesize] = gnl.line_read;
+	gnl.fd = fd;
+	*line = gnl.line_read;
 	if (leftover)
 	{
 		gnl.line_read = ft_strdup(leftover);
@@ -109,10 +111,11 @@ int				get_next_line(t_cub *cub)
 		leftover = NULL;
 	}
 	if (find_newline(gnl.line_read) == -1)
-		gnl.line_read = read_line(&gnl);
+		gnl.line_read = read_line(gnl);
 	if (!gnl.line_read)
 		return (-1);
-	ret = fill_line(&gnl, cub);
+	ret = fill_line(gnl, line);
+	ft_printf("%s\n", line);
 	gnl.newline = find_newline(gnl.line_read);
 	if (gnl.newline != -1)
 		leftover = fill_leftover(gnl.line_read);

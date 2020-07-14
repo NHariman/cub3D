@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/14 00:46:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 22:12:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,36 +47,39 @@ void	free_array(char **arr)
 	arr = NULL;
 }
 
-void	cubfile_elongator(t_cub *cub)
+void	cubfile_elongator(char **arr)
 {
 	char	**tmp;
 	int		arrlen;
 	int		i;
 
-	arrlen = ft_arrlen(cub->cubfile) + 1;
+	arrlen = ft_arrlen(arr) + 1;
 	i = 0;
 	tmp = (char **)malloc((arrlen + 1) * sizeof(char *));
 	while (i < arrlen)
 	{
-		tmp[i] = ft_strdup(cub->cubfile[i]);
+		tmp[i] = ft_strdup(arr[i]);
 		i++;
 	}
-	free_array(cub->cubfile);
-	cub->cubfile = tmp;
+	free_array(arr);
+	arr = tmp;
 	free_array(tmp);
 }
 
 int		map_parser(t_cub *cub)
 {
 	int		i;
+	int		fd;
 
 	cub->filesize = 0;
+	fd = open(cub->cubpath, O_RDONLY);
+	ft_printf("open thing\n fd: %i\n", fd);
 	i = 1;
 	while (i == 1)
 	{
-		i = get_next_line(cub);
+		i = get_next_line(fd, cub->cubfile);
 		if (i == 1 && cub->cubfile)
-			cubfile_elongator(cub);
+			cubfile_elongator(cub->cubfile);
 		else if (i == -1)
 		{
 			free_array(cub->cubfile);

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/10 20:46:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/14 20:52:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ void			empty_cub(t_cub *cub)
 	cub->cubpath = NULL;
 	cub->save = 0;
 	cub->cubfile = NULL;
+	cub->pos_sprite = 0;
 	cub->filesize = 0;
 	cub->x = 0;
 	cub->y = 0;
+	cub->res_x = 0;
+	cub->res_y = 0;
 	cub->no = 0;
 	cub->so = 0;
 	cub->we = 0;
@@ -76,7 +79,7 @@ int				main(int argc, char **argv)
 	empty_cub(&cub);
 	cub.cubpath = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
 	if (input_check(argc, argv, &cub))
-	{	
+	{
 		ft_printf("yay i print smth.\ncub->save: %i\n", cub.save);
 		map_parser(&cub);
 	}
