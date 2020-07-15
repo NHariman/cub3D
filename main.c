@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/14 20:52:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/15 22:37:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static char		*ft_strlower(char *str)
 {
 	int		i;
+	char	*tmp;
 
 	i = 0;
 	while (str[i])
@@ -22,14 +23,20 @@ static char		*ft_strlower(char *str)
 		str[i] = ft_tolower(str[i]);
 		i++;
 	}
+	if (str[ft_strlen(str) - 1] == '/')
+	{
+		tmp = ft_substr(str, 0, ft_strlen(str) - 1);
+		str = tmp;
+		free(tmp);
+	}
 	return (str);
 }
 
 void			empty_cub(t_cub *cub)
 {
-	cub->cubpath = NULL;
+	cub->path = NULL;
+	cub->file = NULL;
 	cub->save = 0;
-	cub->cubfile = NULL;
 	cub->pos_sprite = 0;
 	cub->filesize = 0;
 	cub->x = 0;
@@ -52,8 +59,8 @@ static size_t	input_check(int argc, char **argv, t_cub *cub)
 		ft_printf("Invalid amount of arguments\n");
 		return (0);
 	}
-	else if (ft_strncmp(cub->cubpath + (ft_strlen(cub->cubpath) - 4), ".cub", 4)
-	&& ft_strncmp(cub->cubpath + (ft_strlen(cub->cubpath) - 5), ".cub/", 5))
+	else if (ft_strncmp(cub->path + (ft_strlen(cub->path) - 4), ".cub", 4)
+	&& ft_strncmp(cub->path + (ft_strlen(cub->path) - 5), ".cub/", 5))
 	{
 		ft_printf("no .cub file was received.\n");
 		return (0);
@@ -77,17 +84,17 @@ int				main(int argc, char **argv)
 
 	i = 0;
 	empty_cub(&cub);
-	cub.cubpath = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
+	cub.path = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
 	if (input_check(argc, argv, &cub))
 	{
 		ft_printf("yay i print smth.\ncub->save: %i\n", cub.save);
 		map_parser(&cub);
 	}
-	if (cub.cubfile)
+	if (cub.map)
 	{
-		while (cub.cubfile[i] != '\0')
+		while (cub.map[i])
 		{
-			ft_printf("%s\n", cub.cubfile[i]);
+			ft_printf("%s\n", cub.map[i]);
 			i++;
 		}
 	}
@@ -95,7 +102,5 @@ int				main(int argc, char **argv)
 	{
 		ft_printf("lol that didn't work\n");
 	}
-	
-//	free_array(cub->cubfile);
 	return (0);
 }

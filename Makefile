@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/07/10 18:59:24 by nhariman      ########   odam.nl          #
+#    Updated: 2020/07/15 15:32:48 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME): $(OFILES)
 	ar rcs $@ $^
 
 %.o: %.c libft.h
-	$(COMPILE) -c $(FLAGS) -Imlx -Ilft -o $@ -c $<
+	$(COMPILE) -c $(FLAGS) -o $@ -c $<
 
 clean:
 	$(RM) $(OFILES) $(OBONUS)

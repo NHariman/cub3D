@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/14 22:12:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/15 22:39:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,69 +23,74 @@
 // like strjoin in 2D.
 // make a free function that frees for ** and * strings
 
-int		ft_arrlen(char **arr)
+// void	free_array(char **arr)
+// {
+// 	int	len;
+
+// 	len = ft_arrlen(arr);
+// 	while (len > 0)
+// 	{
+// 		free(arr[len + 1]);
+// 		len--;
+// 	}
+// 	free(arr);
+// 	arr = NULL;
+// }
+
+static int	count_newline(char *str)
 {
 	int	i;
+	int n;
 
 	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
-}
-
-void	free_array(char **arr)
-{
-	int	len;
-
-	len = ft_arrlen(arr);
-	while (len > 0)
+	n = 0;
+	while (str[i] != '\0')
 	{
-		free(arr[len + 1]);
-		len--;
+		if (str[i] == '\n')
+			n++;
+		i++;
 	}
-	free(arr);
-	arr = NULL;
+	n++;
+	return (n);
 }
 
-void	cubfile_elongator(char **arr)
+static int	create_array(char *str, int len, t_cub *cub)
 {
-	char	**tmp;
-	int		arrlen;
-	int		i;
+	int i;
+	int	j;
+	int start;
+	int end;
 
-	arrlen = ft_arrlen(arr) + 1;
 	i = 0;
-	tmp = (char **)malloc((arrlen + 1) * sizeof(char *));
-	while (i < arrlen)
+	j = 0;
+	start = 0;
+	end = 0;
+	cub->map = (char **)malloc(sizeof(char *) * (len + 1));
+	while (str[j] != '\0')
 	{
-		tmp[i] = ft_strdup(arr[i]);
-		i++;
+		if (str[j] == '\n')
+		{
+			cub->map[i] = ft_substr(str, start, j - start);
+			if (!cub->map[i] || cub->map[i] == NULL)
+				return (-1);
+			start = j + 1;
+			i++;
+		}
+		j++;
 	}
-	free_array(arr);
-	arr = tmp;
-	free_array(tmp);
+	cub->map[i] = ft_substr(str, start, j - start);
+	cub->map[len] = NULL;
+	return (1);
 }
 
 int		map_parser(t_cub *cub)
 {
-	int		i;
 	int		fd;
 
-	cub->filesize = 0;
-	fd = open(cub->cubpath, O_RDONLY);
-	ft_printf("open thing\n fd: %i\n", fd);
-	i = 1;
-	while (i == 1)
-	{
-		i = get_next_line(fd, cub->cubfile);
-		if (i == 1 && cub->cubfile)
-			cubfile_elongator(cub->cubfile);
-		else if (i == -1)
-		{
-			free_array(cub->cubfile);
-			empty_cub(cub);
-			return (-1);
-		}
-	}
+	fd = open(cub->path, O_RDONLY);
+	if (get_next_line(fd, &cub->file) == -1)
+		return (-1);
+	cub->filesize = count_newline(cub->file);
+	create_array(cub->file, cub->filesize, cub);
 	return (1);
 }

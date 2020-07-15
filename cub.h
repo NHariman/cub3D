@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/14 21:10:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/15 22:17:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,16 @@
 ** ' ' = 32; out of bounds
 */
 
+struct			s_map 
+{
+	int		newlines;
+};
+
 typedef struct	s_cub
 {
-	char	*cubpath;
+	char	*path;
 	int		save;
-	char	**cubfile;
+	char	*file;
 	int		pos_sprite;
 	int		filesize;
 	int		x;
@@ -49,7 +54,7 @@ typedef struct	s_cub
 	char	*sprite;
 	long	floor;
 	long	top;
-	int		**map;
+	char	**map;
 	int		**cpmap;
 }				t_cub;
 
@@ -58,7 +63,6 @@ typedef struct	s_gnl
 	int			bytes_read;
 	int			fd;
 	char		*line_read;
-	int			newline;
 }				t_gnl;
 
 int				get_next_line(int fd, char **line);
