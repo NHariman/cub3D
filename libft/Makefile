@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/07/14 00:43:27 by nhariman      ########   odam.nl          #
+#    Updated: 2020/07/16 19:38:20 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ CFILES = 	ft_atoi.c \
 			ft_split.c \
 			ft_itoa.c \
 			ft_strmapi.c \
+			ft_iswhitespaces.c \
 			ft_printf.c \
 			ft_printf_flags.c \
 			ft_printf_hexflags.c \

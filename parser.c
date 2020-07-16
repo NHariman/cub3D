@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/15 22:39:23 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/16 22:18:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,19 @@
 // like strjoin in 2D.
 // make a free function that frees for ** and * strings
 
-// void	free_array(char **arr)
-// {
-// 	int	len;
-
-// 	len = ft_arrlen(arr);
-// 	while (len > 0)
-// 	{
-// 		free(arr[len + 1]);
-// 		len--;
-// 	}
-// 	free(arr);
-// 	arr = NULL;
-// }
-
 static int	count_newline(char *str)
 {
 	int	i;
 	int n;
 
 	i = 0;
-	n = 0;
+	n = 1;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\n')
 			n++;
 		i++;
 	}
-	n++;
 	return (n);
 }
 
@@ -70,7 +55,7 @@ static int	create_array(char *str, int len, t_cub *cub)
 	{
 		if (str[j] == '\n')
 		{
-			cub->map[i] = ft_substr(str, start, j - start);
+			cub->map[i] = ft_substr(str, start, 1 + j - start);
 			if (!cub->map[i] || cub->map[i] == NULL)
 				return (-1);
 			start = j + 1;
@@ -79,8 +64,28 @@ static int	create_array(char *str, int len, t_cub *cub)
 		j++;
 	}
 	cub->map[i] = ft_substr(str, start, j - start);
-	cub->map[len] = NULL;
+	cub->map[len] = ft_strdup("\0");
 	return (1);
+}
+
+int		free_array(t_cub *cub)
+{
+	int i;
+	int j;
+
+	i = cub->filesize;
+	j = 0;
+	while (i >= 0)
+	{
+		if (cub->map[cub->filesize][0] != '\0')
+		{
+			free(cub->map[cub->filesize]);
+			j++;
+		}
+		i--;
+	}
+	free(cub->map);
+	return (j == cub->filesize ? 1 : -1);
 }
 
 int		map_parser(t_cub *cub)
@@ -91,6 +96,7 @@ int		map_parser(t_cub *cub)
 	if (get_next_line(fd, &cub->file) == -1)
 		return (-1);
 	cub->filesize = count_newline(cub->file);
-	create_array(cub->file, cub->filesize, cub);
+	if (create_array(cub->file, cub->filesize, cub) == -1)
+		return (free_array(cub));
 	return (1);
 }

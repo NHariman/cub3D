@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 16:45:38 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/14 00:43:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/16 19:37:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
+
+long				ft_iswhitespaces(const char *str);
 
 typedef struct	s_flag
 {
@@ -134,7 +136,6 @@ void			ft_padzero(int n, int *count);
 
 void			pft_putchar_fd(char c, int fd, int *count);
 void			pft_putstr_fd(char *s, int fd, int *count);
-
 
 int				ft_printf(const char *format, ...);
 #endif

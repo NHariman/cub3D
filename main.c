@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/15 22:37:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/16 22:13:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ static char		*ft_strlower(char *str)
 	return (str);
 }
 
+void			free_map(char **arr, int len)
+{
+	while (len > 0)
+	{
+		free(arr[len]);
+		len--;
+	}
+	free(arr);
+	arr = NULL;
+}
+
 void			empty_cub(t_cub *cub)
 {
 	cub->path = NULL;
@@ -43,13 +54,13 @@ void			empty_cub(t_cub *cub)
 	cub->y = 0;
 	cub->res_x = 0;
 	cub->res_y = 0;
-	cub->no = 0;
-	cub->so = 0;
-	cub->we = 0;
-	cub->ea = 0;
-	cub->sprite = 0;
+	cub->no = NULL;
+	cub->so = NULL;
+	cub->we = NULL;
+	cub->ea = NULL;
+	cub->sprite = NULL;
 	cub->floor = 0;
-	cub->top = 0;
+	cub->cling = 0;
 }
 
 static size_t	input_check(int argc, char **argv, t_cub *cub)
@@ -87,16 +98,24 @@ int				main(int argc, char **argv)
 	cub.path = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
 	if (input_check(argc, argv, &cub))
 	{
-		ft_printf("yay i print smth.\ncub->save: %i\n", cub.save);
 		map_parser(&cub);
+		if (file_checker(&cub) == -1)
+		{
+			ft_printf("something went wrong\n");
+			return (0);
+		}
 	}
 	if (cub.map)
 	{
-		while (cub.map[i])
-		{
-			ft_printf("%s\n", cub.map[i]);
-			i++;
-		}
+		// while (cub.map[i])
+		// {
+		// 	ft_printf("%s\n", cub.map[i]);
+		// 	i++;
+		// }
+		ft_printf("NO: %s\n", cub.no);
+		ft_printf("SO: %s\n", cub.so);
+		ft_printf("WE: %s\n", cub.we);
+		ft_printf("EA: %s\n", cub.ea);
 	}
 	else
 	{
