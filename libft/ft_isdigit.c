@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 18:26:21 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/10 18:53:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/17 20:57:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 int	ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	return (48 <= c && c <= 57 ? 1 : 0);
 }

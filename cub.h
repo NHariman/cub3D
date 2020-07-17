@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/16 22:01:30 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/17 20:56:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ void			empty_cub(t_cub *cub);
 int				free_array(t_cub *cub);
 int				map_parser(t_cub *cub);
 int				file_checker(t_cub *cub);
-int				texture_saver(char *str, t_cub *cub);
+char			*save_path(char *str);
+int				save_texture(char *str, t_cub *cub);
+int				save_res(char *str, t_cub *cub);
+int				save_colours(char *str, t_cub *cub);
+int				save_rgb(char *str, t_cub *cub);
 
 #endif

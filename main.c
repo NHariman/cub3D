@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/16 22:13:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/17 21:34:36 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,12 @@ int				main(int argc, char **argv)
 		ft_printf("SO: %s\n", cub.so);
 		ft_printf("WE: %s\n", cub.we);
 		ft_printf("EA: %s\n", cub.ea);
+		ft_printf("S : %s\n", cub.sprite);
+		ft_printf("res_x: %i\n", cub.res_x);
+		ft_printf("res_y: %i\n", cub.res_y);
+		ft_printf("r: %i\n", cub.r);
+		ft_printf("g: %i\n", cub.g);
+		ft_printf("b: %i\n", cub.b);
 	}
 	else
 	{

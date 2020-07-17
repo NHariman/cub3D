@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/16 22:18:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/17 18:18:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@
 ** is create a 2D array of the file
 */
 
-// create a function that elongates the 2D cubfile format.
-// like strjoin in 2D.
-// make a free function that frees for ** and * strings
-
-static int	count_newline(char *str)
+static int		count_newline(char *str)
 {
 	int	i;
 	int n;
@@ -39,7 +35,7 @@ static int	count_newline(char *str)
 	return (n);
 }
 
-static int	create_array(char *str, int len, t_cub *cub)
+static int		create_array(char *str, int len, t_cub *cub)
 {
 	int i;
 	int	j;
@@ -63,12 +59,12 @@ static int	create_array(char *str, int len, t_cub *cub)
 		}
 		j++;
 	}
-	cub->map[i] = ft_substr(str, start, j - start);
+	cub->map[i] = ft_substr(str, start, 1 + j - start);
 	cub->map[len] = ft_strdup("\0");
 	return (1);
 }
 
-int		free_array(t_cub *cub)
+int				free_array(t_cub *cub)
 {
 	int i;
 	int j;
@@ -88,7 +84,7 @@ int		free_array(t_cub *cub)
 	return (j == cub->filesize ? 1 : -1);
 }
 
-int		map_parser(t_cub *cub)
+int				map_parser(t_cub *cub)
 {
 	int		fd;
 
