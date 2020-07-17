@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/17 21:49:31 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/18 00:02:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		save_colours(char *str, t_cub *cub)
 	int hex;
 
 	save_rgb(str + 1, cub);
-	hex = 0;
+	hex = get_hex(cub->r, cub->g, cub->b);
 	if (ft_strncmp(str, "F", 1))
 		cub->floor = hex;
 	else if (ft_strncmp(str, "C", 1))

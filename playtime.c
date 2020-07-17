@@ -41,22 +41,22 @@ int		main(void)
 	{
 		while (i < 25)
 		{
-			my_mlx_pixel_put(&img, 0 + j, 0 + i, 0x6033FF);
+			my_mlx_pixel_put(&img, 0 + j, 0 + i, 14443520);
 			i++;
 		}
 		j++;
 		i = 0;
 	}
-		while (j < tmp + 25)
-	{
-		while (i < 250)
-		{
-			my_mlx_pixel_put(&img, 0 + j, 0 + i, 0x6033FF);
-			i++;
-		}
-		j++;
-		i = 0;
-	}
+	// 	while (j < tmp + 25)
+	// {
+	// 	while (i < 250)
+	// 	{
+	// 		my_mlx_pixel_put(&img, 0 + j, 0 + i, 0x6033FF);
+	// 		i++;
+	// 	}
+	// 	j++;
+	// 	i = 0;
+	// }
 	// i = 0;
 	// while (i < img.endian)
 	// {

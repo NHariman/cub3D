@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/17 20:56:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/18 01:30:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 typedef struct	s_cub
 {
 	char	*path;
-	int		save;
+	int		save;ß
 	char	*file;
 	int		pos_sprite;
 	int		filesize;
@@ -47,8 +47,8 @@ typedef struct	s_cub
 	char	*we;
 	char	*ea;
 	char	*sprite;
-	long	floor;
-	long	cling;
+	int		floor;
+	int		cling;
 	char	**map;
 	int		**cpmap;
 	int		r;
@@ -74,5 +74,6 @@ int				save_texture(char *str, t_cub *cub);
 int				save_res(char *str, t_cub *cub);
 int				save_colours(char *str, t_cub *cub);
 int				save_rgb(char *str, t_cub *cub);
+int				get_hex(int r, int g, int b);
 
 #endif

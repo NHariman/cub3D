@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/17 21:34:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/18 01:13:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int				main(int argc, char **argv)
 		ft_printf("r: %i\n", cub.r);
 		ft_printf("g: %i\n", cub.g);
 		ft_printf("b: %i\n", cub.b);
+		ft_printf("floor: %i\n", cub.floor);
+		ft_printf("ceiling: %i\n", cub.cling);
 	}
 	else
 	{
