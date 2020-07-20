@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/20 22:33:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/20 22:39:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct	s_cub
 	char	*we;
 	char	*ea;
 	char	*sprite;
-	long	floor;
-	long	cling;
+	int		floor;
+	int		cling;
 	char	**map;
 	int		*cpmap;
 	int		r;

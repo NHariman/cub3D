@@ -6,22 +6,11 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 15:55:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/10 18:52:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/18 00:07:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static long	ft_iswhitespaces(const char *str)
-{
-	long	i;
-
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' ||
-	str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
-		i++;
-	return (i);
-}
 
 int			ft_atoi(const char *str)
 {
