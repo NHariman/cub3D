@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/17 18:18:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/20 21:30:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,6 @@ static int		create_array(char *str, int len, t_cub *cub)
 	cub->map[i] = ft_substr(str, start, 1 + j - start);
 	cub->map[len] = ft_strdup("\0");
 	return (1);
-}
-
-int				free_array(t_cub *cub)
-{
-	int i;
-	int j;
-
-	i = cub->filesize;
-	j = 0;
-	while (i >= 0)
-	{
-		if (cub->map[cub->filesize][0] != '\0')
-		{
-			free(cub->map[cub->filesize]);
-			j++;
-		}
-		i--;
-	}
-	free(cub->map);
-	return (j == cub->filesize ? 1 : -1);
 }
 
 int				map_parser(t_cub *cub)

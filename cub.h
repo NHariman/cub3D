@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/17 20:56:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/20 22:33:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,25 @@ typedef struct	s_cub
 	long	floor;
 	long	cling;
 	char	**map;
-	int		**cpmap;
+	int		*cpmap;
 	int		r;
 	int		g;
 	int		b;
 	int		hex;
+
 }				t_cub;
+
+typedef	struct	s_check
+{
+	int		north;
+	int		south;
+	int		east;
+	int		west;
+	int		sprite;
+	int		floor;
+	int		ceiling;
+	int		res;
+}				t_check;
 
 typedef struct	s_gnl
 {
@@ -66,13 +79,19 @@ typedef struct	s_gnl
 
 int				get_next_line(int fd, char **line);
 void			empty_cub(t_cub *cub);
+void			empty_check(t_check *check);
 int				free_array(t_cub *cub);
+void			free_struct(t_cub *cub);
 int				map_parser(t_cub *cub);
 int				file_checker(t_cub *cub);
-char			*save_path(char *str);
-int				save_texture(char *str, t_cub *cub);
-int				save_res(char *str, t_cub *cub);
-int				save_colours(char *str, t_cub *cub);
+char			*save_path(char *str, int i, t_check *check);
+int				save_texture(char *str, t_cub *cub, t_check *check);
+int				save_res(char *str, t_cub *cub, t_check *check);
+int				save_colours(char *str, t_cub *cub, t_check *check);
 int				save_rgb(char *str, t_cub *cub);
+int				find_res_y(char *str);
+int				valid_res_input(char *str);
+int				valid_rgb_input(char *str);
+
 
 #endif

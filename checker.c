@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 17:40:49 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/17 21:41:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/20 20:29:22 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int		line_checker(char *str, t_cub *cub)
+int		line_checker(char *str, t_cub *cub, t_check *check)
 {
 	int i;
 
@@ -20,14 +20,20 @@ int		line_checker(char *str, t_cub *cub)
 	while (str[i] == ' ')
 		i++;
 	if (!ft_strncmp(str + i, "R", 1))
-		save_res(str + i + 1, cub);
+	{
+		if (!save_res(str + i + 1, cub, check))
+			return (-1);
+	}
 	else if (ft_strchr("NSWE", str[i]))
 	{
-		if (!save_texture(str + i, cub))
+		if (!save_texture(str + i, cub, check))
 			return (-1);
 	}
 	else if (ft_strchr("FC", str[i]))
-		save_colours(str + i, cub);
+	{
+		if (!save_colours(str + i, cub, check))
+			return (-1);
+	}
 	else
 		return (0);
 	return (1);
@@ -35,12 +41,14 @@ int		line_checker(char *str, t_cub *cub)
 
 int		file_checker(t_cub *cub)
 {
-	int i;
+	int		i;
+	t_check	check;
 
 	i = 0;
+	empty_check(&check);
 	while (cub->map[i][0] != '\0')
 	{
-		if (line_checker(cub->map[i], cub) == -1)
+		if (line_checker(cub->map[i], cub, &check) == -1)
 			return (-1);
 		i++;
 	}
