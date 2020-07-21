@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/20 22:39:43 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 00:51:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,39 @@ typedef struct	s_gnl
 }				t_gnl;
 
 int				get_next_line(int fd, char **line);
+int				map_parser(t_cub *cub);
+int				file_checker(t_cub *cub);
+
+/*
+** functions that empty and free structs,
+** found in clear_structs.c
+*/
 void			empty_cub(t_cub *cub);
 void			empty_check(t_check *check);
 int				free_array(t_cub *cub);
 void			free_struct(t_cub *cub);
-int				map_parser(t_cub *cub);
-int				file_checker(t_cub *cub);
+
+/*
+** input sanitation
+*/
+char			*ft_strlower(char *str);
+/*
+** functions that save data into struct
+** found in savers.c
+*/
 char			*save_path(char *str, int i, t_check *check);
 int				save_texture(char *str, t_cub *cub, t_check *check);
-int				save_res(char *str, t_cub *cub, t_check *check);
-int				save_colours(char *str, t_cub *cub, t_check *check);
-int				save_rgb(char *str, t_cub *cub);
-int				find_res_y(char *str);
-int				valid_res_input(char *str);
-int				valid_rgb_input(char *str);
+int				save_res(const char *str, t_cub *cub, t_check *check);
+int				save_colours(const char *str, t_cub *cub, t_check *check);
+int				save_rgb(const char *str, t_cub *cub);
 
+/*
+** functions that check if input is valid
+** found in valid_input.c
+*/
+int				find_res_y(const char *str);
+int				valid_res_input(const char *str);
+int				valid_rgb_input(const char *str);
+int				complete_input_data(t_check *check);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/20 22:38:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 01:40:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 char	*save_path(char *str, int i, t_check *check)
 {
-	char *path;
-
-	path = ft_strtrim(str, " \n");
+	str = ft_strtrim(ft_strlower(str), " \n");
 	if (i == 1)
 		check->north = 1;
 	else if (i == 2)
@@ -27,20 +25,20 @@ char	*save_path(char *str, int i, t_check *check)
 		check->east = 1;
 	else if (i == 5)
 		check->sprite = 1;
-	return (path);
+	return (str);
 }
 
 int		save_texture(char *str, t_cub *cub, t_check *check)
 {
-	if (!ft_strncmp(str, "NO", 2) && !check->north)
+	if (!ft_strncmp(str, "NO", 2))
 		cub->no = save_path(str + 2, 1, check);
-	else if (!ft_strncmp(str, "SO", 2) && !check->south)
+	else if (!ft_strncmp(str, "SO", 2))
 		cub->so = save_path(str + 2, 2, check);
-	else if (!ft_strncmp(str, "WE", 2) && !check->west)
+	else if (!ft_strncmp(str, "WE", 2))
 		cub->we = save_path(str + 2, 3, check);
-	else if (!ft_strncmp(str, "EA", 2) && !check->east)
+	else if (!ft_strncmp(str, "EA", 2))
 		cub->ea = save_path(str + 2, 4, check);
-	else if (!ft_strncmp(str, "S", 1) && !check->sprite)
+	else if (!ft_strncmp(str, "S", 1))
 		cub->sprite = save_path(str + 2, 5, check);
 	else
 	{
@@ -50,7 +48,7 @@ int		save_texture(char *str, t_cub *cub, t_check *check)
 	return (1);
 }
 
-int		save_res(char *str, t_cub *cub, t_check *check)
+int		save_res(const char *str, t_cub *cub, t_check *check)
 {
 	int		i;
 
@@ -72,7 +70,7 @@ int		save_res(char *str, t_cub *cub, t_check *check)
 	return (1);
 }
 
-int		save_rgb(char *str, t_cub *cub)
+int		save_rgb(const char *str, t_cub *cub)
 {
 	int		i;
 
@@ -96,7 +94,7 @@ int		save_rgb(char *str, t_cub *cub)
 	return (1);
 }
 
-int		save_colours(char *str, t_cub *cub, t_check *check)
+int		save_colours(const char *str, t_cub *cub, t_check *check)
 {
 	int hex;
 

@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 20:07:12 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/20 22:24:31 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 00:49:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int		valid_res_input(char *str)
+int		valid_res_input(const char *str)
 {
 	int		i;
 	int		j;
@@ -30,7 +30,7 @@ int		valid_res_input(char *str)
 	return (str[i] == '\n' ? 1 : -1);
 }
 
-int		valid_rgb_input(char *str)
+int		valid_rgb_input(const char *str)
 {
 	int		i;
 	int		j;
@@ -52,7 +52,7 @@ int		valid_rgb_input(char *str)
 	return (str[i] == '\n' ? 1 : 0);
 }
 
-int		find_res_y(char *str)
+int		find_res_y(const char *str)
 {
 	int		i;
 
@@ -66,4 +66,10 @@ int		find_res_y(char *str)
 		i++;
 	}
 	return (i);
+}
+
+int		complete_input_data(t_check *check)
+{
+	return (check->ceiling && check->east && check->floor && check->west &&
+		check->north && check->res && check->south && check->sprite ? 1 : 0);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/20 21:30:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/21 18:07:36 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** is create a 2D array of the file
 */
 
-static int		count_newline(char *str)
+static int		count_newline(const char *str)
 {
 	int	i;
 	int n;
@@ -35,7 +35,7 @@ static int		count_newline(char *str)
 	return (n);
 }
 
-static int		create_array(char *str, int len, t_cub *cub)
+static int		create_array(const char *str, int len, t_cub *cub)
 {
 	int i;
 	int	j;

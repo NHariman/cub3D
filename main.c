@@ -6,17 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2020/07/20 22:35:05 by nhariman      ########   odam.nl         */
-=======
-/*   Updated: 2020/07/18 01:13:16 by nhariman      ########   odam.nl         */
->>>>>>> ea9ec43381040b10f126d4bb66f0373f6e0a3f31
+/*   Updated: 2020/07/22 01:42:36 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static char		*ft_strlower(char *str)
+char		*ft_strlower(char *str)
 {
 	int		i;
 	char	*tmp;
@@ -84,11 +80,11 @@ int				main(int argc, char **argv)
 			ft_printf("r: %i\n", cub.r);
 			ft_printf("g: %i\n", cub.g);
 			ft_printf("b: %i\n", cub.b);
-			while (cub.map[i])
-			{
-				ft_printf("%s\n", cub.map[i]);
-				i++;
-			}
+			// while (cub.map[i][0] != '\0')
+			// {
+			// 	ft_printf("%s\n", cub.map[i]);
+			// 	i++;
+			// }
 			// free_struct(&cub);
 			// ft_printf("NO: %s\n", cub.no);
 			// ft_printf("SO: %s\n", cub.so);
@@ -101,18 +97,17 @@ int				main(int argc, char **argv)
 			// ft_printf("g: %i\n", cub.g);
 			// ft_printf("b: %i\n", cub.b);
 			ft_printf("something went wrong\n");
-			while (1) {;}
 			return (0);
 		}
 	}
 	if (cub.map)
 	{
-		while (cub.map[i])
+		while (cub.map[i][0] != '\0')
 		{
-			ft_printf("%s\n", cub.map[i]);
+			ft_printf("%s", cub.map[i]);
 			i++;
 		}
-		ft_printf("NO: %s\n", cub.no);
+		ft_printf("\nNO: %s\n", cub.no);
 		ft_printf("SO: %s\n", cub.so);
 		ft_printf("WE: %s\n", cub.we);
 		ft_printf("EA: %s\n", cub.ea);
@@ -122,12 +117,10 @@ int				main(int argc, char **argv)
 		ft_printf("r: %i\n", cub.r);
 		ft_printf("g: %i\n", cub.g);
 		ft_printf("b: %i\n", cub.b);
-		while (1) {;}
 	}
 	else
 	{
 		ft_printf("lol that didn't work\n");
-		while (1) {;}
 	}
 	return (0);
 }
