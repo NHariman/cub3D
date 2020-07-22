@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 17:40:49 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 01:38:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 04:19:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static int		data_checker(char *str, t_cub *cub, t_check *check)
+static int		gather_data(char *str, t_cub *cub, t_check *check)
 {
 	int i;
 
@@ -41,7 +41,28 @@ static int		data_checker(char *str, t_cub *cub, t_check *check)
 	return (1);
 }
 
-int				file_checker(t_cub *cub)
+static int		gather_map(char *str, t_cub *cub, int start)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (str[i] != '\0' && j != start)
+	{
+		if (str[i] == '\n')
+			j++;
+		i++;
+	}
+	if (valid_map(str + i + 1) == -1)
+		return (-1);
+	cub->map = create_array(str + i + 1, cub->filesize - start);
+	if (!cub->map)
+		return (0);
+	return (1);
+}
+
+int				data_parser(t_cub *cub)
 {
 	int		i;
 	int		j;
@@ -50,9 +71,9 @@ int				file_checker(t_cub *cub)
 	i = 0;
 	j = 1;
 	empty_check(&check);
-	while (cub->map[i][0] != '\0')
+	while (cub->filearr[i][0] != '\0' && i != cub->filesize)
 	{
-		j = data_checker(cub->map[i], cub, &check);
+		j = gather_data(cub->filearr[i], cub, &check);
 		if (j == -1 || j == 0)
 		{
 			if (j == 0)
@@ -63,5 +84,6 @@ int				file_checker(t_cub *cub)
 			break ;
 		i++;
 	}
-	return (1);
+	return (gather_map(cub->file, cub, i) == 1 ? 1 : -1);
+//	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/21 18:07:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 04:13:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,35 @@ static int		count_newline(const char *str)
 	return (n);
 }
 
-static int		create_array(const char *str, int len, t_cub *cub)
+char			**create_array(char *str, int len)
 {
-	int i;
-	int	j;
-	int start;
-	int end;
+	int		i;
+	int		j;
+	int		start;
+	char	**arr;
 
 	i = 0;
 	j = 0;
 	start = 0;
-	end = 0;
-	cub->map = (char **)malloc(sizeof(char *) * (len + 1));
+	arr = (char **)malloc(sizeof(char *) * (len + 1));
 	while (str[j] != '\0')
 	{
 		if (str[j] == '\n')
 		{
-			cub->map[i] = ft_substr(str, start, 1 + j - start);
-			if (!cub->map[i] || cub->map[i] == NULL)
-				return (-1);
+			arr[i] = ft_substr(str, start, 1 + j - start);
+			if (!arr[i] || arr[i] == NULL)
+				return (NULL);
 			start = j + 1;
 			i++;
 		}
 		j++;
 	}
-	cub->map[i] = ft_substr(str, start, 1 + j - start);
-	cub->map[len] = ft_strdup("\0");
-	return (1);
+	arr[i] = ft_substr(str, start, 1 + j - start);
+	arr[len] = ft_strdup("\0");
+	return (arr);
 }
 
-int				map_parser(t_cub *cub)
+int				file_parser(t_cub *cub)
 {
 	int		fd;
 
@@ -72,7 +71,8 @@ int				map_parser(t_cub *cub)
 	if (get_next_line(fd, &cub->file) == -1)
 		return (-1);
 	cub->filesize = count_newline(cub->file);
-	if (create_array(cub->file, cub->filesize, cub) == -1)
+	cub->filearr = create_array(cub->file, cub->filesize);
+	if (cub->filearr == NULL)
 		return (free_array(cub));
 	return (1);
 }

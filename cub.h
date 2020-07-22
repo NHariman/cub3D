@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 00:51:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 04:20:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_cub
 	char	*path;
 	int		save;
 	char	*file;
+	char	**filearr;
 	int		pos_sprite;
 	int		filesize;
 	int		x;
@@ -50,7 +51,6 @@ typedef struct	s_cub
 	int		floor;
 	int		cling;
 	char	**map;
-	int		*cpmap;
 	int		r;
 	int		g;
 	int		b;
@@ -77,9 +77,16 @@ typedef struct	s_gnl
 	char		*line_read;
 }				t_gnl;
 
+/*
+** creates a string and a 2D array of
+** of the .cub file.
+** Leads to the saving data functions
+** found in checker.c and parser.c
+*/
 int				get_next_line(int fd, char **line);
-int				map_parser(t_cub *cub);
-int				file_checker(t_cub *cub);
+int				file_parser(t_cub *cub);
+int				data_parser(t_cub *cub);
+char			**create_array(char *str, int len);
 
 /*
 ** functions that empty and free structs,
@@ -92,8 +99,10 @@ void			free_struct(t_cub *cub);
 
 /*
 ** input sanitation
+** found in main.c
 */
 char			*ft_strlower(char *str);
+
 /*
 ** functions that save data into struct
 ** found in savers.c
@@ -111,6 +120,7 @@ int				save_rgb(const char *str, t_cub *cub);
 int				find_res_y(const char *str);
 int				valid_res_input(const char *str);
 int				valid_rgb_input(const char *str);
+int				valid_map(char *str);
 int				complete_input_data(t_check *check);
 
 #endif

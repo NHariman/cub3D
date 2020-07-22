@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 01:40:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 03:53:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*save_path(char *str, int i, t_check *check)
 {
-	str = ft_strtrim(ft_strlower(str), " \n");
+	str = ft_strtrim(ft_strlower(str), " ");
 	if (i == 1)
 		check->north = 1;
 	else if (i == 2)

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/20 21:48:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 03:36:21 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		empty_cub(t_cub *cub)
 	cub->path = NULL;
 	cub->save = 0;
 	cub->file = NULL;
+	cub->filearr = NULL;
 	cub->pos_sprite = 0;
 	cub->filesize = 0;
 	cub->x = 0;
@@ -31,7 +32,6 @@ void		empty_cub(t_cub *cub)
 	cub->floor = 0;
 	cub->cling = 0;
 	cub->map = NULL;
-	cub->cpmap = NULL;
 	cub->r = 0;
 	cub->g = 0;
 	cub->b = 0;
@@ -54,8 +54,6 @@ void		free_strings(t_cub *cub)
 		free(cub->we);
 	if (cub->sprite)
 		free(cub->sprite);
-	if (cub->cpmap)
-		free(cub->cpmap);
 }
 
 void		free_struct(t_cub *cub)

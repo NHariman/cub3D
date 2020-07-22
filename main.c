@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 01:42:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 04:14:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int				main(int argc, char **argv)
 	cub.path = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
 	if (input_check(argc, argv, &cub))
 	{
-		map_parser(&cub);
-		if (file_checker(&cub) == -1)
+		file_parser(&cub);
+		if (data_parser(&cub) == -1)
 		{
 			ft_printf("NO: %s\n", cub.no);
 			ft_printf("SO: %s\n", cub.so);
@@ -100,14 +100,14 @@ int				main(int argc, char **argv)
 			return (0);
 		}
 	}
-	if (cub.map)
+	if (cub.filearr)
 	{
-		while (cub.map[i][0] != '\0')
+		while (cub.filearr[i][0] != '\0')
 		{
-			ft_printf("%s", cub.map[i]);
+			ft_printf("%s", cub.filearr[i]);
 			i++;
 		}
-		ft_printf("\nNO: %s\n", cub.no);
+		ft_printf("NO: %s\n", cub.no);
 		ft_printf("SO: %s\n", cub.so);
 		ft_printf("WE: %s\n", cub.we);
 		ft_printf("EA: %s\n", cub.ea);
@@ -117,6 +117,13 @@ int				main(int argc, char **argv)
 		ft_printf("r: %i\n", cub.r);
 		ft_printf("g: %i\n", cub.g);
 		ft_printf("b: %i\n", cub.b);
+		i = 0;
+		while (cub.map[i][0] != '\0')
+		{
+			ft_printf("%s", cub.map[i]);
+			i++;
+		}
+	//	while (1) {;}
 	}
 	else
 	{
