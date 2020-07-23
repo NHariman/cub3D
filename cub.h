@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 04:20:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/23 00:49:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ typedef struct	s_cub
 	int		save;
 	char	*file;
 	char	**filearr;
-	int		pos_sprite;
 	int		filesize;
-	int		x;
-	int		y;
+	int		sprite_x;
+	int		sprite_y;
 	int		res_x;
 	int		res_y;
 	char	*no;
@@ -68,6 +67,7 @@ typedef	struct	s_check
 	int		floor;
 	int		ceiling;
 	int		res;
+	int		sprite_pos;
 }				t_check;
 
 typedef struct	s_gnl
@@ -120,7 +120,7 @@ int				save_rgb(const char *str, t_cub *cub);
 int				find_res_y(const char *str);
 int				valid_res_input(const char *str);
 int				valid_rgb_input(const char *str);
-int				valid_map(char *str);
+int				valid_map(char **map, int maplen, t_check *check);
 int				complete_input_data(t_check *check);
 
 #endif

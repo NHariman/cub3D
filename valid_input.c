@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 20:07:12 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 04:20:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/22 15:33:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,4 @@ int		complete_input_data(t_check *check)
 {
 	return (check->ceiling && check->east && check->floor && check->west &&
 		check->north && check->res && check->south && check->sprite ? 1 : 0);
-}
-
-int		valid_map(char *str)
-{
-	return (1);
 }
