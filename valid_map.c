@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/23 02:14:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/23 02:16:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		edgebound(char **map, int i, int j)
 
 static int		midbound(char **map, int i, int j)
 {
-	return (map[i][j - 1] == ' ' || map[i][j + 1] == ' ' ? 0 : 1);
+	return (map[i][j - 1] != ' ' && map[i][j + 1] != ' ' ? 1 : 0);
 }
 
 static int		valid_middle(char **map, int i, t_check *check)
