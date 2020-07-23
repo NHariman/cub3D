@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 04:14:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/23 17:35:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-char		*ft_strlower(char *str)
+char			*ft_strlower(char *str)
 {
 	int		i;
 	char	*tmp;
@@ -70,57 +70,32 @@ int				main(int argc, char **argv)
 		file_parser(&cub);
 		if (data_parser(&cub) == -1)
 		{
-			ft_printf("NO: %s\n", cub.no);
-			ft_printf("SO: %s\n", cub.so);
-			ft_printf("WE: %s\n", cub.we);
-			ft_printf("EA: %s\n", cub.ea);
-			ft_printf("S : %s\n", cub.sprite);
-			ft_printf("res_x: %i\n", cub.res_x);
-			ft_printf("res_y: %i\n", cub.res_y);
-			ft_printf("r: %i\n", cub.r);
-			ft_printf("g: %i\n", cub.g);
-			ft_printf("b: %i\n", cub.b);
-			// while (cub.map[i][0] != '\0')
-			// {
-			// 	ft_printf("%s\n", cub.map[i]);
-			// 	i++;
-			// }
-			// free_struct(&cub);
-			// ft_printf("NO: %s\n", cub.no);
-			// ft_printf("SO: %s\n", cub.so);
-			// ft_printf("WE: %s\n", cub.we);
-			// ft_printf("EA: %s\n", cub.ea);
-			// ft_printf("S : %s\n", cub.sprite);
-			// ft_printf("res_x: %i\n", cub.res_x);
-			// ft_printf("res_y: %i\n", cub.res_y);
-			// ft_printf("r: %i\n", cub.r);
-			// ft_printf("g: %i\n", cub.g);
-			// ft_printf("b: %i\n", cub.b);
 			ft_printf("something went wrong\n");
 			return (0);
 		}
 	}
 	if (cub.filearr)
 	{
-		while (cub.filearr[i][0] != '\0')
-		{
-			ft_printf("%s", cub.filearr[i]);
-			i++;
-		}
-		ft_printf("NO: %s\n", cub.no);
-		ft_printf("SO: %s\n", cub.so);
-		ft_printf("WE: %s\n", cub.we);
-		ft_printf("EA: %s\n", cub.ea);
-		ft_printf("S : %s\n", cub.sprite);
-		ft_printf("res_x: %i\n", cub.res_x);
-		ft_printf("res_y: %i\n", cub.res_y);
-		ft_printf("r: %i\n", cub.r);
-		ft_printf("g: %i\n", cub.g);
-		ft_printf("b: %i\n", cub.b);
-		i = 0;
+		//return (0);
+		// while (cub.filearr[i][0] != '\0')
+		// {
+		// 	ft_printf("%s", cub.filearr[i]);
+		// 	i++;
+		// }
+		// ft_printf("\nNO: %s\n", cub.no);
+		// ft_printf("SO: %s\n", cub.so);
+		// ft_printf("WE: %s\n", cub.we);
+		// ft_printf("EA: %s\n", cub.ea);
+		// ft_printf("S : %s\n", cub.sprite);
+		// ft_printf("res_x: %i\n", cub.res_x);
+		// ft_printf("res_y: %i\n", cub.res_y);
+		// ft_printf("r: %i\n", cub.r);
+		// ft_printf("g: %i\n", cub.g);
+		// ft_printf("b: %i\n", cub.b);
+		// i = 0;
 		while (cub.map[i][0] != '\0')
 		{
-			ft_printf("%s", cub.map[i]);
+			ft_printf("%i: %s", i, cub.map[i]);
 			i++;
 		}
 	//	while (1) {;}

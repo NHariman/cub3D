@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 17:40:49 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/23 02:00:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/23 22:14:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,11 @@ static int		gather_map(char *str, t_cub *cub, int start, t_check *check)
 			j++;
 		i++;
 	}
-	cub->map = create_array(str + i + 1, cub->filesize - start);
+	cub->map = create_array(str + i, cub->filesize - start);
 	if (!cub->map)
 		return (0);
-	if (!valid_map(cub->map, cub->filesize - start, check))
-	{
-		ft_printf("invalid map detected\n");
+	if (!valid_map(cub->map, check))
 		return (0);
-	}
 	return (1);
 }
 

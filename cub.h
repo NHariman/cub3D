@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/23 00:49:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/23 22:35:28 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,16 @@ typedef	struct	s_check
 	int		ceiling;
 	int		res;
 	int		sprite_pos;
+	int		sprite_x;
+	int		sprite_y;
 }				t_check;
+
+typedef struct	s_map
+{
+	int		start;
+	int		end;
+	int		sprite_pos;
+}				t_map;
 
 typedef struct	s_gnl
 {
@@ -120,7 +129,15 @@ int				save_rgb(const char *str, t_cub *cub);
 int				find_res_y(const char *str);
 int				valid_res_input(const char *str);
 int				valid_rgb_input(const char *str);
-int				valid_map(char **map, int maplen, t_check *check);
+int				valid_map(char **map, t_check *check);
 int				complete_input_data(t_check *check);
 
+/*
+** functions that check if the map received is valid
+** found in valid_map.c and valid_neighbors.c
+*/
+int				edgebound(char **map, int i, int j, int type);
+int				midbound(char **map, int i, int j, int type);
+int				valid_neighbors(char **map, int x, int y, int *check);
+int				is_connected(char **map, int x, int y);
 #endif
