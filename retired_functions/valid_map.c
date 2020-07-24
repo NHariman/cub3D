@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/25 00:19:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/24 18:20:02 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,84 +31,105 @@
 ** the function should know the map is over and still scan the field to
 ** check for ' ' and 1s as those are still valid even after a map ends.
 ** if only ' ' and '\n' are found that also means the map has ended,
-** if characters are found after that's fine too lol.
+** if characters are found after they are considered improper maps.
 ** WARNING: ONLY THE MAP THE PLAYER AS ACCESS TO HAS TO BE CLOSED. AKA. FLOODFILL
 ** STARTING FROM SPAWN POINT!!
 */
 
-static int		find_spawnpoint(t_cub *cub)
+static int		valid_edge(char *str)
 {
-	int x;
-	int y;
+	int	i;
 
-	x = 0;
-	y = 0;
-	while (cub->map[x][0] != '\0')
+	i = 0;
+	while (str[i] != '\0')
 	{
-		while (cub->map[x][y] != '\0')
+		if (!ft_strchr(" 1\n", str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static void		find_outerbounds(t_map *v_map, char *str)
+{
+	v_map->start = 0;
+	v_map->end = ft_strlen(str) - 2;
+	while (str[v_map->start] == ' ')
+		v_map->start++;
+	while (str[v_map->end] == ' ')
+		v_map->end--;
+}
+
+static int		valid_middle(char **map, int i, t_check *check)
+{
+	t_map v_map;
+
+	find_outerbounds(&v_map, map[i]);
+	ft_printf("check: check: %i\n", check->sprite_pos);
+	check->sprite_pos = 0;
+	if (map[i][v_map.start] != '1' || map[i][v_map.end] != '1')
+		return (0);
+	while (map[i][v_map.start] != '\0')
+	{
+		if (!ft_strchr(" 102NSWE\n", map[i][v_map.start]))
+			return (0);
+		else if (ft_strchr("02NSWE", map[i][v_map.start]))
 		{
-			if (ft_strchr("NSWE", cub->map[x][y]))
-			{
-				cub->sprite_x = x;
-				cub->sprite_y = y;
-				return (1);
-			}
-			y++;
+			if (ft_strchr("NSWE", map[i][v_map.start]) && check->sprite_pos)
+				return (0);
+			else if (!valid_neighbors(map, i, v_map.start, &check->sprite_pos))
+				return (0);
 		}
-		y = 0;
-		x++;
+		v_map.start = v_map.start + 1;
 	}
-	return (0);
+	return (1);
 }
 
-int		edgebound(char **map, int i, int j)
+int				valid_leftovers(char **map, int i)
 {
-	return (ft_strchr("0123", map[i][j - 1]) && ft_strchr("0123", map[i][j]) &&
-			ft_strchr("0123", map[i][j + 1]) ? 1 : 0);
-}
+	int j;
 
-int		midbound(char **map, int i, int j)
-{
-	return (ft_strchr("0123", map[i][j - 1]) &&
-			ft_strchr("0123", map[i][j + 1]) ? 1 : 0);
-}
-
-int				floodfill_map(char **map, int x, int y)
-{
-	if (!ft_strchr("0123", map[x][y]))
+	j = 0;
+	while (map[i][j] != '\0')
 	{
-		ft_printf("ok\n");
-		return (print_error(10));
+		if (map[i][j] == ' ')
+			j++;
+		if (map[i][j] != '1' && map[i][j] != ' ' && map[i][j] != '\n')
+			return (0);
+		else if (map[i][j] == '1')
+		{
+			if (!is_connected(map, i, j))
+				return (0);
+		}
+		j++;
 	}
-	else if (map[x][y] == '1')
-		return (1);
-	else if (!edgebound(map, x - 1, y) || !edgebound(map, x + 1, y) ||
-			!midbound(map, x, y))
-		return (print_error(11));
-	else if (ft_strchr("023", map[x][y]))
-	{
-		if (!floodfill_map(map, x, y + 1))
-			return (0);
-		if (!floodfill_map(map, x, y - 1))
-			return (0);
-		if (!floodfill_map(map, x + 1, y))
-			return (0);
-		if (!floodfill_map(map, x - 1, y))
-			return (0);
-		return (1);
-	}
-	return (0);
+	return (1);
 }
 
-int				valid_map(t_cub *cub)
+int				valid_map(char **map, t_check *check)
 {
-	int k;
+	int		i;
+	int		map_end;
 
-	k = 0;
-	if (!find_spawnpoint(cub))
-		return (print_error(9));
-	cub->map[cub->sprite_x][cub->sprite_y] = '3';
-	if (!floodfill_map(cub->map, cub->sprite_x, cub->sprite_y))
-		return (print_error(10));
+	i = 1;
+	map_end = 0;
+	if (!valid_edge(map[0]))
+		return (0);
+	while (map[i][0] != '\0')
+	{
+		if (valid_edge(map[i]) && !map_end)
+			map_end = 1;
+		else if (map_end == 0)
+		{
+			if (!valid_middle(map, i, check))
+				return (0);
+		}
+		else
+		{
+			if (!valid_leftovers(map, i))
+				return (0);
+		}
+		i++;
+	}
 	return (1);
 }

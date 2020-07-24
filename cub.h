@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/23 22:35:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/24 22:21:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_cub
 	int		floor;
 	int		cling;
 	char	**map;
+	char	**cpmap;
 	int		r;
 	int		g;
 	int		b;
@@ -67,9 +68,6 @@ typedef	struct	s_check
 	int		floor;
 	int		ceiling;
 	int		res;
-	int		sprite_pos;
-	int		sprite_x;
-	int		sprite_y;
 }				t_check;
 
 typedef struct	s_map
@@ -129,15 +127,19 @@ int				save_rgb(const char *str, t_cub *cub);
 int				find_res_y(const char *str);
 int				valid_res_input(const char *str);
 int				valid_rgb_input(const char *str);
-int				valid_map(char **map, t_check *check);
+int				valid_map(t_cub *cub);
 int				complete_input_data(t_check *check);
 
 /*
 ** functions that check if the map received is valid
 ** found in valid_map.c and valid_neighbors.c
 */
-int				edgebound(char **map, int i, int j, int type);
-int				midbound(char **map, int i, int j, int type);
-int				valid_neighbors(char **map, int x, int y, int *check);
-int				is_connected(char **map, int x, int y);
+int				floodfill_map(char **map, int x, int y);
+/*
+** error messages, found in error_messages.c
+*/
+int				print_error(int num);
+int				print_more_errors(int num);
+int				print_even_more_errors(int num);
+
 #endif

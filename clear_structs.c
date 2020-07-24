@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/23 21:04:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/24 20:42:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		empty_cub(t_cub *cub)
 	cub->floor = 0;
 	cub->cling = 0;
 	cub->map = NULL;
+	cub->cpmap = NULL;
 	cub->r = 0;
 	cub->g = 0;
 	cub->b = 0;
@@ -92,7 +93,4 @@ void		empty_check(t_check *check)
 	check->sprite = 0;
 	check->floor = 0;
 	check->ceiling = 0;
-	check->sprite_pos = 0;
-	check->sprite_x = 0;
-	check->sprite_y = 0;
 }

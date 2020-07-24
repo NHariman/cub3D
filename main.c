@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/23 17:35:56 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/24 23:57:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int				main(int argc, char **argv)
 			ft_printf("%i: %s", i, cub.map[i]);
 			i++;
 		}
+		ft_printf("\n");
+		ft_printf("it worked!\n");
 	//	while (1) {;}
 	}
 	else

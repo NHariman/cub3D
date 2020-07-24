@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 03:53:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/24 20:14:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int		save_texture(char *str, t_cub *cub, t_check *check)
 	else if (!ft_strncmp(str, "S", 1))
 		cub->sprite = save_path(str + 2, 5, check);
 	else
-	{
-		ft_printf("invalid or double texture input detected\n");
-		return (0);
-	}
+		return (print_error(1));
 	return (1);
 }
 
@@ -54,16 +51,10 @@ int		save_res(const char *str, t_cub *cub, t_check *check)
 
 	i = 0;
 	if (check->res)
-	{
-		ft_printf("double R values detected\n");
-		return (-1);
-	}
+		return (print_error(2));
 	check->res = valid_res_input(str);
 	if (check->res == -1)
-	{
-		ft_printf("invalid res input\n");
-		return (0);
-	}
+		return (print_error(3));
 	cub->res_x = ft_atoi(str);
 	i = find_res_y(str);
 	cub->res_y = ft_atoi(str + i);
@@ -99,10 +90,7 @@ int		save_colours(const char *str, t_cub *cub, t_check *check)
 	int hex;
 
 	if (!valid_rgb_input(str + 1))
-	{
-		ft_printf("Invalid rgb values detected\n");
-		return (0);
-	}
+		return (print_error(4));
 	save_rgb(str + 1, cub);
 	hex = 0;
 	if (ft_strncmp(str, "F", 1) && !check->floor)
@@ -116,9 +104,6 @@ int		save_colours(const char *str, t_cub *cub, t_check *check)
 		check->ceiling = 1;
 	}
 	else
-	{
-		ft_printf("invalid or double rgb values detected\n");
-		return (0);
-	}
+		return (print_error(5));
 	return (1);
 }
