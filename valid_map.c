@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/26 00:00:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/26 00:14:28 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 ** STARTING FROM SPAWN POINT!!
 */
 
+static void			fill_sprite_pos(t_cub *cub, int x, int y)
+{
+	cub->sprite_x = x;
+	cub->sprite_y = y;
+	cub->sprite_pos = cub->map[x][y];
+	cub->map[cub->sprite_x][cub->sprite_y] = '3';
+}
+
 static int			find_spawnpoint(t_cub *cub, int *success)
 {
 	int x;
@@ -49,10 +57,7 @@ static int			find_spawnpoint(t_cub *cub, int *success)
 		{
 			if (ft_strchr("NSWE", cub->map[x][y]))
 			{
-				cub->sprite_x = x;
-				cub->sprite_y = y;
-				cub->sprite_pos = cub->map[x][y];
-				cub->map[cub->sprite_x][cub->sprite_y] = '3';
+				fill_sprite_pos(cub, x, y);
 				floodfill_map(cub->map, success, cub->sprite_x, cub->sprite_y);
 				if (*success == 1)
 					return (1);
@@ -66,44 +71,6 @@ static int			find_spawnpoint(t_cub *cub, int *success)
 	return (print_error(10));
 }
 
-int					edgebound(char **map, int i, int j)
-{
-	return (!ft_strchr(" ", map[i][j - 1]) &&
-			!ft_strchr(" ", map[i][j]) &&
-			!ft_strchr(" ", map[i][j + 1]) ? 1 : 0);
-}
-
-int					midbound(char **map, int i, int j)
-{
-	return (!ft_strchr(" ", map[i][j - 1]) &&
-			!ft_strchr(" ", map[i][j + 1]) ? 1 : 0);
-}
-
-void				floodfill_map(char **map, int *start, int x, int y)
-{
-	if (*start == 0)
-		return ;
-	if (!ft_strchr("0123xy", map[x][y]))
-	{
-		*start = print_error(12);
-		return ;
-	}
-	else if (ft_strchr("1xy", map[x][y]))
-		return ;
-	if (!edgebound(map, x - 1, y) || !edgebound(map, x + 1, y) ||
-			!midbound(map, x, y))
-	{
-		*start = 0;
-		return ;
-	}
-	map[x][y] = map[x][y] == '2' ? 'y' : 'x';
-	floodfill_map(map, start, x + 1, y);
-	floodfill_map(map, start, x - 1, y);
-	floodfill_map(map, start, x, y + 1);
-	floodfill_map(map, start, x, y - 1);
-	return ;
-}
-
 int					valid_map(t_cub *cub)
 {
 	int success;
@@ -111,5 +78,6 @@ int					valid_map(t_cub *cub)
 	success = 1;
 	if (!find_spawnpoint(cub, &success))
 		return (print_error(9));
+	cub->map[cub->sprite_x][cub->sprite_y] = cub->sprite_pos;
 	return (1);
 }
