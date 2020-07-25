@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/24 20:42:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/25 23:59:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		empty_cub(t_cub *cub)
 	cub->filesize = 0;
 	cub->sprite_x = 0;
 	cub->sprite_y = 0;
+	cub->sprite_pos = 'e';
 	cub->res_x = 0;
 	cub->res_y = 0;
 	cub->no = NULL;

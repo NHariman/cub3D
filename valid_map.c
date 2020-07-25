@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/25 00:19:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/26 00:00:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 ** STARTING FROM SPAWN POINT!!
 */
 
-static int		find_spawnpoint(t_cub *cub)
+static int			find_spawnpoint(t_cub *cub, int *success)
 {
 	int x;
 	int y;
@@ -51,64 +51,65 @@ static int		find_spawnpoint(t_cub *cub)
 			{
 				cub->sprite_x = x;
 				cub->sprite_y = y;
-				return (1);
+				cub->sprite_pos = cub->map[x][y];
+				cub->map[cub->sprite_x][cub->sprite_y] = '3';
+				floodfill_map(cub->map, success, cub->sprite_x, cub->sprite_y);
+				if (*success == 1)
+					return (1);
+				*success = 1;
 			}
 			y++;
 		}
 		y = 0;
 		x++;
 	}
-	return (0);
+	return (print_error(10));
 }
 
-int		edgebound(char **map, int i, int j)
+int					edgebound(char **map, int i, int j)
 {
-	return (ft_strchr("0123", map[i][j - 1]) && ft_strchr("0123", map[i][j]) &&
-			ft_strchr("0123", map[i][j + 1]) ? 1 : 0);
+	return (!ft_strchr(" ", map[i][j - 1]) &&
+			!ft_strchr(" ", map[i][j]) &&
+			!ft_strchr(" ", map[i][j + 1]) ? 1 : 0);
 }
 
-int		midbound(char **map, int i, int j)
+int					midbound(char **map, int i, int j)
 {
-	return (ft_strchr("0123", map[i][j - 1]) &&
-			ft_strchr("0123", map[i][j + 1]) ? 1 : 0);
+	return (!ft_strchr(" ", map[i][j - 1]) &&
+			!ft_strchr(" ", map[i][j + 1]) ? 1 : 0);
 }
 
-int				floodfill_map(char **map, int x, int y)
+void				floodfill_map(char **map, int *start, int x, int y)
 {
-	if (!ft_strchr("0123", map[x][y]))
+	if (*start == 0)
+		return ;
+	if (!ft_strchr("0123xy", map[x][y]))
 	{
-		ft_printf("ok\n");
-		return (print_error(10));
+		*start = print_error(12);
+		return ;
 	}
-	else if (map[x][y] == '1')
-		return (1);
-	else if (!edgebound(map, x - 1, y) || !edgebound(map, x + 1, y) ||
+	else if (ft_strchr("1xy", map[x][y]))
+		return ;
+	if (!edgebound(map, x - 1, y) || !edgebound(map, x + 1, y) ||
 			!midbound(map, x, y))
-		return (print_error(11));
-	else if (ft_strchr("023", map[x][y]))
 	{
-		if (!floodfill_map(map, x, y + 1))
-			return (0);
-		if (!floodfill_map(map, x, y - 1))
-			return (0);
-		if (!floodfill_map(map, x + 1, y))
-			return (0);
-		if (!floodfill_map(map, x - 1, y))
-			return (0);
-		return (1);
+		*start = 0;
+		return ;
 	}
-	return (0);
+	map[x][y] = map[x][y] == '2' ? 'y' : 'x';
+	floodfill_map(map, start, x + 1, y);
+	floodfill_map(map, start, x - 1, y);
+	floodfill_map(map, start, x, y + 1);
+	floodfill_map(map, start, x, y - 1);
+	return ;
 }
 
-int				valid_map(t_cub *cub)
+int					valid_map(t_cub *cub)
 {
-	int k;
+	int success;
 
-	k = 0;
-	if (!find_spawnpoint(cub))
+	success = 1;
+	if (!find_spawnpoint(cub, &success))
 		return (print_error(9));
-	cub->map[cub->sprite_x][cub->sprite_y] = '3';
-	if (!floodfill_map(cub->map, cub->sprite_x, cub->sprite_y))
-		return (print_error(10));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/24 22:21:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/25 23:58:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_cub
 	char	*file;
 	char	**filearr;
 	int		filesize;
+	char	sprite_pos;
 	int		sprite_x;
 	int		sprite_y;
 	int		res_x;
@@ -134,7 +135,7 @@ int				complete_input_data(t_check *check);
 ** functions that check if the map received is valid
 ** found in valid_map.c and valid_neighbors.c
 */
-int				floodfill_map(char **map, int x, int y);
+void			floodfill_map(char **map, int *start, int x, int y);
 /*
 ** error messages, found in error_messages.c
 */
