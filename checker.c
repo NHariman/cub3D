@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 17:40:49 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/24 23:53:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/26 20:46:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static int		check_under(char *str)
 	i = 0;
 	while (str[i] == ' ')
 		i++;
-	if ((str[i] == '0' || str[i] == '2' || str[i] == '1'))
+	if (ft_strchr("021NSWE", str[i]))
+	{
+		if (ft_strchr("NWE", str[i]))
+			return (!ft_strchr(" 201", str[i + 1]) ? 0 : 1);
 		return (1);
-	else if (!ft_strncmp(str + i, "R", 1))
-		return (print_error(8));
-	else if (ft_strchr("NSWE", str[i]))
-		return (print_error(8));
-	else if (ft_strchr("FC", str[i]))
+	}
+	else
 		return (print_error(8));
 	return (1);
 }
