@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 17:40:49 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/26 20:46:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/27 19:09:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,7 @@ static int		gather_data(char *str, t_cub *cub, t_check *check)
 		return (!save_texture(str + i, cub, check) ? -1 : 1);
 	else if (ft_strchr("FC", str[i]))
 		return (!save_colours(str + i, cub, check) ? -1 : 1);
-	return (1);
-}
-
-static int		check_under(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	if (ft_strchr("021NSWE", str[i]))
-	{
-		if (ft_strchr("NWE", str[i]))
-			return (!ft_strchr(" 201", str[i + 1]) ? 0 : 1);
-		return (1);
-	}
-	else
-		return (print_error(8));
-	return (1);
+	return (str[i] == '\n' ? 3 : 0);
 }
 
 static int		gather_map(char *str, t_cub *cub, int start)
@@ -73,24 +55,6 @@ static int		gather_map(char *str, t_cub *cub, int start)
 	return (1);
 }
 
-static int		check_last_element(t_cub *cub)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (cub->filearr[cub->filesize - 1 - i])
-	{
-		j = check_under(cub->filearr[cub->filesize - 1 - i]);
-		if (j == 0)
-			return (0);
-		if (j == 1)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 int				data_parser(t_cub *cub)
 {
 	int		i;
@@ -109,7 +73,5 @@ int				data_parser(t_cub *cub)
 			break ;
 		i++;
 	}
-	if (!check_last_element(cub))
-		return (-1);
 	return (gather_map(cub->file, cub, i) == 1 ? 1 : -1);
 }

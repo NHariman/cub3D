@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/26 00:14:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/27 18:49:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void			fill_sprite_pos(t_cub *cub, int x, int y)
 	cub->map[cub->sprite_x][cub->sprite_y] = '3';
 }
 
-static int			find_spawnpoint(t_cub *cub, int *success)
+static int			find_spawnpoint(t_cub *cub)
 {
 	int x;
 	int y;
@@ -58,10 +58,7 @@ static int			find_spawnpoint(t_cub *cub, int *success)
 			if (ft_strchr("NSWE", cub->map[x][y]))
 			{
 				fill_sprite_pos(cub, x, y);
-				floodfill_map(cub->map, success, cub->sprite_x, cub->sprite_y);
-				if (*success == 1)
-					return (1);
-				*success = 1;
+				return (1);
 			}
 			y++;
 		}
@@ -76,8 +73,11 @@ int					valid_map(t_cub *cub)
 	int success;
 
 	success = 1;
-	if (!find_spawnpoint(cub, &success))
+	if (!find_spawnpoint(cub))
 		return (print_error(9));
+	floodfill_map(cub->map, &success, cub->sprite_x, cub->sprite_y);
+	if (success == 0)
+		return (0);
 	cub->map[cub->sprite_x][cub->sprite_y] = cub->sprite_pos;
 	return (1);
 }

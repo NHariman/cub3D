@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   valid_neighbors.c                                  :+:    :+:            */
+/*   floodfill.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/23 18:01:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/26 00:01:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/27 19:11:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ void				floodfill_map(char **map, int *start, int x, int y)
 {
 	if (*start == 0)
 		return ;
-	if (!ft_strchr("0123xy", map[x][y]))
+	if (!ft_strchr("0123x", map[x][y]))
 	{
 		*start = print_error(12);
 		return ;
 	}
-	else if (ft_strchr("1xy", map[x][y]))
+	else if (ft_strchr("1x", map[x][y]))
 		return ;
 	if (!edgebound(map, x - 1, y) || !edgebound(map, x + 1, y) ||
 			!midbound(map, x, y))
 	{
-		*start = 0;
+		*start = print_error(11);
 		return ;
 	}
-	map[x][y] = map[x][y] == '2' ? 'y' : 'x';
+	map[x][y] = 'x';
 	floodfill_map(map, start, x + 1, y);
 	floodfill_map(map, start, x - 1, y);
 	floodfill_map(map, start, x, y + 1);
