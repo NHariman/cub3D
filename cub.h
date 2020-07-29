@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/25 23:58:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/29 20:23:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,7 @@ void			floodfill_map(char **map, int *start, int x, int y);
 int				print_error(int num);
 int				print_more_errors(int num);
 int				print_even_more_errors(int num);
+void			show_map(char **map);
+void			show_file(char **file);
 
 #endif

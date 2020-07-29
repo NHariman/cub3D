@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/24 20:07:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/25 23:04:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/29 20:22:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,30 @@ int		print_even_more_errors(int num)
 	if (num == 20)
 		ft_printf("Oh lord\n");
 	return (0);
+}
+
+void	show_map(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i][0] != '\0')
+	{
+		ft_printf("%s", map[i]);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+void	show_file(char **file)
+{
+	int i;
+
+	i = 0;
+	while (file[i][0] != '\0')
+	{
+		ft_printf("%s", file[i]);
+		i++;
+	}
+	ft_printf("\n");
 }

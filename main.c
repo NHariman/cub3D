@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/25 23:50:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/29 21:17:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,23 @@ static size_t	input_check(int argc, char **argv, t_cub *cub)
 
 int				main(int argc, char **argv)
 {
-	t_cub	cub;
+	t_cub	*cub;
 	int		i;
 
 	i = 0;
-	empty_cub(&cub);
-	cub.path = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
-	if (input_check(argc, argv, &cub))
+	cub = ft_calloc(1, sizeof(t_cub));
+	cub->path = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
+	if (input_check(argc, argv, cub))
 	{
-		file_parser(&cub);
-		if (data_parser(&cub) == -1)
+		file_parser(cub);
+		if (data_parser(cub) == -1)
 		{
+			free(cub);
 			ft_printf("something went wrong\n");
 			return (0);
 		}
 	}
-	if (cub.filearr)
+	if (cub->filearr)
 	{
 		//return (0);
 		// while (cub.filearr[i][0] != '\0')
@@ -82,12 +83,7 @@ int				main(int argc, char **argv)
 		// ft_printf("g: %i\n", cub.g);
 		// ft_printf("b: %i\n", cub.b);
 		// i = 0;
-		while (cub.map[i][0] != '\0')
-		{
-			ft_printf("%i: %s", i, cub.map[i]);
-			i++;
-		}
-		ft_printf("\n");
+		show_map(cub->map);
 		ft_printf("it worked!\n");
 		//while (1) {;}
 	}

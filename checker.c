@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 17:40:49 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/27 19:09:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/29 21:23:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		gather_data(char *str, t_cub *cub, t_check *check)
 	i = 0;
 	while (str[i] == ' ')
 		i++;
-	if (str[i] == '1' && complete_input_data(check))
+	if (ft_strchr("1NSWE", str[i]) && complete_input_data(check))
 		return (2);
 	else if ((str[i] == '0' || str[i] == '2' || str[i] == '1') &&
 				!complete_input_data(check))
@@ -59,14 +59,14 @@ int				data_parser(t_cub *cub)
 {
 	int		i;
 	int		j;
-	t_check	check;
+	t_check	*check;
 
 	i = 0;
 	j = 1;
-	empty_check(&check);
+	empty_check(check);
 	while (cub->filearr[i][0] != '\0' && i != cub->filesize)
 	{
-		j = gather_data(cub->filearr[i], cub, &check);
+		j = gather_data(cub->filearr[i], cub, check);
 		if (j == -1 || j == 0)
 			return (-1);
 		else if (j == 2)

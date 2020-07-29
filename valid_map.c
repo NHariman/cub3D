@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/27 18:49:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/29 20:32:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ int					valid_map(t_cub *cub)
 		return (print_error(9));
 	floodfill_map(cub->map, &success, cub->sprite_x, cub->sprite_y);
 	if (success == 0)
+	{
+		show_map(cub->map);
 		return (0);
+	}
 	cub->map[cub->sprite_x][cub->sprite_y] = cub->sprite_pos;
 	return (1);
 }
