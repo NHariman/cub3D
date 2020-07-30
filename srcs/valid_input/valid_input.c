@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 20:07:12 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 15:33:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/30 22:53:11 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../../cub.h"
 
 int		valid_res_input(const char *str)
 {

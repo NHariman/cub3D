@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/22 04:13:45 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/30 22:52:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../../cub.h"
 
 /*
 ** in this function it's not important if
@@ -69,10 +69,10 @@ int				file_parser(t_cub *cub)
 
 	fd = open(cub->path, O_RDONLY);
 	if (get_next_line(fd, &cub->file) == -1)
-		return (-1);
+		return (print_error(18));
 	cub->filesize = count_newline(cub->file);
 	cub->filearr = create_array(cub->file, cub->filesize);
 	if (cub->filearr == NULL)
-		return (free_array(cub));
+		return (print_error(17));
 	return (1);
 }

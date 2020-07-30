@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/17 23:44:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/18 00:03:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/30 22:51:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../../cub.h"
 
 int	get_hex(int r, int g, int b)
 {

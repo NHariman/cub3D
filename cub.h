@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/29 20:23:45 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/30 22:49:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # define CUB_H
 
 # include "mlx/mlx.h"
-# include "libft/libft.h"
+# include "srcs/libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -71,13 +71,6 @@ typedef	struct	s_check
 	int		res;
 }				t_check;
 
-typedef struct	s_map
-{
-	int		start;
-	int		end;
-	int		sprite_pos;
-}				t_map;
-
 typedef struct	s_gnl
 {
 	int			bytes_read;
@@ -89,7 +82,7 @@ typedef struct	s_gnl
 ** creates a string and a 2D array of
 ** of the .cub file.
 ** Leads to the saving data functions
-** found in checker.c and parser.c
+** found in checker.c and parser.c, folder: PARSER
 */
 int				get_next_line(int fd, char **line);
 int				file_parser(t_cub *cub);
@@ -98,24 +91,23 @@ char			**create_array(char *str, int len);
 
 /*
 ** functions that empty and free structs,
-** found in clear_structs.c
+** found in clear_structs.c, folder: PARSER
 */
-void			empty_cub(t_cub *cub);
 void			empty_check(t_check *check);
-int				free_array(t_cub *cub);
-void			free_struct(t_cub *cub);
+//void			empty_cub(t_cub *cub);
+int				free_struct(t_cub *cub);
 
 /*
 ** input sanitation
-** found in main.c
+** found in main.c, folder: SRCS
 */
 char			*ft_strlower(char *str);
 
 /*
 ** functions that save data into struct
-** found in savers.c
+** found in savers.c, folder: SRCS
 */
-char			*save_path(char *str, int i, t_check *check);
+char			*save_path(char *str, int i, t_check *check, t_cub *cub);
 int				save_texture(char *str, t_cub *cub, t_check *check);
 int				save_res(const char *str, t_cub *cub, t_check *check);
 int				save_colours(const char *str, t_cub *cub, t_check *check);
@@ -123,7 +115,7 @@ int				save_rgb(const char *str, t_cub *cub);
 
 /*
 ** functions that check if input is valid
-** found in valid_input.c
+** found in valid_input.c, folder VALID_INPUT
 */
 int				find_res_y(const char *str);
 int				valid_res_input(const char *str);
@@ -133,16 +125,16 @@ int				complete_input_data(t_check *check);
 
 /*
 ** functions that check if the map received is valid
-** found in valid_map.c and valid_neighbors.c
+** found in floodfill.c, folder VALID_INPUT
 */
-void			floodfill_map(char **map, int *start, int x, int y);
+void			floodfill_map(char **map, int *success, int x, int y);
 /*
-** error messages, found in error_messages.c
+** error messages, found in error_messages.c, map_errors.c
+** folder ERRORS/
 */
 int				print_error(int num);
-int				print_more_errors(int num);
-int				print_even_more_errors(int num);
+int				check_noise(char **map);
 void			show_map(char **map);
-void			show_file(char **file);
+int				show_file_error(char **file, int error);
 
 #endif

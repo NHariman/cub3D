@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/29 20:32:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/30 22:53:17 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../../cub.h"
 
 /*
 ** map must ONLY contain ' ', 1, 2, or ONE of N, S, E, W.
@@ -73,6 +73,8 @@ int					valid_map(t_cub *cub)
 	int success;
 
 	success = 1;
+	if (!check_noise(cub->map))
+		return (0);
 	if (!find_spawnpoint(cub))
 		return (print_error(9));
 	floodfill_map(cub->map, &success, cub->sprite_x, cub->sprite_y);

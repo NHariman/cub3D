@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 17:40:49 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/29 21:23:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/30 22:51:36 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../../cub.h"
 
 static int		gather_data(char *str, t_cub *cub, t_check *check)
 {
@@ -59,19 +59,21 @@ int				data_parser(t_cub *cub)
 {
 	int		i;
 	int		j;
-	t_check	*check;
+	t_check	check;
+	int		map;
 
 	i = 0;
 	j = 1;
-	empty_check(check);
+	empty_check(&check);
 	while (cub->filearr[i][0] != '\0' && i != cub->filesize)
 	{
-		j = gather_data(cub->filearr[i], cub, check);
+		j = gather_data(cub->filearr[i], cub, &check);
 		if (j == -1 || j == 0)
-			return (-1);
+			return (show_file_error(cub->filearr, i));
 		else if (j == 2)
 			break ;
 		i++;
 	}
-	return (gather_map(cub->file, cub, i) == 1 ? 1 : -1);
+	map = gather_map(cub->file, cub, i);
+	return (map == 1 ? 1 : 0);
 }

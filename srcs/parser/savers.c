@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/27 17:49:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/30 22:52:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../../cub.h"
 
-char	*save_path(char *str, int i, t_check *check)
+char	*save_path(char *str, int i, t_check *check, t_cub *cub)
 {
 	str = ft_strtrim(ft_strlower(str), " ");
 	if (i == 1)
@@ -31,15 +31,15 @@ char	*save_path(char *str, int i, t_check *check)
 int		save_texture(char *str, t_cub *cub, t_check *check)
 {
 	if (!ft_strncmp(str, "NO", 2) && !check->north)
-		cub->no = save_path(str + 2, 1, check);
+		cub->no = save_path(str + 2, 1, check, cub);
 	else if (!ft_strncmp(str, "SO", 2) && !check->south)
-		cub->so = save_path(str + 2, 2, check);
+		cub->so = save_path(str + 2, 2, check, cub);
 	else if (!ft_strncmp(str, "WE", 2) && !check->west)
-		cub->we = save_path(str + 2, 3, check);
+		cub->we = save_path(str + 2, 3, check, cub);
 	else if (!ft_strncmp(str, "EA", 2) && !check->east)
-		cub->ea = save_path(str + 2, 4, check);
+		cub->ea = save_path(str + 2, 4, check, cub);
 	else if (!ft_strncmp(str, "S", 1) && !check->sprite)
-		cub->sprite = save_path(str + 2, 5, check);
+		cub->sprite = save_path(str + 2, 5, check, cub);
 	else
 		return (print_error(1));
 	return (1);
