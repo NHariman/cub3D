@@ -6,17 +6,17 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/30 22:51:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/31 21:13:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub.h"
+#include "../cub.h"
 
-// int			free_struct(t_cub *cub)
-// {
-// 	free(cub);
-// 	return (0);
-// }
+int			free_struct(t_cub *cub)
+{
+	free(cub);
+	return (0);
+}
 
 // void		empty_cub(t_cub *cub)
 // {

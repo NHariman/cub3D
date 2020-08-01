@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/08 22:17:28 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/30 22:52:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/31 20:48:31 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub.h"
+#include "../cub.h"
 
 static char				*gnl_strjoin(char *s1, char *s2)
 {

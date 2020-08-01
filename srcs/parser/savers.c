@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/30 22:52:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/31 20:48:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub.h"
+#include "../cub.h"
 
 char	*save_path(char *str, int i, t_check *check, t_cub *cub)
 {

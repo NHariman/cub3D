@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/30 22:53:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/31 20:48:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub.h"
+#include "../cub.h"
 
 /*
 ** map must ONLY contain ' ', 1, 2, or ONE of N, S, E, W.

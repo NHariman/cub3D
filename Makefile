@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/07/30 22:54:54 by nhariman      ########   odam.nl          #
+#    Updated: 2020/07/31 21:06:57 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,12 @@ COMPILE = gcc
 
 FLAGS = -Wall -Werror -Wextra
 
-PARSER = 	main.c \
+PARSER = 	srcs/main.c \
 			srcs/parser/parser.c \
 			srcs/parser/savers.c \
-			scrs/parser/checker.c \
-			scrs/parser/colour.c \
-			scrs/parser/clear_structs.c \
-			scrs/parser/get_next_line.c
+			srcs/parser/checker.c \
+			srcs/parser/colour.c \
+			srcs/parser/get_next_line.c
 
 
 VALID =		srcs/valid_input/valid_input.c \
@@ -28,7 +27,8 @@ VALID =		srcs/valid_input/valid_input.c \
 			srcs/valid_input/floodfill.c 
 
 ERROR =		srcs/errors/error_messages.c \
-			srcs/errors/map_errors.c
+			srcs/errors/map_errors.c \
+			srcs/errors/clear_structs.c
 
 #CBONUS =
 
@@ -77,7 +77,7 @@ srcs/libft/libft.a:
 	@$(COMPILE) -c $(FLAGS) -o $@ -c $<
 
 clean:
-	@$(RM) $(OFILES) $(OBONUS) 
+	@$(RM) $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) 
 	@cd srcs/libft && $(MAKE) clean
 
 fclean: clean
@@ -86,5 +86,5 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OFILES) $(OBONUS) srcs/libft/libft.a
-	@$(COMPILE) $(OFILES) srcs/libft/libft.a -o $@
+bonus: $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) srcs/libft/libft.a
+	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a -o $@

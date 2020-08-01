@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/23 18:01:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/30 22:53:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/31 20:48:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub.h"
+#include "../cub.h"
 
 static int			edgebound(char **map, int i, int j)
 {

@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/30 22:52:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/31 21:55:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub.h"
+#include "../cub.h"
 
 /*
 ** in this function it's not important if
@@ -68,6 +68,7 @@ int				file_parser(t_cub *cub)
 	int		fd;
 
 	fd = open(cub->path, O_RDONLY);
+	//fd = open("srcs/parser/invalid_map_doubles.cub", O_RDONLY);
 	if (get_next_line(fd, &cub->file) == -1)
 		return (print_error(18));
 	cub->filesize = count_newline(cub->file);
