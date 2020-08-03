@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/31 20:51:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 20:10:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,39 +23,45 @@
 # include <string.h>
 # include <fcntl.h>
 
-/*
-** in ASCII:
-** '0' = 48; walkable space on the map
-** '1' = 49; a wall
-** '2' = 50; a sprite/item
-** ' ' = 32; out of bounds
-*/
+// # define NO 0
+// # define SO 1
+// # define EA 2
+// # define WE 3
+// # define SP 4
+
+// typedef	struct	s_texture
+// {
+// 	char	*path;
+// 	int		width;
+// 	int		height;
+// }				t_texture;
 
 typedef struct	s_cub
 {
-	char	*path;
-	int		save;
-	char	*file;
-	char	**filearr;
-	int		filesize;
-	char	sprite_pos;
-	int		sprite_x;
-	int		sprite_y;
-	int		res_x;
-	int		res_y;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*sprite;
-	int		floor;
-	int		cling;
-	char	**map;
-	char	**cpmap;
-	int		r;
-	int		g;
-	int		b;
-	int		hex;
+	//t_texture	textures[5];
+	char		*path;
+	int			save;
+	char		*file;
+	char		**filearr;
+	int			filesize;
+	char		sprite_pos;
+	int			sprite_x;
+	int			sprite_y;
+	int			res_x;
+	int			res_y;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*sprite;
+	int			floor;
+	int			cling;
+	char		**map;
+	char		**cpmap;
+	int			r;
+	int			g;
+	int			b;
+	int			hex;
 
 }				t_cub;
 

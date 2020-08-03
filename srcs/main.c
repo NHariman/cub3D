@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/01 15:04:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 20:04:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int				main(int argc, char **argv)
 		return (0);
 	if (!data_parser(cub))
 		return (0);
+	//ft_printf("test cub->textures[NO].path: %s\n", cub->textures[NO].path);
 	// if (cub->save)
 	// 	save_bmp(cub);
-	ray_time(cub);
+	//ray_time(cub);
 	return (0);
 }
 
