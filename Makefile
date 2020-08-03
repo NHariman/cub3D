@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/07/31 21:06:57 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/03 20:57:29 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,15 @@ NAME = cub3d
 all: $(NAME)
 
 test: $(NAME)
+	@make re
 	./cub3d srcs/maps/test.cub
 
 valid: $(NAME)
+	@make re
 	./cub3d srcs/maps/valid_map_noise.cub
 
 invalid: $(NAME)
+	@make re
 	@echo "this will test **INVALID MAPS**, the program should fail."
 	@echo "****testing: map_invalid_doubles_.cub"
 	./cub3d srcs/maps/invalid_map_doubles.cub
@@ -66,6 +69,8 @@ invalid: $(NAME)
 	./cub3d srcs/maps/double_input.cub
 	@echo "\n***testing: empty_file.cub"
 	./cub3d srcs/maps/empty_file.cub
+	@echo "\n***testing: negative_input.cub"
+	./cub3d srcs/maps/negative_input.cub
 
 $(NAME): $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a
 	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a -o $@

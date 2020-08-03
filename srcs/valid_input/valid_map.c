@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/31 20:48:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 21:28:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@
 ** STARTING FROM SPAWN POINT!!
 */
 
-static void			fill_sprite_pos(t_cub *cub, int x, int y)
+static void			fill_spawn_pos(t_cub *cub, int x, int y)
 {
-	cub->sprite_x = x;
-	cub->sprite_y = y;
-	cub->sprite_pos = cub->map[x][y];
-	cub->map[cub->sprite_x][cub->sprite_y] = '3';
+	cub->spawn_x = x;
+	cub->spawn_y = y;
+	cub->spawn_pos = cub->map[y][x];
+	cub->map[cub->spawn_x][cub->spawn_y] = '3';
 }
 
 static int			find_spawnpoint(t_cub *cub)
@@ -51,19 +51,19 @@ static int			find_spawnpoint(t_cub *cub)
 
 	x = 0;
 	y = 0;
-	while (cub->map[x][0] != '\0')
+	while (cub->map[y][0] != '\0')
 	{
-		while (cub->map[x][y] != '\0')
+		while (cub->map[y][x] != '\0')
 		{
-			if (ft_strchr("NSWE", cub->map[x][y]))
+			if (ft_strchr("NSWE", cub->map[y][x]))
 			{
-				fill_sprite_pos(cub, x, y);
+				fill_spawn_pos(cub, x, y);
 				return (1);
 			}
-			y++;
+			x++;
 		}
-		y = 0;
-		x++;
+		x = 0;
+		y++;
 	}
 	return (print_error(10));
 }
@@ -77,12 +77,12 @@ int					valid_map(t_cub *cub)
 		return (0);
 	if (!find_spawnpoint(cub))
 		return (print_error(9));
-	floodfill_map(cub->map, &success, cub->sprite_x, cub->sprite_y);
+	floodfill_map(cub->map, &success, cub->spawn_x, cub->spawn_y);
 	if (success == 0)
 	{
 		show_map(cub->map);
 		return (0);
 	}
-	cub->map[cub->sprite_x][cub->sprite_y] = cub->sprite_pos;
+	cub->map[cub->spawn_x][cub->spawn_y] = cub->spawn_pos;
 	return (1);
 }

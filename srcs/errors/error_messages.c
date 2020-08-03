@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/24 20:07:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/31 20:48:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 22:16:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 static int		print_even_more_errors(int num)
 {
-	if (num == 20)
-		ft_printf("Oh lord\n");
+	if (num > 28)
+		return (omg_so_many_errors(num));
+	else if (num == 19)
+		ft_printf("Error\n%i: mlx failed to start.\n", num);
+	else if (num == 20)
+		ft_printf("Error\n%i: mlx image failed to start.\n", num);
+	else if (num == 21)
+		ft_printf("Error\n%i: failed to load png image.\n", num);
+	else if (num == 22)
+		ft_printf("Error\n%i: Invalid texture type, png or xmp only.\n", num);
 	return (0);
 }
 
 static int		print_more_errors(int num)
 {
-	if (num > 19)
+	if (num > 18)
 		return (print_even_more_errors(num));
 	else if (num == 10)
 		ft_printf("Error\n%i: Floodfill failed.\n", num);

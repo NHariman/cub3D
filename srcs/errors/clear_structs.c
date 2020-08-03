@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/31 21:13:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 21:09:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int			free_struct(t_cub *cub)
 // 	cub->file = NULL;
 // 	cub->filearr = NULL;
 // 	cub->filesize = 0;
-// 	cub->sprite_x = 0;
-// 	cub->sprite_y = 0;
-// 	cub->sprite_pos = ' ';
+// 	cub->spawn_x = 0;
+// 	cub->spawn_y = 0;
+// 	cub->spawn_pos = ' ';
 // 	cub->res_x = 0;
 // 	cub->res_y = 0;
 // 	cub->no = NULL;

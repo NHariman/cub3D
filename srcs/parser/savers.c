@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/03 20:04:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 20:45:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 char	*save_path(char *str, int i, t_check *check, t_cub *cub)
 {
 	str = ft_strtrim(ft_strlower(str), " ");
-	if (i == 0)
+	if (i == NO)
 		check->north = 1;
-	else if (i == 1)
+	else if (i == SO)
 		check->south = 1;
-	else if (i == 2)
+	else if (i == WE)
 		check->west = 1;
-	else if (i == 3)
+	else if (i == EA)
 		check->east = 1;
-	else if (i == 4)
+	else if (i == SP)
 		check->sprite = 1;
 	return (str);
 }
@@ -31,15 +31,15 @@ char	*save_path(char *str, int i, t_check *check, t_cub *cub)
 int		save_texture(char *str, t_cub *cub, t_check *check)
 {
 	if (!ft_strncmp(str, "NO", 2) && !check->north)
-		cub->no = save_path(str + 2, 0, check, cub);
+		cub->textures[NO].path = save_path(str + 2, NO, check, cub);
 	else if (!ft_strncmp(str, "SO", 2) && !check->south)
-		cub->so = save_path(str + 2, 1, check, cub);
+		cub->textures[SO].path = save_path(str + 2, SO, check, cub);
 	else if (!ft_strncmp(str, "WE", 2) && !check->west)
-		cub->we = save_path(str + 2, 2, check, cub);
+		cub->textures[WE].path = save_path(str + 2, WE, check, cub);
 	else if (!ft_strncmp(str, "EA", 2) && !check->east)
-		cub->ea = save_path(str + 2, 3, check, cub);
+		cub->textures[EA].path = save_path(str + 2, EA, check, cub);
 	else if (!ft_strncmp(str, "S", 1) && !check->sprite)
-		cub->sprite = save_path(str + 2, 4, check, cub);
+		cub->textures[SP].path = save_path(str + 2, SP, check, cub);
 	else
 		return (print_error(1));
 	return (1);

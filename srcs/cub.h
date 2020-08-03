@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/03 20:10:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 22:06:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,34 @@
 # include <string.h>
 # include <fcntl.h>
 
-// # define NO 0
-// # define SO 1
-// # define EA 2
-// # define WE 3
-// # define SP 4
+# define NO 0
+# define SO 1
+# define EA 2
+# define WE 3
+# define SP 4
 
-// typedef	struct	s_texture
-// {
-// 	char	*path;
-// 	int		width;
-// 	int		height;
-// }				t_texture;
+typedef	struct	s_texture
+{
+	void	*texture;
+	char	*path;
+	int		width;
+	int		height;
+	int		endian;
+}				t_texture;
 
 typedef struct	s_cub
 {
-	//t_texture	textures[5];
+	t_texture	textures[5];
 	char		*path;
 	int			save;
 	char		*file;
 	char		**filearr;
 	int			filesize;
-	char		sprite_pos;
-	int			sprite_x;
-	int			sprite_y;
+	char		spawn_pos;
+	int			spawn_x;
+	int			spawn_y;
 	int			res_x;
 	int			res_y;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
 	char		*sprite;
 	int			floor;
 	int			cling;
@@ -100,7 +98,6 @@ char			**create_array(char *str, int len);
 ** found in clear_structs.c, folder: PARSER
 */
 void			empty_check(t_check *check);
-//void			empty_cub(t_cub *cub);
 int				free_struct(t_cub *cub);
 
 /*
@@ -139,8 +136,14 @@ void			floodfill_map(char **map, int *success, int x, int y);
 ** folder ERRORS/
 */
 int				print_error(int num);
+int				omg_so_many_errors(int num);
 int				check_noise(char **map);
 void			show_map(char **map);
 int				show_file_error(char **file, int error);
+
+/*
+** raycasting time baybeeeeee
+*/
+int				ray_time(t_cub *cub);
 
 #endif

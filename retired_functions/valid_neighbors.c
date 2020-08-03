@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/23 18:01:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/24 17:53:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 21:08:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int		valid_neighbors(char **map, int x, int y, t_check *check)
 
 	if (ft_strchr("NSWE", map[x][y]))
 	{
-		if (check->sprite_pos == 0)
-			check->sprite_pos = 1;
+		if (check->spawn_pos == 0)
+			check->spawn_pos = 1;
 		else
 			return (0);
 	}
