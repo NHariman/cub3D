@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/03 20:57:29 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/03 22:54:02 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ VALID =		srcs/valid_input/valid_input.c \
 
 ERROR =		srcs/errors/error_messages.c \
 			srcs/errors/map_errors.c \
+			srcs/errors/more_errors.c \
 			srcs/errors/clear_structs.c
 
 #CBONUS =

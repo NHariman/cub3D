@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/01 23:05:57 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/03 22:19:56 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/03 22:55:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int				ray_time(t_cub *cub)
 	mlx = mlx_init();
 	if (!mlx)
 		return (print_error(19));
+	if (!get_textures(mlx, cub))
+		return (0);
 	mlx_img = mlx_new_window(mlx, cub->res_x, cub->res_y, "Cub3D");
 	if (!mlx_img)
 		return (print_error(20));
-	if (!get_textures(mlx, cub))
-		return (0);
 }
