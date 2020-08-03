@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/02 21:47:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/07/31 20:51:11 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@
 ** '2' = 50; a sprite/item
 ** ' ' = 32; out of bounds
 */
-
-typedef struct s_texture
-{
-	char	*path;
-	int		width;
-	int		height;
-
-};
-
 
 typedef struct	s_cub
 {
