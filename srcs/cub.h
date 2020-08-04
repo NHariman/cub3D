@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 14:57:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 15:12:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ typedef	struct	s_camera
 	double		posx;
 	double		posy;
 	double		dirx;
-	double		diry;
+	double		diry;	
+	double		raydirx;
+	double		raydiry;
 	double		planex;
 	double		planey;
 	double		time;
@@ -58,10 +60,17 @@ typedef	struct	s_camera
 	double		camerax;
 }				t_camera;
 
+typedef	struct	s_map
+{
+
+}				t_map;
+
+
 typedef struct	s_cub
 {
 	t_texture	textures[5];
 	t_camera	cam;
+	t_map		map;
 	char		*path;
 	int			save;
 	char		*file;

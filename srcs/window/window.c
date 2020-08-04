@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/01 23:05:57 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 14:55:59 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 15:12:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ int				ray_time(t_cub *cub)
 		return (mlx_exit(mlx, mlx_img, 20));
 	while (mlx_loop(mlx))
 	{
-		
+		calc_camray(cub);
 	}
 }
