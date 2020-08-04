@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 11:15:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 12:57:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*save_path(char *str, int i, t_check *check, t_cub *cub)
 {
-	str = ft_strtrim(ft_strlower(str), " ");
+	str = ft_strtrim(ft_strlower(str), " \n");
 	if (i == NO)
 		check->north = 1;
 	else if (i == SO)
@@ -61,19 +61,19 @@ int		save_res(const char *str, t_cub *cub, t_check *check)
 	return (1);
 }
 
-int		save_rgb(const char *str, t_cub *cub)
+int		save_rgb(const char *str, t_cub *cub, t_rgb *rgb)
 {
 	int		i;
 
 	i = 0;
-	cub->r = ft_atoi(str);
+	rgb->r = ft_atoi(str);
 	while ((str[i] == ' ' || ft_isdigit(str[i])) && str[i] != '\0')
 	{
 		if (str[i] == ',')
 			break ;
 		i++;
 	}
-	cub->g = ft_atoi(str + i + 1);
+	rgb->g = ft_atoi(str + i + 1);
 	i++;
 	while ((str[i] == ' ' || ft_isdigit(str[i])) && str[i] != '\0')
 	{
@@ -81,18 +81,21 @@ int		save_rgb(const char *str, t_cub *cub)
 			break ;
 		i++;
 	}
-	cub->b = ft_atoi(str + i + 1);
+	rgb->b = ft_atoi(str + i + 1);
 	return (1);
 }
 
 int		save_colours(const char *str, t_cub *cub, t_check *check)
 {
-	int hex;
+	int		hex;
+	t_rgb	rgb;
 
 	if (!valid_rgb_input(str + 1))
 		return (print_error(4));
-	save_rgb(str + 1, cub);
-	hex = 0;
+	save_rgb(str + 1, cub, &rgb);
+	if (!valid_rgb_values(&rgb))
+		return (print_error(5));
+	hex = get_hex(rgb.r, rgb.g, rgb.b);
 	if (ft_strncmp(str, "F", 1) && !check->floor)
 	{
 		cub->floor = hex;

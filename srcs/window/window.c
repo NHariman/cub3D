@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/01 23:05:57 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/03 22:55:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 14:55:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ int				get_textures(void *mlx, t_cub *cub)
 
 int				ray_time(t_cub *cub)
 {
-	void	*mlx;
-	void	*mlx_img;
+	void		*mlx;
+	void		*mlx_img;
+	t_camera	cam;
 
+	set_spawnpoint(cub);
 	mlx = mlx_init();
 	if (!mlx)
 		return (print_error(19));
@@ -60,5 +62,9 @@ int				ray_time(t_cub *cub)
 		return (0);
 	mlx_img = mlx_new_window(mlx, cub->res_x, cub->res_y, "Cub3D");
 	if (!mlx_img)
-		return (print_error(20));
+		return (mlx_exit(mlx, mlx_img, 20));
+	while (mlx_loop(mlx))
+	{
+		
+	}
 }

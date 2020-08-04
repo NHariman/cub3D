@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/03 22:54:02 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/04 13:37:39 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ PARSER = 	srcs/main.c \
 			srcs/parser/parser.c \
 			srcs/parser/savers.c \
 			srcs/parser/checker.c \
-			srcs/parser/colour.c \
 			srcs/parser/get_next_line.c
 
 
 VALID =		srcs/valid_input/valid_input.c \
 			srcs/valid_input/valid_map.c \
-			srcs/valid_input/floodfill.c 
+			srcs/valid_input/floodfill.c \
+			srcs/valid_input/colour.c 
 
 ERROR =		srcs/errors/error_messages.c \
 			srcs/errors/map_errors.c \
@@ -39,7 +39,7 @@ OVALID =	$(VALID:.c=.o)
 
 OERROR =	$(ERROR:.c=.o)
 
-OBONUS = $(CBONUS:.c=.o)
+OBONUS = 	$(CBONUS:.c=.o)
 
 NAME = cub3d
 
@@ -72,9 +72,14 @@ invalid: $(NAME)
 	./cub3d srcs/maps/empty_file.cub
 	@echo "\n***testing: negative_input.cub"
 	./cub3d srcs/maps/negative_input.cub
+	@echo "\n***testing: invalid_rgb_input.cub"
+	./cub3d srcs/maps/invalid_rgb_input.cub
 
-$(NAME): $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a
-	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a -o $@
+$(NAME): $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a libmlx.dylib
+	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a libmlx.dylib -o $@
+
+libmlx.dylib:
+	@cd srcs/mlx && $(MAKE) && mv libmlx.dylib ../../
 
 srcs/libft/libft.a:
 	@cd srcs/libft && $(MAKE)
@@ -85,9 +90,10 @@ srcs/libft/libft.a:
 clean:
 	@$(RM) $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) 
 	@cd srcs/libft && $(MAKE) clean
+	@cd srcs/mlx && $(MAKE) clean
 
 fclean: clean
-	@$(RM) $(NAME) 
+	@$(RM) $(NAME) libmlx.dylib
 	@cd srcs/libft && $(MAKE) fclean
 
 re: fclean all

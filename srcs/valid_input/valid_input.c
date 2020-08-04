@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 20:07:12 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 11:19:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 12:34:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int		valid_rgb_input(const char *str)
 		j++;
 	}
 	return (str[i] == '\n' ? 1 : 0);
+}
+
+int		valid_rgb_values(t_rgb *rgb)
+{
+	return (rgb->r > 255 || rgb->g > 255 || rgb->b > 255 ||
+	rgb->r < 0 || rgb->g < 0 || rgb->b < 0 ? 0 : 1);
 }
 
 int		find_res_y(const char *str)

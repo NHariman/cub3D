@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 11:49:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 13:33:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,10 @@ int				main(int argc, char **argv)
 	if (!data_parser(cub))
 		return (0);
 	show_map(cub->map);
-	while (1) {;}
+	//while (1) {;}
 	// if (cub->save)
 	// 	save_bmp(cub);
 	// if (!ray_time(cub))
 	// 	return (0);
 	return (0);
 }
-
-	// int i;
-
-	// i = 0;
-	// while (map[i][0] != '\0')
-	// {
-	// 	ft_printf("%i: %s", i, map[i]);
-	// 	i++;
-	// }
-	// ft_printf("\n");

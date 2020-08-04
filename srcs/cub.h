@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 10:46:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 14:57:22 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@
 # define WE 3
 # define SP 4
 
+typedef	struct	s_rgb
+{
+	int			r;
+	int			g;
+	int			b;
+}				t_rgb;
+
 typedef	struct	s_texture
 {
 	void	*texture;
@@ -38,9 +45,23 @@ typedef	struct	s_texture
 	int		endian;
 }				t_texture;
 
+typedef	struct	s_camera
+{
+	double		posx;
+	double		posy;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	double		time;
+	double		prev_time;
+	double		camerax;
+}				t_camera;
+
 typedef struct	s_cub
 {
 	t_texture	textures[5];
+	t_camera	cam;
 	char		*path;
 	int			save;
 	char		*file;
@@ -51,16 +72,10 @@ typedef struct	s_cub
 	int			spawn_y;
 	int			res_x;
 	int			res_y;
-	char		*sprite;
 	int			floor;
 	int			cling;
 	char		**map;
 	char		**cpmap;
-	int			r;
-	int			g;
-	int			b;
-	int			hex;
-
 }				t_cub;
 
 typedef	struct	s_check
@@ -95,7 +110,7 @@ char			**create_array(char *str, int len);
 
 /*
 ** functions that empty and free structs,
-** found in clear_structs.c, folder: PARSER
+** found in clear_structs.c, folder: ERRORS
 */
 void			empty_check(t_check *check);
 int				free_struct(t_cub *cub);
@@ -114,7 +129,7 @@ char			*save_path(char *str, int i, t_check *check, t_cub *cub);
 int				save_texture(char *str, t_cub *cub, t_check *check);
 int				save_res(const char *str, t_cub *cub, t_check *check);
 int				save_colours(const char *str, t_cub *cub, t_check *check);
-int				save_rgb(const char *str, t_cub *cub);
+int				save_rgb(const char *str, t_cub *cub, t_rgb *rgb);
 
 /*
 ** functions that check if input is valid
@@ -123,6 +138,7 @@ int				save_rgb(const char *str, t_cub *cub);
 int				find_res_y(const char *str);
 int				valid_res_input(const char *str);
 int				valid_rgb_input(const char *str);
+int				valid_rgb_values(t_rgb *rgb);
 int				valid_map(t_cub *cub);
 int				complete_input_data(t_check *check);
 
@@ -131,6 +147,7 @@ int				complete_input_data(t_check *check);
 ** found in floodfill.c, folder VALID_INPUT
 */
 void			floodfill_map(char **map, int *success, int x, int y);
+int				get_hex(int r, int g, int b);
 /*
 ** error messages, found in error_messages.c, map_errors.c
 ** folder ERRORS/
@@ -145,5 +162,6 @@ int				show_file_error(char **file, int error);
 ** raycasting time baybeeeeee
 */
 int				ray_time(t_cub *cub);
+int				mlx_exit(void *mlx, void *mlx_img, int error);
 
 #endif

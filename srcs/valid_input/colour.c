@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   clear_structs.c                                    :+:    :+:            */
+/*   colour.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 12:30:28 by nhariman      ########   odam.nl         */
+/*   Created: 2020/07/17 23:44:35 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/08/04 12:38:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int			free_struct(t_cub *cub)
+int		get_hex(int r, int g, int b)
 {
-	free(cub);
-	return (0);
+	return ((r << 16) | (g << 8) | b);
 }
 
-void		empty_check(t_check *check)
+int		get_r(int trgb)
 {
-	check->res = 0;
-	check->north = 0;
-	check->south = 0;
-	check->east = 0;
-	check->west = 0;
-	check->sprite = 0;
-	check->floor = 0;
-	check->ceiling = 0;
+	return (trgb & (0xFF << 16));
+}
+
+int		get_g(int trgb)
+{
+	return (trgb & (0xFF << 8));
+}
+
+int		get_b(int trgb)
+{
+	return (trgb & 0xFF);
 }

@@ -3,7 +3,7 @@
  */
 
 #include <math.h>
-#include "mlx/mlx.h"
+#include "srcs/mlx/mlx.h"
 
 typedef struct	s_data {
 	void        *img;
@@ -33,6 +33,7 @@ int		main(void)
 
 	i = 0;
 	j = 0;
+	tmp = 0;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 	img.img = mlx_new_image(mlx, 1920, 1080);
