@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/03 21:28:18 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 11:33:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@
 ** STARTING FROM SPAWN POINT!!
 */
 
-static void			fill_spawn_pos(t_cub *cub, int x, int y)
+static void			fill_spawn_pos(t_cub *cub, int y, int x)
 {
 	cub->spawn_x = x;
 	cub->spawn_y = y;
 	cub->spawn_pos = cub->map[y][x];
-	cub->map[cub->spawn_x][cub->spawn_y] = '3';
+	cub->map[cub->spawn_y][cub->spawn_x] = '3';
 }
 
 static int			find_spawnpoint(t_cub *cub)
@@ -57,7 +57,7 @@ static int			find_spawnpoint(t_cub *cub)
 		{
 			if (ft_strchr("NSWE", cub->map[y][x]))
 			{
-				fill_spawn_pos(cub, x, y);
+				fill_spawn_pos(cub, y, x);
 				return (1);
 			}
 			x++;
@@ -77,12 +77,12 @@ int					valid_map(t_cub *cub)
 		return (0);
 	if (!find_spawnpoint(cub))
 		return (print_error(9));
-	floodfill_map(cub->map, &success, cub->spawn_x, cub->spawn_y);
+	floodfill_map(cub->map, &success, cub->spawn_y, cub->spawn_x);
 	if (success == 0)
 	{
 		show_map(cub->map);
 		return (0);
 	}
-	cub->map[cub->spawn_x][cub->spawn_y] = cub->spawn_pos;
+	cub->map[cub->spawn_y][cub->spawn_x] = cub->spawn_pos;
 	return (1);
 }

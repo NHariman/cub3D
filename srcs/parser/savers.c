@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/03 22:58:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 11:15:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int		save_texture(char *str, t_cub *cub, t_check *check)
 		cub->textures[WE].path = save_path(str + 2, WE, check, cub);
 	else if (!ft_strncmp(str, "EA", 2) && !check->east)
 		cub->textures[EA].path = save_path(str + 2, EA, check, cub);
-	// else if (!ft_strncmp(str, "S", 1) && !check->sprite)
-	// 	cub->textures[SP].path = save_path(str + 2, 4, check, cub);
+	else if (!ft_strncmp(str, "S", 1) && !check->sprite)
+		cub->textures[SP].path = save_path(str + 1, SP, check, cub);
 	else
 		return (print_error(1));
 	return (1);

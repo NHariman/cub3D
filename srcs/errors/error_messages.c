@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/24 20:07:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/03 22:16:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 11:52:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int		print_even_more_errors(int num)
 		ft_printf("Error\n%i: failed to load png image.\n", num);
 	else if (num == 22)
 		ft_printf("Error\n%i: Invalid texture type, png or xmp only.\n", num);
+	else if (num == 23)
+		ft_printf("Error\n%i: Empty file/file too short to be valid.\n", num);
 	return (0);
 }
 
@@ -85,15 +87,17 @@ int				print_error(int num)
 
 void			show_map(char **map)
 {
-	int i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	while (map[i][0] != '\0')
 	{
-		ft_printf("%s", map[i]);
+		tmp = ft_substr(map[i], 0, ft_strlen(map[i]) - 1);
+		ft_printf("%s%%\n", tmp);
+		free(tmp);
 		i++;
 	}
-	ft_printf("\n");
 }
 
 int				show_file_error(char **file, int error)

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 17:40:49 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/31 20:48:21 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 11:27:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static int		gather_data(char *str, t_cub *cub, t_check *check)
 		i++;
 	if (ft_strchr("1NSWE", str[i]) && complete_input_data(check))
 		return (2);
-	else if ((str[i] == '0' || str[i] == '2' || str[i] == '1') &&
-				!complete_input_data(check))
+	else if (ft_strchr(" 120", str[i]) && !complete_input_data(check))
 		return (print_error(6));
 	else if (!ft_strncmp(str + i, "R", 1))
 		return (!save_res(str + i + 1, cub, check) ? -1 : 1);

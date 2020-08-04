@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/31 21:55:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/04 11:42:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ int				file_parser(t_cub *cub)
 	int		fd;
 
 	fd = open(cub->path, O_RDONLY);
-	//fd = open("srcs/parser/invalid_map_doubles.cub", O_RDONLY);
 	if (get_next_line(fd, &cub->file) == -1)
 		return (print_error(18));
 	cub->filesize = count_newline(cub->file);
+	if (cub->filesize == 1)
+		return (print_error(23));
 	cub->filearr = create_array(cub->file, cub->filesize);
 	if (cub->filearr == NULL)
 		return (print_error(17));
