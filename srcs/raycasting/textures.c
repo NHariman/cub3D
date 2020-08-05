@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   window.c                                           :+:    :+:            */
+/*   textures.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/01 23:05:57 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 15:12:25 by nhariman      ########   odam.nl         */
+/*   Created: 2020/08/05 20:47:46 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/08/05 22:52:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,41 @@ int				get_textures(void *mlx, t_cub *cub)
 	return (1);
 }
 
-int				ray_time(t_cub *cub)
+static int		get_texnr(t_camera *cam)
 {
-	void		*mlx;
-	void		*mlx_img;
-	t_camera	cam;
-
-	set_spawnpoint(cub);
-	mlx = mlx_init();
-	if (!mlx)
-		return (print_error(19));
-	if (!get_textures(mlx, cub))
-		return (0);
-	mlx_img = mlx_new_window(mlx, cub->res_x, cub->res_y, "Cub3D");
-	if (!mlx_img)
-		return (mlx_exit(mlx, mlx_img, 20));
-	while (mlx_loop(mlx))
+	if (cam->ray.side == 0)
 	{
-		calc_camray(cub);
+		if (cam->posx > cam->ray.mapx)
+			return (NO);
+		else
+			return (EA);
 	}
+	else
+	{
+		if (cam->posy > cam->ray.mapy)
+			return (SO);
+		else
+			return (WE);
+	}
+}
+
+void			calc_textures(t_camera *cam, t_cub *cub, int *buf)
+{
+	int nr;
+
+	nr = get_texnr(cam);
+	cam->wall.wallx = cam->ray.side == 0 ?
+				cam->posy + cam->ray.perpwalldist * cam->raydiry :
+				cam->posx + cam->ray.perpwalldist * cam->raydirx;
+	cam->wall.wallx -= floor(cam->wall.wallx);
+	cam->wall.texx =
+			(int)(cam->wall.wallx * (double)cub->textures[nr].width);
+	if ((cam->ray.side == 0 && cam->raydirx > 0) ||
+				cam->ray.side == 1 && cam->raydiry < 0)
+		cam->wall.texx = cub->textures[nr].width - cam->wall.texx - 1;
+	cam->step = 1.0 * cub->textures[nr].height / cam->draw.lineheight;
+	cam->texpos =
+		(cam->draw.start - cub->res_y / 2 + cam->draw.lineheight / 2) *
+		cam->step;
+	// STILL NEEDS TO USE THE BUFFER!!!!
 }

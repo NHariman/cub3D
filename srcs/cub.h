@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 15:12:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/05 22:44:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,43 @@ typedef	struct	s_texture
 	int		endian;
 }				t_texture;
 
+typedef	struct	s_ray
+{
+	int			mapx;
+	int			mapy;
+	double		sidedistx;
+	double		sidedisty;
+	double		deltadistx;
+	double		deltadisty;
+	double		perpwalldist;
+	int			stepx;
+	int			stepy;
+	int			hit;
+	int			side;
+}				t_ray;
+
+typedef struct	s_draw
+{
+	int			lineheight;
+	int			start;
+	int			end;
+}				t_draw;
+
+typedef struct	s_wall
+{
+	double		wallx;
+	int			texx;
+}				t_wall;
+
 typedef	struct	s_camera
 {
+	t_ray		ray;
+	t_draw		draw;
+	t_wall		wall;
 	double		posx;
 	double		posy;
 	double		dirx;
-	double		diry;	
+	double		diry;
 	double		raydirx;
 	double		raydiry;
 	double		planex;
@@ -58,19 +89,13 @@ typedef	struct	s_camera
 	double		time;
 	double		prev_time;
 	double		camerax;
+	double		step;
+	double		texpos;
 }				t_camera;
-
-typedef	struct	s_map
-{
-
-}				t_map;
-
 
 typedef struct	s_cub
 {
 	t_texture	textures[5];
-	t_camera	cam;
-	t_map		map;
 	char		*path;
 	int			save;
 	char		*file;
@@ -169,8 +194,26 @@ int				show_file_error(char **file, int error);
 
 /*
 ** raycasting time baybeeeeee
+** found in setup_raycasting.c
+** folder: RAYCASTING/
 */
 int				ray_time(t_cub *cub);
-int				mlx_exit(void *mlx, void *mlx_img, int error);
 
+/*
+** these functions calculate various stuff for rays
+** found in: calc.c and raycasting.c
+** folder: RAYCASTING/
+*/
+void			setup_camray(t_cub *cub, t_camera *cam, int *buf);
+void			calc_step_and_sidedist(t_camera *cam);
+void			calc_dda(t_camera *cam, t_cub *cub);
+void			calc_camwalldist(t_camera *cam);
+void			calc_line(t_camera *cam, int y);
+
+/*
+** get and calculate textures.
+** found in textures.c
+** folder: RAYCASTING/
+*/
+int				get_textures(void *mlx, t_cub *cub);
 #endif

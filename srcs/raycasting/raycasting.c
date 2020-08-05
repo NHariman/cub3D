@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   spawnpoint.c                                       :+:    :+:            */
+/*   raycasting.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/04 13:51:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 15:11:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/05 22:45:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void		set_spawnpoint(t_cub *cub)
-{
-	cub->cam.posx = (double)cub->spawn_x;
-	cub->cam.posy = (double)cub->spawn_y;
-	cub->cam.dirx = -1;
-	cub->cam.diry = 0;
-	cub->cam.raydirx = 0;
-	cub->cam.raydiry = 0;
-	cub->cam.planex = 0;
-	cub->cam.planey = 0.66;
-	cub->cam.time = 0;
-	cub->cam.prev_time = 0;
-	cub->cam.camerax = 0;
-}
-
-void		calc_camray(t_cub *cub)
+void			setup_camray(t_cub *cub, t_camera *cam, int *buf)
 {
 	int i;
 
 	while (i < cub->res_x)
+	{
+		cam->camerax = 2 * i / (double)cub->res_x - 1;
+		calc_camray(cub, cam);
+		calc_step_and_sidedist(cam);
+		calc_dda(cam, cub);
+		calc_camwalldist(cam);
+		calc_line(cam, cub->res_y);
+		calc_textures(cam, cub, buf);
+	}
 }

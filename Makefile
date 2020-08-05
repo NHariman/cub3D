@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/04 13:37:39 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/05 20:49:35 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ ERROR =		srcs/errors/error_messages.c \
 			srcs/errors/map_errors.c \
 			srcs/errors/more_errors.c \
 			srcs/errors/clear_structs.c
+
+#RAYCAST =	srcs/window
 
 #CBONUS =
 
