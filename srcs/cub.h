@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/05 22:44:59 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/06 16:59:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,106 +29,114 @@
 # define WE 3
 # define SP 4
 
+# define PNG 5
+# define XPM 6
+
 typedef	struct	s_rgb
 {
-	int			r;
-	int			g;
-	int			b;
+	int				r;
+	int				g;
+	int				b;
 }				t_rgb;
 
 typedef	struct	s_texture
 {
-	void	*texture;
-	char	*path;
-	int		width;
-	int		height;
-	int		endian;
+	void			*texture;
+	char			*path;
+	int				width;
+	int				height;
+	int				endian;
 }				t_texture;
 
 typedef	struct	s_ray
 {
-	int			mapx;
-	int			mapy;
-	double		sidedistx;
-	double		sidedisty;
-	double		deltadistx;
-	double		deltadisty;
-	double		perpwalldist;
-	int			stepx;
-	int			stepy;
-	int			hit;
-	int			side;
+	int				mapx;
+	int				mapy;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+	double			perpwalldist;
+	int				stepx;
+	int				stepy;
+	int				hit;
+	int				side;
 }				t_ray;
 
 typedef struct	s_draw
 {
-	int			lineheight;
-	int			start;
-	int			end;
+	int				lineheight;
+	int				start;
+	int				end;
 }				t_draw;
 
 typedef struct	s_wall
 {
-	double		wallx;
-	int			texx;
+	double			wallx;
+	int				texx;
+	int				texy;
+	unsigned int	colour;
 }				t_wall;
 
 typedef	struct	s_camera
 {
-	t_ray		ray;
-	t_draw		draw;
-	t_wall		wall;
-	double		posx;
-	double		posy;
-	double		dirx;
-	double		diry;
-	double		raydirx;
-	double		raydiry;
-	double		planex;
-	double		planey;
-	double		time;
-	double		prev_time;
-	double		camerax;
-	double		step;
-	double		texpos;
+	t_ray			ray;
+	t_draw			draw;
+	t_wall			wall;
+	double			posx;
+	double			posy;
+	double			dirx;
+	double			diry;
+	double			raydirx;
+	double			raydiry;
+	double			planex;
+	double			planey;
+	double			time;
+	double			prev_time;
+	double			frametime;
+	double			camerax;
+	double			step;
+	double			texpos;
+	double			movespeed;
+	double			rotspeed;
 }				t_camera;
 
 typedef struct	s_cub
 {
-	t_texture	textures[5];
-	char		*path;
-	int			save;
-	char		*file;
-	char		**filearr;
-	int			filesize;
-	char		spawn_pos;
-	int			spawn_x;
-	int			spawn_y;
-	int			res_x;
-	int			res_y;
-	int			floor;
-	int			cling;
-	char		**map;
-	char		**cpmap;
+	t_texture		textures[5];
+	char			*path;
+	int				save;
+	char			*file;
+	char			**filearr;
+	int				filesize;
+	char			spawn_pos;
+	int				spawn_x;
+	int				spawn_y;
+	int				res_x;
+	int				res_y;
+	int				floor;
+	int				cling;
+	char			**map;
+	char			**cpmap;
 }				t_cub;
 
 typedef	struct	s_check
 {
-	int		north;
-	int		south;
-	int		east;
-	int		west;
-	int		sprite;
-	int		floor;
-	int		ceiling;
-	int		res;
+	int				north;
+	int				south;
+	int				east;
+	int				west;
+	int				sprite;
+	int				floor;
+	int				ceiling;
+	int				res;
 }				t_check;
 
 typedef struct	s_gnl
 {
-	int			bytes_read;
-	int			fd;
-	char		*line_read;
+	int				bytes_read;
+	int				fd;
+	char			*line_read;
 }				t_gnl;
 
 /*
@@ -204,11 +212,13 @@ int				ray_time(t_cub *cub);
 ** found in: calc.c and raycasting.c
 ** folder: RAYCASTING/
 */
-void			setup_camray(t_cub *cub, t_camera *cam, int *buf);
+void			setup_camray(t_cub *cub, t_camera *cam, unsigned int **buf);
 void			calc_step_and_sidedist(t_camera *cam);
 void			calc_dda(t_camera *cam, t_cub *cub);
 void			calc_camwalldist(t_camera *cam);
 void			calc_line(t_camera *cam, int y);
+void			calc_textures(t_camera *cam, t_cub *cub,
+									unsigned int **buf, int x);
 
 /*
 ** get and calculate textures.

@@ -6,22 +6,20 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 20:47:46 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/05 22:52:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/06 16:32:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-static void		get_png(void *mlx, t_cub *cub, int i)
+static void		get_img(void *mlx, t_cub *cub, int i, int img_type)
 {
-	cub->textures[i].texture = mlx_png_file_to_image(mlx,
+	if (img_type == PNG)
+		cub->textures[i].texture = mlx_png_file_to_image(mlx,
 							cub->textures[i].path, &cub->textures[i].width,
 							&cub->textures[i].height);
-}
-
-static void		get_xpm(void *mlx, t_cub *cub, int i)
-{
-	cub->textures[i].texture = mlx_xpm_file_to_image(mlx,
+	if (img_type == XPM)
+		cub->textures[i].texture = mlx_xpm_file_to_image(mlx,
 							cub->textures[i].path, &cub->textures[i].width,
 							&cub->textures[i].height);
 }
@@ -35,10 +33,10 @@ int				get_textures(void *mlx, t_cub *cub)
 	{
 		if (!ft_strncmp(cub->textures[i].path +
 		(ft_strlen(cub->textures[i].path) - 4), ".png", 4))
-			get_png(mlx, cub, i);
+			get_img(mlx, cub, i, PNG);
 		else if (!ft_strncmp(cub->textures[i].path +
 		(ft_strlen(cub->textures[i].path) - 4), ".xpm", 4))
-			get_xpm(mlx, cub, i);
+			get_img(mlx, cub, i, XPM);
 		else
 			return (print_error(22));
 		if (!cub->textures[i].texture)
@@ -66,7 +64,26 @@ static int		get_texnr(t_camera *cam)
 	}
 }
 
-void			calc_textures(t_camera *cam, t_cub *cub, int *buf)
+static void			calc_texy(t_camera *cam, t_texture tex,
+						unsigned int **buf, int x)
+{
+	int y;
+
+	y = cam->draw.start;
+	while (y < cam->draw.end)
+	{
+		cam->wall.texy = (int)cam->texpos & (tex.height - 1);
+		cam->texpos += cam->step;
+		cam->wall.colour = tex.texture[tex.height * cam->wall.texy + cam->wall.texx];
+		if (cam->ray.side == 1)
+			cam->wall.colour = (cam->wall.colour >> 1) && 8355711;
+		buf[y][x] = cam->wall.colour;
+		y++;
+	}
+}
+
+void			calc_textures(t_camera *cam, t_cub *cub,
+									unsigned int **buf, int x)
 {
 	int nr;
 
@@ -84,5 +101,5 @@ void			calc_textures(t_camera *cam, t_cub *cub, int *buf)
 	cam->texpos =
 		(cam->draw.start - cub->res_y / 2 + cam->draw.lineheight / 2) *
 		cam->step;
-	// STILL NEEDS TO USE THE BUFFER!!!!
+	calc_texy(cam, cub->textures[nr], buf, x);
 }
