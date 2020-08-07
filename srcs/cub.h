@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/06 16:59:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/07 20:42:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,23 @@
 # define WE 3
 # define SP 4
 
-# define PNG 5
-# define XPM 6
+# define PNG 15
+# define XPM 16
+
+typedef struct	s_data {
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_data;
+
+typedef	struct	s_mlx
+{
+	void			*mlx;
+	void			*mlx_win;
+	t_data			img;
+}				t_mlx;
 
 typedef	struct	s_rgb
 {
@@ -41,11 +56,10 @@ typedef	struct	s_rgb
 
 typedef	struct	s_texture
 {
-	void			*texture;
+	void			**texture;
 	char			*path;
 	int				width;
 	int				height;
-	int				endian;
 }				t_texture;
 
 typedef	struct	s_ray
@@ -75,11 +89,11 @@ typedef struct	s_wall
 	double			wallx;
 	int				texx;
 	int				texy;
-	unsigned int	colour;
 }				t_wall;
 
 typedef	struct	s_camera
 {
+	t_mlx			mlx;
 	t_ray			ray;
 	t_draw			draw;
 	t_wall			wall;
@@ -212,13 +226,14 @@ int				ray_time(t_cub *cub);
 ** found in: calc.c and raycasting.c
 ** folder: RAYCASTING/
 */
-void			setup_camray(t_cub *cub, t_camera *cam, unsigned int **buf);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			set_window(t_camera *cam, t_cub *cub);
+void			setup_camray(t_cub *cub, t_camera *cam);
 void			calc_step_and_sidedist(t_camera *cam);
 void			calc_dda(t_camera *cam, t_cub *cub);
 void			calc_camwalldist(t_camera *cam);
 void			calc_line(t_camera *cam, int y);
-void			calc_textures(t_camera *cam, t_cub *cub,
-									unsigned int **buf, int x);
+void			calc_textures(t_camera *cam, t_cub *cub, int x);
 
 /*
 ** get and calculate textures.
@@ -226,4 +241,9 @@ void			calc_textures(t_camera *cam, t_cub *cub,
 ** folder: RAYCASTING/
 */
 int				get_textures(void *mlx, t_cub *cub);
+
+/*
+** get keyboard input
+*/
+void			get_key_input(t_camera *cam, t_cub *cub);
 #endif

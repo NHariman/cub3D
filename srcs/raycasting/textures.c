@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 20:47:46 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/06 16:32:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/07 18:17:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-static void		get_img(void *mlx, t_cub *cub, int i, int img_type)
+static void			get_img(void *mlx, t_cub *cub, int i, int img_type)
 {
 	if (img_type == PNG)
 		cub->textures[i].texture = mlx_png_file_to_image(mlx,
@@ -24,7 +24,7 @@ static void		get_img(void *mlx, t_cub *cub, int i, int img_type)
 							&cub->textures[i].height);
 }
 
-int				get_textures(void *mlx, t_cub *cub)
+int					get_textures(void *mlx, t_cub *cub)
 {
 	int i;
 
@@ -46,7 +46,7 @@ int				get_textures(void *mlx, t_cub *cub)
 	return (1);
 }
 
-static int		get_texnr(t_camera *cam)
+static int			get_texnr(t_camera *cam)
 {
 	if (cam->ray.side == 0)
 	{
@@ -64,26 +64,25 @@ static int		get_texnr(t_camera *cam)
 	}
 }
 
-static void			calc_texy(t_camera *cam, t_texture tex,
-						unsigned int **buf, int x)
+static void			calc_texy(t_camera *cam, t_texture tex, int x)
 {
-	int y;
+	int				y;
+	unsigned int	colour;
 
 	y = cam->draw.start;
 	while (y < cam->draw.end)
 	{
 		cam->wall.texy = (int)cam->texpos & (tex.height - 1);
 		cam->texpos += cam->step;
-		cam->wall.colour = tex.texture[tex.height * cam->wall.texy + cam->wall.texx];
+		colour = tex.texture[tex.height * cam->wall.texy + cam->wall.texx];
 		if (cam->ray.side == 1)
-			cam->wall.colour = (cam->wall.colour >> 1) && 8355711;
-		buf[y][x] = cam->wall.colour;
+			colour = (colour >> 1) && 8355711;
+		my_mlx_pixel_put(&cam->mlx.img.img, x, y, colour);
 		y++;
 	}
 }
 
-void			calc_textures(t_camera *cam, t_cub *cub,
-									unsigned int **buf, int x)
+void				calc_textures(t_camera *cam, t_cub *cub, int x)
 {
 	int nr;
 
@@ -101,5 +100,5 @@ void			calc_textures(t_camera *cam, t_cub *cub,
 	cam->texpos =
 		(cam->draw.start - cub->res_y / 2 + cam->draw.lineheight / 2) *
 		cam->step;
-	calc_texy(cam, cub->textures[nr], buf, x);
+	calc_texy(cam, cub->textures[nr], x);
 }

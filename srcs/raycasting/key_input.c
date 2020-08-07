@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   clear_structs.c                                    :+:    :+:            */
+/*   key_input.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 18:49:17 by nhariman      ########   odam.nl         */
+/*   Created: 2020/08/07 17:17:30 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/08/07 19:24:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int			free_struct(t_cub *cub)
+void		get_key_input(t_camera *cam, t_cub *cub)
 {
-	free(cub);
-	return (0);
-}
 
-void		empty_check(t_check *check)
-{
-	check->res = 0;
-	check->north = 0;
-	check->south = 0;
-	check->east = 0;
-	check->west = 0;
-	check->sprite = 0;
-	check->floor = 0;
-	check->ceiling = 0;
 }

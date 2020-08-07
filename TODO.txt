@@ -82,4 +82,13 @@ C 225,30,0
 11111111 1111111 111111111111
 
 //ft_printf("NO: %s\nSO: %s\nWE: %s\nEA: %s\nSP: %s\n", cub->textures[NO].path, cub->textures[SO].path, cub->textures[WE].path, cub->textures[EA].path, cub->textures[SP].path);
-	
+
+
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+
+# define ESC 53
+# define LEFT 59
+# define RIGHT 60
