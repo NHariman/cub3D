@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 20:47:46 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 18:17:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/07 21:32:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void			calc_texy(t_camera *cam, t_texture tex, int x)
 		colour = tex.texture[tex.height * cam->wall.texy + cam->wall.texx];
 		if (cam->ray.side == 1)
 			colour = (colour >> 1) && 8355711;
-		my_mlx_pixel_put(&cam->mlx.img.img, x, y, colour);
+		my_mlx_pixel_put(&cam->img.img, x, y, colour);
 		y++;
 	}
 }

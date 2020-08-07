@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/07 20:39:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 20:50:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/07 21:32:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void			set_window(t_camera *cam, t_cub *cub)
 			mlx_new_window(cam->mlx.mlx, cub->res_x, cub->res_y, "Cub3D");
 	if (!cam->mlx.mlx_win)
 		exit(mlx_exit(cam->mlx.mlx, cam->mlx.mlx_win, 20));
-	cam->mlx.img.img = mlx_new_image(cam->mlx.mlx, cub->res_x, cub->res_y);
-	cam->mlx.img.addr =
-		mlx_get_data_addr(cam->mlx.img.img, &cam->mlx.img.bits_per_pixel,
-						&cam->mlx.img.line_length, &cam->mlx.img.endian);
+	cam->img.img = mlx_new_image(cam->mlx.mlx, cub->res_x, cub->res_y);
+	cam->img.addr =
+		mlx_get_data_addr(cam->img.img, &cam->img.bits_per_pixel,
+						&cam->img.line_length, &cam->img.endian);
 }

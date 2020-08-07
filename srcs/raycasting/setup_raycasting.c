@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/01 23:05:57 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 20:42:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/07 21:34:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int				ray_time(t_cub *cub)
 	if (!cam.mlx.mlx)
 		exit(print_error(19));
 	if (!get_textures(cam.mlx.mlx, cub))
-		exit(0);
+		exit(1);
 	set_window(&cam, cub);
 	while (mlx_loop(cam.mlx.mlx))
 	{
 		setup_camray(cub, &cam);
 		mlx_put_image_to_window(cam.mlx.mlx, cam.mlx.mlx_win,
-								cam.mlx.img.img, 0, 0);
-		mlx_destroy_image(cam.mlx.mlx, cam.mlx.img.img);
+								cam.img.img, 0, 0);
+		mlx_destroy_image(cam.mlx.mlx, cam.img.img);
 		get_speedmod(&cam);
 		get_key_input(&cam, cub);
 	}

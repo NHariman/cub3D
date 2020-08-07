@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 20:42:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/07 21:31:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@
 # define PNG 15
 # define XPM 16
 
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+
+# define ESC 53
+
+# define LEFT 123
+# define RIGHT 124
+
 typedef struct	s_data {
 	void		*img;
 	char		*addr;
@@ -44,7 +54,6 @@ typedef	struct	s_mlx
 {
 	void			*mlx;
 	void			*mlx_win;
-	t_data			img;
 }				t_mlx;
 
 typedef	struct	s_rgb
@@ -94,6 +103,7 @@ typedef struct	s_wall
 typedef	struct	s_camera
 {
 	t_mlx			mlx;
+	t_data			img;
 	t_ray			ray;
 	t_draw			draw;
 	t_wall			wall;
