@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/01 23:05:57 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/10 17:52:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/11 00:03:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ static void		set_spawnpoint(t_cub *cub, t_camera *cam)
 	cam->prev_time = 0;
 	cam->camerax = 0;
 	cam->map = cub->map;
-}
-
-static int		mlx_exit(void *mlx, void *mlx_win, int error)
-{
-	mlx_destroy_window(mlx, mlx_win);
-	return (error != 0 ? 1 : print_error(error));
 }
 
 static void		get_speedmod(t_camera *cam)
@@ -58,6 +52,7 @@ int				ray_time(t_cub *cub)
 								cam.img.img, 0, 0);
 		mlx_destroy_image(cam.mlx.mlx, cam.img.img);
 		get_speedmod(&cam);
-		get_key_input(&cam, cub);
+		get_key_input(&cam);
 	}
+	return (1);
 }

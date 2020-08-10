@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/05 20:49:35 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/10 23:59:52 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,12 @@ ERROR =		srcs/errors/error_messages.c \
 			srcs/errors/more_errors.c \
 			srcs/errors/clear_structs.c
 
-#RAYCAST =	srcs/window
+RAYCAST =	srcs/raycasting/setup_raycasting.c \
+			srcs/raycasting/window.c \
+			srcs/raycasting/textures.c \
+			srcs/raycasting/raycasting.c \
+			srcs/raycasting/calc.c \
+			srcs/raycasting/key_input.c
 
 #CBONUS =
 
@@ -40,6 +45,8 @@ OPARSER = 	$(PARSER:.c=.o)
 OVALID =	$(VALID:.c=.o)
 
 OERROR =	$(ERROR:.c=.o)
+
+ORAYCAST =	$(RAYCAST:.c=.o)
 
 OBONUS = 	$(CBONUS:.c=.o)
 
@@ -77,7 +84,7 @@ invalid: $(NAME)
 	@echo "\n***testing: invalid_rgb_input.cub"
 	./cub3d srcs/maps/invalid_rgb_input.cub
 
-$(NAME): $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a libmlx.dylib
+$(NAME): $(OPARSER) $(OVALID) $(OERROR) $(ORAYCAST) srcs/libft/libft.a libmlx.dylib
 	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a libmlx.dylib -o $@
 
 libmlx.dylib:
@@ -86,11 +93,11 @@ libmlx.dylib:
 srcs/libft/libft.a:
 	@cd srcs/libft && $(MAKE)
 
-%.o: %.c libft.h
+%.o: %.c srcs/cub.h
 	@$(COMPILE) -c $(FLAGS) -o $@ -c $<
 
 clean:
-	@$(RM) $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) 
+	@$(RM) $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) $(ORAYCAST)
 	@cd srcs/libft && $(MAKE) clean
 	@cd srcs/mlx && $(MAKE) clean
 
@@ -100,5 +107,5 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) srcs/libft/libft.a
+bonus: $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) $(ORAYCAST) srcs/libft/libft.a
 	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a -o $@

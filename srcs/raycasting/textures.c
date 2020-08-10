@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 20:47:46 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 21:32:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/10 23:02:28 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ static void			calc_texy(t_camera *cam, t_texture tex, int x)
 		cam->texpos += cam->step;
 		colour = tex.texture[tex.height * cam->wall.texy + cam->wall.texx];
 		if (cam->ray.side == 1)
-			colour = (colour >> 1) && 8355711;
-		my_mlx_pixel_put(&cam->img.img, x, y, colour);
+			colour = (colour >> 1) & 8355711;
+		my_mlx_pixel_put(cam->img.img, x, y, colour);
 		y++;
 	}
 }
@@ -94,7 +94,7 @@ void				calc_textures(t_camera *cam, t_cub *cub, int x)
 	cam->wall.texx =
 			(int)(cam->wall.wallx * (double)cub->textures[nr].width);
 	if ((cam->ray.side == 0 && cam->raydirx > 0) ||
-				cam->ray.side == 1 && cam->raydiry < 0)
+				(cam->ray.side == 1 && cam->raydiry < 0))
 		cam->wall.texx = cub->textures[nr].width - cam->wall.texx - 1;
 	cam->step = 1.0 * cub->textures[nr].height / cam->draw.lineheight;
 	cam->texpos =

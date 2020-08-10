@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/10 21:42:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/11 00:03:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef	struct	s_rgb
 
 typedef	struct	s_texture
 {
-	void			**texture;
+	unsigned int	*texture;
 	char			*path;
 	int				width;
 	int				height;
@@ -194,11 +194,11 @@ char			*ft_strlower(char *str);
 ** functions that save data into struct
 ** found in savers.c, folder: SRCS
 */
-char			*save_path(char *str, int i, t_check *check, t_cub *cub);
+char			*save_path(char *str, int i, t_check *check);
 int				save_texture(char *str, t_cub *cub, t_check *check);
 int				save_res(const char *str, t_cub *cub, t_check *check);
 int				save_colours(const char *str, t_cub *cub, t_check *check);
-int				save_rgb(const char *str, t_cub *cub, t_rgb *rgb);
+int				save_rgb(const char *str, t_rgb *rgb);
 
 /*
 ** functions that check if input is valid
@@ -242,6 +242,7 @@ int				ray_time(t_cub *cub);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			set_window(t_camera *cam, t_cub *cub);
 void			setup_camray(t_cub *cub, t_camera *cam);
+void			calc_camray(t_cub *cub, t_camera *cam);
 void			calc_step_and_sidedist(t_camera *cam);
 void			calc_dda(t_camera *cam, t_cub *cub);
 void			calc_camwalldist(t_camera *cam);
@@ -259,7 +260,9 @@ int				get_textures(void *mlx, t_cub *cub);
 ** get keyboard input, found in key_input.c and movement.c
 ** folder: RAYCASSTING/
 */
-void			get_key_input(t_camera *cam, t_cub *cub);
+int				exit_program(t_camera *cam);
+void			get_key_input(t_camera *cam);
 void			move_vertical(t_camera *cam, int type);
 void			move_horizontal(t_camera *cam, int type);
+void			rotate(t_camera *cam, int type);
 #endif

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/10 19:21:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/10 22:07:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/10 22:16:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,17 @@ void				move_horizontal(t_camera *cam, int type)
 void				rotate(t_camera *cam, int type)
 {
 	cam->olddirx = cam->dirx;
-	cam->dirx = cam->dirx * cos(type == LEFT ? -cam->rotspeed : cam->rotspeed) -
-					cam->diry * sin(type == LEFT ? -cam->rotspeed : cam->rotspeed);
-	cam->diry = cam->olddirx * sin(type == LEFT ? -cam->rotspeed : cam->rotspeed) +
-					cam->diry * cos(type == LEFT ? -cam->rotspeed : cam->rotspeed);
+	cam->dirx = cam->dirx * cos(type == LEFT ?
+		-cam->rotspeed : cam->rotspeed) - cam->diry * sin(type == LEFT ?
+			-cam->rotspeed : cam->rotspeed);
+	cam->diry = cam->olddirx * sin(type == LEFT ?
+		-cam->rotspeed : cam->rotspeed) + cam->diry * cos(type == LEFT ?
+			-cam->rotspeed : cam->rotspeed);
 	cam->oldplanex = cam->planex;
-	cam->planex = cam->planex * cos(type == LEFT ? -cam->rotspeed : cam->rotspeed) -
-					cam->planey * sin(type == LEFT ? -cam->rotspeed : cam->rotspeed);
-	cam->planey = cam->oldplanex * sin(type == LEFT ? -cam->rotspeed : cam->rotspeed) +
-					cam->planey * cos(type == LEFT ? -cam->rotspeed : cam->rotspeed);
-
+	cam->planex = cam->planex * cos(type == LEFT ?
+		-cam->rotspeed : cam->rotspeed) - cam->planey * sin(type == LEFT ?
+			-cam->rotspeed : cam->rotspeed);
+	cam->planey = cam->oldplanex * sin(type == LEFT ?
+		-cam->rotspeed : cam->rotspeed) - cam->planey * cos(type == LEFT ?
+			-cam->rotspeed : cam->rotspeed);
 }

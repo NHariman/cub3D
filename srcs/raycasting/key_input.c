@@ -6,48 +6,38 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/07 17:17:30 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/10 19:18:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/11 00:03:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-static int			exit_program(t_camera *cam)
+int					exit_program(t_camera *cam)
 {
 	mlx_destroy_window(cam->mlx.mlx, cam->mlx.mlx_win);
 	exit(1);
 }
 
-static void			move_up(t_camera *cam)
-{
-	if (cam->map[(int)(cam->posx + cam->dirx * cam->movespeed)]
-			[(int)cam->posy] != '1')
-		cam->posx += cam->dirx * cam->movespeed;
-	if (cam->map[(int)(cam->posx)]
-			[(int)(cam->posy + cam->diry * cam->movespeed)] != '1')
-		cam->posy += cam->diry * cam->movspeed;
-}
-
 static int			keys(int keycode, t_camera *cam)
 {
 	if (keycode == W)
-		move_up(cam);
+		move_vertical(cam, W);
 	else if (keycode == A)
-		move_left(cam);
+		move_horizontal(cam, A);
 	else if (keycode == S)
-		move_down(cam);
+		move_vertical(cam, S);
 	else if (keycode == D)
-		move_right(cam);
+		move_horizontal(cam, D);
 	else if (keycode == ESC)
 		exit_program(cam);
 	else if (keycode == LEFT)
-		pan_left(cam);
+		rotate(cam, LEFT);
 	else if (keycode == RIGHT)
-		pan_right(cam);
+		rotate(cam, RIGHT);
 	return (0);
 }
 
-void				get_key_input(t_camera *cam, t_cub *cub)
+void				get_key_input(t_camera *cam)
 {
 	mlx_hook(cam->mlx.mlx_win, 2, 1L << 0, keys, cam);
 	mlx_hook(cam->mlx.mlx_win, 17, 0L, exit_program, cam);

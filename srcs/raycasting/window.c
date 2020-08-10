@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/07 20:39:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 21:32:23 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/10 23:06:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ static void		set_window_size(t_camera *cam, t_cub *cub)
 	}
 	if (check)
 		ft_printf("Modified screen resolution to fit screen.\n");
+}
+
+static int		mlx_exit(void *mlx, void *mlx_win, int error)
+{
+	mlx_destroy_window(mlx, mlx_win);
+	return (error != 0 ? 1 : print_error(error));
 }
 
 void			set_window(t_camera *cam, t_cub *cub)

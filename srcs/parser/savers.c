@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 12:57:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/11 00:02:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-char	*save_path(char *str, int i, t_check *check, t_cub *cub)
+char	*save_path(char *str, int i, t_check *check)
 {
 	str = ft_strtrim(ft_strlower(str), " \n");
 	if (i == NO)
@@ -31,15 +31,15 @@ char	*save_path(char *str, int i, t_check *check, t_cub *cub)
 int		save_texture(char *str, t_cub *cub, t_check *check)
 {
 	if (!ft_strncmp(str, "NO", 2) && !check->north)
-		cub->textures[NO].path = save_path(str + 2, NO, check, cub);
+		cub->textures[NO].path = save_path(str + 2, NO, check);
 	else if (!ft_strncmp(str, "SO", 2) && !check->south)
-		cub->textures[SO].path = save_path(str + 2, SO, check, cub);
+		cub->textures[SO].path = save_path(str + 2, SO, check);
 	else if (!ft_strncmp(str, "WE", 2) && !check->west)
-		cub->textures[WE].path = save_path(str + 2, WE, check, cub);
+		cub->textures[WE].path = save_path(str + 2, WE, check);
 	else if (!ft_strncmp(str, "EA", 2) && !check->east)
-		cub->textures[EA].path = save_path(str + 2, EA, check, cub);
+		cub->textures[EA].path = save_path(str + 2, EA, check);
 	else if (!ft_strncmp(str, "S", 1) && !check->sprite)
-		cub->textures[SP].path = save_path(str + 1, SP, check, cub);
+		cub->textures[SP].path = save_path(str + 1, SP, check);
 	else
 		return (print_error(1));
 	return (1);
@@ -61,7 +61,7 @@ int		save_res(const char *str, t_cub *cub, t_check *check)
 	return (1);
 }
 
-int		save_rgb(const char *str, t_cub *cub, t_rgb *rgb)
+int		save_rgb(const char *str, t_rgb *rgb)
 {
 	int		i;
 
@@ -92,7 +92,7 @@ int		save_colours(const char *str, t_cub *cub, t_check *check)
 
 	if (!valid_rgb_input(str + 1))
 		return (print_error(4));
-	save_rgb(str + 1, cub, &rgb);
+	save_rgb(str + 1, &rgb);
 	if (!valid_rgb_values(&rgb))
 		return (print_error(5));
 	hex = get_hex(rgb.r, rgb.g, rgb.b);
