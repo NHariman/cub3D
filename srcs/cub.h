@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 21:31:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/10 21:42:11 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,9 @@ typedef	struct	s_camera
 	double			texpos;
 	double			movespeed;
 	double			rotspeed;
+	double			olddirx;
+	double			oldplanex;
+	char			**map;
 }				t_camera;
 
 typedef struct	s_cub
@@ -253,7 +256,10 @@ void			calc_textures(t_camera *cam, t_cub *cub, int x);
 int				get_textures(void *mlx, t_cub *cub);
 
 /*
-** get keyboard input
+** get keyboard input, found in key_input.c and movement.c
+** folder: RAYCASSTING/
 */
 void			get_key_input(t_camera *cam, t_cub *cub);
+void			move_vertical(t_camera *cam, int type);
+void			move_horizontal(t_camera *cam, int type);
 #endif

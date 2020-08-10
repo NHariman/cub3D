@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 17:53:36 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/05 21:57:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/10 20:47:49 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			calc_dda(t_camera *cam, t_cub *cub)
 			cam->ray.mapy += cam->ray.stepy;
 			cam->ray.side = 1;
 		}
-		if (cub->map[cub->spawn_y][cub->spawn_x] == '1')
+		if (cub->map[cub->spawn_x][cub->spawn_y] == '1')
 			cam->ray.hit = 1;
 	}
 }

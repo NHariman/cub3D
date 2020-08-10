@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/01 23:05:57 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 21:34:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/10 17:52:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void		set_spawnpoint(t_cub *cub, t_camera *cam)
 	cam->time = 0;
 	cam->prev_time = 0;
 	cam->camerax = 0;
+	cam->map = cub->map;
 }
 
 static int		mlx_exit(void *mlx, void *mlx_win, int error)

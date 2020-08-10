@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/07 17:17:30 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 21:45:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/10 19:18:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@ static int			exit_program(t_camera *cam)
 {
 	mlx_destroy_window(cam->mlx.mlx, cam->mlx.mlx_win);
 	exit(1);
+}
+
+static void			move_up(t_camera *cam)
+{
+	if (cam->map[(int)(cam->posx + cam->dirx * cam->movespeed)]
+			[(int)cam->posy] != '1')
+		cam->posx += cam->dirx * cam->movespeed;
+	if (cam->map[(int)(cam->posx)]
+			[(int)(cam->posy + cam->diry * cam->movespeed)] != '1')
+		cam->posy += cam->diry * cam->movspeed;
 }
 
 static int			keys(int keycode, t_camera *cam)
