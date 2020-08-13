@@ -1,15 +1,15 @@
 
-NO srcs/textures/north_texture.png       
+NO srcs/pics/greystone.png     
 
-SO srcs/textures/south_texture.png
-         WE             srcs/textures/west_texture.png
+SO srcs/pics/mossy.png
+         WE             srcs/pics/wood.png
 
 R 1920 1080
 
-EA srcs/textures/east_texture.png
+EA srcs/pics/bluestone.png
 
 
-S srcs/textures/sprite_texture.xmp
+S srcs/pics/barrel.png
 
 
 F 255,  255,   255

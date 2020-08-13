@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/11 00:03:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/13 19:00:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,20 @@
 # define RIGHT 124
 
 typedef struct	s_data {
-	void		*img;
+	void		*texture;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			width;
+	int			height;
 }				t_data;
 
 typedef	struct	s_mlx
 {
 	void			*mlx;
 	void			*mlx_win;
+	t_data			img;
 }				t_mlx;
 
 typedef	struct	s_rgb
@@ -65,10 +68,7 @@ typedef	struct	s_rgb
 
 typedef	struct	s_texture
 {
-	unsigned int	*texture;
 	char			*path;
-	int				width;
-	int				height;
 }				t_texture;
 
 typedef	struct	s_ray
@@ -100,10 +100,29 @@ typedef struct	s_wall
 	int				texy;
 }				t_wall;
 
+typedef struct	s_cub
+{
+	t_texture		textures[5];
+	char			*path;
+	int				save;
+	char			*file;
+	char			**filearr;
+	int				filesize;
+	char			spawn_pos;
+	int				spawn_x;
+	int				spawn_y;
+	int				res_x;
+	int				res_y;
+	int				floor;
+	int				cling;
+	char			**map;
+	char			**cpmap;
+}				t_cub;
+
 typedef	struct	s_camera
 {
 	t_mlx			mlx;
-	t_data			img;
+	t_data			tex[5];
 	t_ray			ray;
 	t_draw			draw;
 	t_wall			wall;
@@ -125,27 +144,8 @@ typedef	struct	s_camera
 	double			rotspeed;
 	double			olddirx;
 	double			oldplanex;
-	char			**map;
+	t_cub			*cub;
 }				t_camera;
-
-typedef struct	s_cub
-{
-	t_texture		textures[5];
-	char			*path;
-	int				save;
-	char			*file;
-	char			**filearr;
-	int				filesize;
-	char			spawn_pos;
-	int				spawn_x;
-	int				spawn_y;
-	int				res_x;
-	int				res_y;
-	int				floor;
-	int				cling;
-	char			**map;
-	char			**cpmap;
-}				t_cub;
 
 typedef	struct	s_check
 {
@@ -240,21 +240,23 @@ int				ray_time(t_cub *cub);
 ** folder: RAYCASTING/
 */
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void			set_window(t_camera *cam, t_cub *cub);
-void			setup_camray(t_cub *cub, t_camera *cam);
-void			calc_camray(t_cub *cub, t_camera *cam);
+void			set_window_size(t_camera *cam);
+int				mlx_exit(void *mlx, void *mlx_win, int error);
+void			set_img(t_camera *cam);
+void			setup_camray(t_camera *cam);
+void			calc_camray(t_camera *cam);
 void			calc_step_and_sidedist(t_camera *cam);
-void			calc_dda(t_camera *cam, t_cub *cub);
+void			calc_dda(t_camera *cam);
 void			calc_camwalldist(t_camera *cam);
 void			calc_line(t_camera *cam, int y);
-void			calc_textures(t_camera *cam, t_cub *cub, int x);
+void			calc_textures(t_camera *cam, int x);
 
 /*
 ** get and calculate textures.
 ** found in textures.c
 ** folder: RAYCASTING/
 */
-int				get_textures(void *mlx, t_cub *cub);
+int				get_textures(t_camera *cam);
 
 /*
 ** get keyboard input, found in key_input.c and movement.c

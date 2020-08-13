@@ -6,20 +6,20 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/05 17:53:36 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/10 20:47:49 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/13 18:51:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void			calc_camray(t_cub *cub, t_camera *cam)
+void			calc_camray(t_camera *cam)
 {
 	cam->raydirx = cam->dirx + cam->planex * cam->camerax;
 	cam->raydiry = cam->diry + cam->planey * cam->camerax;
 	cam->ray.deltadistx = fabs(1 / cam->raydirx);
 	cam->ray.deltadisty = fabs(1 / cam->raydiry);
-	cam->ray.mapx = cub->spawn_x;
-	cam->ray.mapy = cub->spawn_y;
+	cam->ray.mapx = cam->cub->spawn_x;
+	cam->ray.mapy = cam->cub->spawn_y;
 	cam->ray.hit = 0;
 	cam->ray.side = 0;
 }
@@ -36,7 +36,7 @@ void			calc_step_and_sidedist(t_camera *cam)
 				(cam->ray.mapy + 1.0 - cam->posy) * cam->ray.deltadisty;
 }
 
-void			calc_dda(t_camera *cam, t_cub *cub)
+void			calc_dda(t_camera *cam)
 {
 	while (cam->ray.hit == 0)
 	{
@@ -52,7 +52,7 @@ void			calc_dda(t_camera *cam, t_cub *cub)
 			cam->ray.mapy += cam->ray.stepy;
 			cam->ray.side = 1;
 		}
-		if (cub->map[cub->spawn_x][cub->spawn_y] == '1')
+		if (cam->cub->map[cam->cub->spawn_x][cam->cub->spawn_y] == '1')
 			cam->ray.hit = 1;
 	}
 }

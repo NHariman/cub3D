@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/10 23:59:52 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/11 12:19:57 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ RAYCAST =	srcs/raycasting/setup_raycasting.c \
 			srcs/raycasting/textures.c \
 			srcs/raycasting/raycasting.c \
 			srcs/raycasting/calc.c \
-			srcs/raycasting/key_input.c
+			srcs/raycasting/key_input.c \
+			srcs/raycasting/movement.c
 
 #CBONUS =
 
@@ -85,7 +86,7 @@ invalid: $(NAME)
 	./cub3d srcs/maps/invalid_rgb_input.cub
 
 $(NAME): $(OPARSER) $(OVALID) $(OERROR) $(ORAYCAST) srcs/libft/libft.a libmlx.dylib
-	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) srcs/libft/libft.a libmlx.dylib -o $@
+	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) $(ORAYCAST) srcs/libft/libft.a libmlx.dylib -o $@
 
 libmlx.dylib:
 	@cd srcs/mlx && $(MAKE) && mv libmlx.dylib ../../
