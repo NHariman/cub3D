@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/13 19:00:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/15 21:41:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@
 
 # define LEFT 123
 # define RIGHT 124
+
+typedef	struct	s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+}				t_keys;
 
 typedef struct	s_data {
 	void		*texture;
@@ -126,6 +136,7 @@ typedef	struct	s_camera
 	t_ray			ray;
 	t_draw			draw;
 	t_wall			wall;
+	t_keys			keys;
 	double			posx;
 	double			posy;
 	double			dirx;
@@ -240,6 +251,7 @@ int				ray_time(t_cub *cub);
 ** folder: RAYCASTING/
 */
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void        	ft_background(t_camera *cam);
 void			set_window_size(t_camera *cam);
 int				mlx_exit(void *mlx, void *mlx_win, int error);
 void			set_img(t_camera *cam);
@@ -267,4 +279,7 @@ void			get_key_input(t_camera *cam);
 void			move_vertical(t_camera *cam, int type);
 void			move_horizontal(t_camera *cam, int type);
 void			rotate(t_camera *cam, int type);
+void			ft_movement(t_camera *cam);
+
+void        	giant_fucking_function(t_camera *cam);
 #endif

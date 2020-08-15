@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/07 20:39:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/13 19:00:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/13 22:29:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void			set_img(t_camera *cam)
 {
 	cam->mlx.img.texture =
 		mlx_new_image(cam->mlx.mlx, cam->cub->res_x, cam->cub->res_y);
+	if (!cam->mlx.img.texture)
+		exit(print_error(20));
 	cam->mlx.img.addr = mlx_get_data_addr(cam->mlx.img.texture,
 		&cam->mlx.img.bits_per_pixel, &cam->mlx.img.line_length,
 			&cam->mlx.img.endian);

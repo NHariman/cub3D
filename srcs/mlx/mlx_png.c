@@ -36,38 +36,38 @@ unsigned char magic[PNG_MAGIC_SIZE] = {137, 80, 78, 71, 13, 10, 26, 10};
 #define ERR_MALLOC	13
 char *(mipng_err[]) =
 {
-  "No error",
-  "Not enough size for magic",
-  "Wrong magic",
-  "Incomplete chunk structure",
-  "Duplicate or incorrect header",
-  "Duplicate or incorrect end",
-  "Invalid CRC in chunk",
-  "Incorrect header or configuration not implemented",
-  "Non consecutive dat chunks",
-  "Missing header/dat/end chunk(s)",
-  "Zlib inflate error",
-  "Inflated data size mismatch",
-  "Unknown scanline filter",
-  "Can't malloc"
+	"No error",
+	"Not enough size for magic",
+	"Wrong magic",
+	"Incomplete chunk structure",
+	"Duplicate or incorrect header",
+	"Duplicate or incorrect end",
+	"Invalid CRC in chunk",
+	"Incorrect header or configuration not implemented",
+	"Non consecutive dat chunks",
+	"Missing header/dat/end chunk(s)",
+	"Zlib inflate error",
+	"Inflated data size mismatch",
+	"Unknown scanline filter",
+	"Can't malloc"
 };
 
 typedef struct png_info_s
 {
-  unsigned int	width;
-  unsigned int	height;
-  int		depth;
-  int		color;
-  int		interlace;
-  int		bpp;
+	unsigned int	width;
+	unsigned int	height;
+	int		depth;
+	int		color;
+	int		interlace;
+	int		bpp;
 } png_info_t;
 
 
 int	mipng_is_type(unsigned char *ptr, char *type)
 {
-  if (ptr[4] == type[0] && ptr[5] == type[1] && ptr[6] == type[2] && ptr[7] == type[3])
-    return (1);
-  return (0);
+	if (ptr[4] == type[0] && ptr[5] == type[1] && ptr[6] == type[2] && ptr[7] == type[3])
+		return (1);
+	return (0);
 }
 
 
@@ -81,17 +81,17 @@ unsigned char mipng_defilter_average(unsigned char *buff, int pos, int a, int b,
 { return (buff[pos]+((unsigned int)a+(unsigned int)b)/2); }
 unsigned char mipng_defilter_paeth(unsigned char *buff, int pos, int a, int b, int c)
 {
-  int	p;
-  int	result;
+	int	p;
+	int	result;
 
-  p = a + b - c;
-  if (abs(b - c) <= abs(a - c) && abs(b - c) <= abs(a + b - c - c))
-    result = a;
-  else
-    if (abs(a - c) <= abs(a + b - c - c))
-      result = b;
-    else
-      result = c;
+	p = a + b - c;
+	if (abs(b - c) <= abs(a - c) && abs(b - c) <= abs(a + b - c - c))
+		result = a;
+	else
+		if (abs(a - c) <= abs(a + b - c - c))
+			result = b;
+		else
+			result = c;
  return (buff[pos]+result);
 }
 
@@ -99,156 +99,156 @@ unsigned char mipng_defilter_paeth(unsigned char *buff, int pos, int a, int b, i
 
 unsigned char (*(mipng_defilter[]))(unsigned char *buff, int pos, int a, int b, int c) =
 {
-  mipng_defilter_none,
-  mipng_defilter_sub,
-  mipng_defilter_up,
-  mipng_defilter_average,
-  mipng_defilter_paeth
+	mipng_defilter_none,
+	mipng_defilter_sub,
+	mipng_defilter_up,
+	mipng_defilter_average,
+	mipng_defilter_paeth
 };
 
 // only work for mlx mac or img 32bpp
 int	mipng_fill_img(void *img, unsigned char *buf, png_info_t *pi)
 {
-  unsigned int	current_filter;
-  int	ipos;
-  int	bpos;
-  int	ilen;
-  int	iline;
-  int	blen;
-  int   bpp;
-  int   endian;
-  unsigned char tmp;
-  unsigned char *ibuf;
+	unsigned int	current_filter;
+	int	ipos;
+	int	bpos;
+	int	ilen;
+	int	iline;
+	int	blen;
+	int   bpp;
+	int   endian;
+	unsigned char tmp;
+	unsigned char *ibuf;
 
-  ibuf = (unsigned char *)mlx_get_data_addr(img, &bpp, &iline, &endian);
-  //  iline = img->width * UNIQ_BPP;
-  // ilen = img->width * img->height * UNIQ_BPP;
-  ilen = iline*pi->height;
-  ipos = 0;
-  blen = pi->width * pi->height * pi->bpp + pi->height;  // ??? why + pi->height ??
-  bpos = 0;
-  while (ipos < ilen && bpos < blen)
-    {
-      if (ipos % iline == 0)
+	ibuf = (unsigned char *)mlx_get_data_addr(img, &bpp, &iline, &endian);
+	//  iline = img->width * UNIQ_BPP;
+	// ilen = img->width * img->height * UNIQ_BPP;
+	ilen = iline*pi->height;
+	ipos = 0;
+	blen = pi->width * pi->height * pi->bpp + pi->height;  // ??? why + pi->height ??
+	bpos = 0;
+	while (ipos < ilen && bpos < blen)
+		{
+			if (ipos % iline == 0)
 	{
-	  // printf("ipos %d iline %d pi->width %d bpos %d\n", ipos, iline, pi->width, bpos);
-	  if ((current_filter = buf[bpos++]) > 4)
-	    {  
-	    return (ERR_DATA_FILTER);
-	    }
+		// printf("ipos %d iline %d pi->width %d bpos %d\n", ipos, iline, pi->width, bpos);
+		if ((current_filter = buf[bpos++]) > 4)
+			{  
+			return (ERR_DATA_FILTER);
+			}
 	}
-      ibuf[ipos] = mipng_defilter[current_filter](buf, bpos,
-						  ipos%iline>3?ibuf[ipos-UNIQ_BPP]:0,
+			ibuf[ipos] = mipng_defilter[current_filter](buf, bpos,
+							ipos%iline>3?ibuf[ipos-UNIQ_BPP]:0,
 				 (ipos>=iline)?ibuf[ipos-iline]:0,
-						  (ipos>=iline && ipos%iline>3)?ibuf[ipos-iline-UNIQ_BPP]:0);
-      ipos ++;
-      bpos ++;
-      if (pi->depth == 16)
+							(ipos>=iline && ipos%iline>3)?ibuf[ipos-iline-UNIQ_BPP]:0);
+			ipos ++;
+			bpos ++;
+			if (pi->depth == 16)
 	bpos ++;
-      if (ipos % 4 == 3 && pi->color == 2)  // no alpha
+			if (ipos % 4 == 3 && pi->color == 2)  // no alpha
 	ibuf[ipos++] = 0xFF;
-      if (ipos % iline == pi->width * 4)
+			if (ipos % iline == pi->width * 4)
 	ipos += iline-pi->width*4;
-    }
-  if (ipos != ilen || bpos != blen)
-    {
-      //      printf("fill err ipos %d vs %d, bpos %d vs %d\n", ipos, ilen, bpos, blen);
-      return (ERR_DATA_MISMATCH);
-    }
-  ipos = 0;
-  while (ipos < ilen)
-    {
-      tmp = ibuf[ipos];
-      ibuf[ipos] = ibuf[ipos+2];
-      ibuf[ipos+2] = tmp;
-      ibuf[ipos+3] = 0xFF - ibuf[ipos+3];
-      ipos += UNIQ_BPP;
-    }
-  return (0);
+		}
+	if (ipos != ilen || bpos != blen)
+		{
+			//      printf("fill err ipos %d vs %d, bpos %d vs %d\n", ipos, ilen, bpos, blen);
+			return (ERR_DATA_MISMATCH);
+		}
+	ipos = 0;
+	while (ipos < ilen)
+		{
+			tmp = ibuf[ipos];
+			ibuf[ipos] = ibuf[ipos+2];
+			ibuf[ipos+2] = tmp;
+			ibuf[ipos+3] = 0xFF - ibuf[ipos+3];
+			ipos += UNIQ_BPP;
+		}
+	return (0);
 }
 
 
 int	mipng_data(void *img, unsigned char *dat, png_info_t *pi)
 {
-  unsigned int	len;
-  int		b_pos;
-  unsigned char *buffer;
-  int		ret;
-  int z_ret;
-  unsigned z_have;
-  z_stream z_strm;
-  unsigned char z_out[Z_CHUNK];
+	unsigned int	len;
+	int		b_pos;
+	unsigned char *buffer;
+	int		ret;
+	int z_ret;
+	unsigned z_have;
+	z_stream z_strm;
+	unsigned char z_out[Z_CHUNK];
 
-  b_pos = 0;
-  if (!(buffer = malloc((long long)pi->width*(long long)pi->height*(long long)pi->bpp + pi->height)))
-    return (ERR_MALLOC);
-  z_strm.zalloc = Z_NULL;
-  z_strm.zfree = Z_NULL;
-  z_strm.opaque = Z_NULL;
-  z_strm.avail_in = 0;
-  z_strm.next_in = Z_NULL;
-  z_ret = inflateInit(&z_strm);
-  if (z_ret != Z_OK)
-    {
-      free(buffer);
-      return (ERR_ZLIB);
-    }
+	b_pos = 0;
+	if (!(buffer = malloc((long long)pi->width*(long long)pi->height*(long long)pi->bpp + pi->height)))
+		return (ERR_MALLOC);
+	z_strm.zalloc = Z_NULL;
+	z_strm.zfree = Z_NULL;
+	z_strm.opaque = Z_NULL;
+	z_strm.avail_in = 0;
+	z_strm.next_in = Z_NULL;
+	z_ret = inflateInit(&z_strm);
+	if (z_ret != Z_OK)
+		{
+			free(buffer);
+			return (ERR_ZLIB);
+		}
 
-  while (mipng_is_type(dat, "IDAT"))
-    {
-      len = *((unsigned int *)dat);
-      len = ntohl(len);
-      z_strm.avail_in = len;
-      z_strm.next_in = dat + 8;
-      z_strm.avail_out = 0;
-      while (z_strm.avail_out == 0)
+	while (mipng_is_type(dat, "IDAT"))
+		{
+			len = *((unsigned int *)dat);
+			len = ntohl(len);
+			z_strm.avail_in = len;
+			z_strm.next_in = dat + 8;
+			z_strm.avail_out = 0;
+			while (z_strm.avail_out == 0)
 	{
-	  z_strm.avail_out = Z_CHUNK;
-	  z_strm.next_out = z_out;
-	  z_ret = inflate(&z_strm, Z_NO_FLUSH);
-	  //	  printf("inflate ret %d avail_out %d\n", z_ret, z_strm.avail_out);
-	  if (z_ret != Z_OK && z_ret != Z_STREAM_END)
-	    {
-	      inflateEnd(&z_strm);
-	      free(buffer);
-	      return (ERR_ZLIB);
-	    }
-	  if (b_pos + Z_CHUNK - z_strm.avail_out > pi->width*pi->height*pi->bpp+pi->height)
-	    {
-	      inflateEnd(&z_strm);
-	      free(buffer);
-	      return (ERR_DATA_MISMATCH);
-	    }
-	  bcopy(z_out, buffer+b_pos, Z_CHUNK - z_strm.avail_out);
-	  b_pos += Z_CHUNK - z_strm.avail_out;
+		z_strm.avail_out = Z_CHUNK;
+		z_strm.next_out = z_out;
+		z_ret = inflate(&z_strm, Z_NO_FLUSH);
+		//	  printf("inflate ret %d avail_out %d\n", z_ret, z_strm.avail_out);
+		if (z_ret != Z_OK && z_ret != Z_STREAM_END)
+			{
+				inflateEnd(&z_strm);
+				free(buffer);
+				return (ERR_ZLIB);
+			}
+		if (b_pos + Z_CHUNK - z_strm.avail_out > pi->width*pi->height*pi->bpp+pi->height)
+			{
+				inflateEnd(&z_strm);
+				free(buffer);
+				return (ERR_DATA_MISMATCH);
+			}
+		bcopy(z_out, buffer+b_pos, Z_CHUNK - z_strm.avail_out);
+		b_pos += Z_CHUNK - z_strm.avail_out;
 	}
-      dat += len + 4 + 4 + 4;
-    } 
-  inflateEnd(&z_strm);
-  if (b_pos != pi->width*pi->height*pi->bpp+pi->height)
-    {
-      //      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bpp+img->height);
-      free(buffer);
-      return (ERR_DATA_MISMATCH);
-    }
-  ret = mipng_fill_img(img, buffer, pi);
-  free(buffer);
-  return (ret);
+			dat += len + 4 + 4 + 4;
+		} 
+	inflateEnd(&z_strm);
+	if (b_pos != pi->width*pi->height*pi->bpp+pi->height)
+		{
+			//      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bpp+img->height);
+			free(buffer);
+			return (ERR_DATA_MISMATCH);
+		}
+	ret = mipng_fill_img(img, buffer, pi);
+	free(buffer);
+	return (ret);
 }
 
 
 
 int	mipng_magic(unsigned char *ptr, int size)
 {
-  int	i;
+	int	i;
 
-  if (size < PNG_MAGIC_SIZE)
-    return (ERR_MAGIC_SIZE);
-  i = 0;
-  while (i < PNG_MAGIC_SIZE)
-    if (*(ptr++) != magic[i++])
-      return (ERR_MAGIC_WRONG);
-  return (0);
+	if (size < PNG_MAGIC_SIZE)
+		return (ERR_MAGIC_SIZE);
+	i = 0;
+	while (i < PNG_MAGIC_SIZE)
+		if (*(ptr++) != magic[i++])
+			return (ERR_MAGIC_WRONG);
+	return (0);
 }
 
 
@@ -257,149 +257,149 @@ unsigned long crc_table[256] = { 0, 0x77073096, 0xee0e612c, 0x990951ba, 0x76dc41
 // From http://www.w3.org/TR/PNG/#D-CRCAppendix
 int	mipng_crc(unsigned char *ptr, int len)
 {
-  unsigned int	file_crc;
-  unsigned long crc;
-  int		i;
+	unsigned int	file_crc;
+	unsigned long crc;
+	int		i;
 
-  file_crc = *((unsigned int *)(ptr+4+4+len));
-  file_crc = ntohl(file_crc);
-  
-  crc = 0xffffffffL;
-  i = 0;
-  while (i < len+4)
-    crc = crc_table[(crc ^ ptr[(i++)+4]) & 0xff] ^ (crc >> 8);
-  crc ^= 0xffffffffL;
+	file_crc = *((unsigned int *)(ptr+4+4+len));
+	file_crc = ntohl(file_crc);
+	
+	crc = 0xffffffffL;
+	i = 0;
+	while (i < len+4)
+		crc = crc_table[(crc ^ ptr[(i++)+4]) & 0xff] ^ (crc >> 8);
+	crc ^= 0xffffffffL;
 
-  if (file_crc != crc)
-    return (1);
-  return (0);
+	if (file_crc != crc)
+		return (1);
+	return (0);
 }
 
 
 int	mipng_structure(unsigned char *ptr, int size, unsigned char **hdr, unsigned char **dat)
 {
-  unsigned int	len;
-  int		dat_state;
-  int		end;
+	unsigned int	len;
+	int		dat_state;
+	int		end;
 
-  dat_state = 0;
-  *hdr = NULL;
-  *dat = NULL;
-  end = 0;
-  while (size)
-    {
-      if (size >= 4) // length present
-	{
-	  len = *((unsigned int *)ptr);
-	  len = ntohl(len);
-	  if (size < 4 + 4 + 4 + len)
-	    return (ERR_STRUCT_INCOMPLETE);
-	  if (mipng_crc(ptr, len))
-	    return (ERR_STRUCT_CRC);
-	  //	  printf("found chunk len %d type %c%c%c%c\n", len, *(ptr+4), *(ptr+5), *(ptr+6), *(ptr+7));
-	  if (mipng_is_type(ptr, "IHDR"))
-	    {
-	      if (*hdr || len != PNG_HDR_SIZE)
-		return (ERR_STRUCT_HDR);
-	      *hdr = ptr;
-	    }
-	  if (mipng_is_type(ptr, "IEND"))
-	    {
-	      if (len != 0 || size != 4+4+4)
-		return (ERR_STRUCT_END);
-	      end = 1;
-	    }
-	  if (mipng_is_type(ptr, "IDAT"))
-	    {
-	      if (dat_state == 0)
+	dat_state = 0;
+	*hdr = NULL;
+	*dat = NULL;
+	end = 0;
+	while (size)
 		{
-		  dat_state = 1;
-		  *dat = ptr;
+			if (size >= 4) // length present
+	{
+		len = *((unsigned int *)ptr);
+		len = ntohl(len);
+		if (size < 4 + 4 + 4 + len)
+			return (ERR_STRUCT_INCOMPLETE);
+		if (mipng_crc(ptr, len))
+			return (ERR_STRUCT_CRC);
+		//	  printf("found chunk len %d type %c%c%c%c\n", len, *(ptr+4), *(ptr+5), *(ptr+6), *(ptr+7));
+		if (mipng_is_type(ptr, "IHDR"))
+			{
+				if (*hdr || len != PNG_HDR_SIZE)
+		return (ERR_STRUCT_HDR);
+				*hdr = ptr;
+			}
+		if (mipng_is_type(ptr, "IEND"))
+			{
+				if (len != 0 || size != 4+4+4)
+		return (ERR_STRUCT_END);
+				end = 1;
+			}
+		if (mipng_is_type(ptr, "IDAT"))
+			{
+				if (dat_state == 0)
+		{
+			dat_state = 1;
+			*dat = ptr;
 		}
-	      if (dat_state == 2)
+				if (dat_state == 2)
 		return (ERR_STRUCT_DAT);
-	    }
-	  else
-	    if (dat_state == 1)
-	      dat_state = 2;
-	  size -= 4+4+4+len;
-	  ptr += 4+4+4+len;
+			}
+		else
+			if (dat_state == 1)
+				dat_state = 2;
+		size -= 4+4+4+len;
+		ptr += 4+4+4+len;
 	}
-      else
+			else
 	return (ERR_STRUCT_INCOMPLETE);
-    }
-  if (*hdr == 0 || *dat == 0 || end == 0)
-    return (ERR_STRUCT_MISSCHK);
-  return (0);
+		}
+	if (*hdr == 0 || *dat == 0 || end == 0)
+		return (ERR_STRUCT_MISSCHK);
+	return (0);
 }
 
 
 int	mipng_verif_hdr(unsigned char *hdr, png_info_t *pi)
 {
-  unsigned int	compress;
-  unsigned int	filter;
+	unsigned int	compress;
+	unsigned int	filter;
 
-  hdr += 8;
-  pi->width = ntohl(*((unsigned long *)hdr));
-  pi->height = ntohl(*((unsigned long *)(hdr+4)));
-  pi->depth = *(hdr+8);
-  pi->color = *(hdr+9);
-  compress = *(hdr+10);
-  filter = *(hdr+11);
-  pi->interlace = *(hdr+12);
-  if (pi->width <= 0 || pi->height <= 0 || (pi->depth != 8 && pi->depth != 16)
-      || (pi->color != 2 && pi->color != 6) || compress != 0 || filter != 0 || pi->interlace != 0)
-    return (ERR_STRUCT_INCIMPL);
-  pi->bpp = pi->depth / 8;
-  if (pi->color == 2)
-    pi->bpp *= 3;
-  if (pi->color == 6)
-    pi->bpp *= 4;
-  //  printf("hdr info : %d x %d, depth %d, col type %d, comp %d, filter %d, interlace %d\nbpp is %d\n",
-  //	 pi->width, pi->height, pi->depth, pi->color, compress, filter, pi->interlace, pi->bpp);
-  return (0);
+	hdr += 8;
+	pi->width = ntohl(*((unsigned long *)hdr));
+	pi->height = ntohl(*((unsigned long *)(hdr+4)));
+	pi->depth = *(hdr+8);
+	pi->color = *(hdr+9);
+	compress = *(hdr+10);
+	filter = *(hdr+11);
+	pi->interlace = *(hdr+12);
+	if (pi->width <= 0 || pi->height <= 0 || (pi->depth != 8 && pi->depth != 16)
+			|| (pi->color != 2 && pi->color != 6) || compress != 0 || filter != 0 || pi->interlace != 0)
+		return (ERR_STRUCT_INCIMPL);
+	pi->bpp = pi->depth / 8;
+	if (pi->color == 2)
+		pi->bpp *= 3;
+	if (pi->color == 6)
+		pi->bpp *= 4;
+	//  printf("hdr info : %d x %d, depth %d, col type %d, comp %d, filter %d, interlace %d\nbpp is %d\n",
+	//	 pi->width, pi->height, pi->depth, pi->color, compress, filter, pi->interlace, pi->bpp);
+	return (0);
 }
 
 
 void	*mlx_int_parse_png(void *xvar, unsigned char *fptr, int size, int *width, int *height)
 {
-  int		err;
-  unsigned char *hdr;
-  unsigned char *dat;
-  png_info_t	pi;
-  void          *img;
+	int		err;
+	unsigned char *hdr;
+	unsigned char *dat;
+	png_info_t	pi;
+	void          *img;
 
-  if ((err = mipng_magic(fptr, size)))
-    {
-      warnx("mlx PNG error : %s", mipng_err[err]);
-      return ((void *)0);
-    }
-  fptr += PNG_MAGIC_SIZE;
-  size -= PNG_MAGIC_SIZE;
-  if ((err = mipng_structure(fptr, size, &hdr, &dat)))
-    {
-      warnx("mlx PNG error : %s", mipng_err[err]);
-      return ((void *)0);
-    }
-  if ((err = mipng_verif_hdr(hdr, &pi)))
-    {
-      warnx("mlx PNG error : %s", mipng_err[err]);
-      return ((void *)0);
-    }
-  if (!(img = mlx_new_image(xvar, pi.width, pi.height)))
-    {
-      warnx("mlx PNG error : Can't create mlx image");
-      return ((void *)0);
-    }
-  *width = pi.width;
-  *height = pi.height;
-  if ((err = mipng_data(img, dat, &pi)))
-    {
-      mlx_destroy_image(xvar, img);
-      warnx("mlx PNG error : %s", mipng_err[err]);
-      return ((void *)0);
-    }
-  return (img);
+	if ((err = mipng_magic(fptr, size)))
+		{
+			warnx("mlx PNG error : %s", mipng_err[err]);
+			return ((void *)0);
+		}
+	fptr += PNG_MAGIC_SIZE;
+	size -= PNG_MAGIC_SIZE;
+	if ((err = mipng_structure(fptr, size, &hdr, &dat)))
+		{
+			warnx("mlx PNG error : %s", mipng_err[err]);
+			return ((void *)0);
+		}
+	if ((err = mipng_verif_hdr(hdr, &pi)))
+		{
+			warnx("mlx PNG error : %s", mipng_err[err]);
+			return ((void *)0);
+		}
+	if (!(img = mlx_new_image(xvar, pi.width, pi.height)))
+		{
+			warnx("mlx PNG error : Can't create mlx image");
+			return ((void *)0);
+		}
+	*width = pi.width;
+	*height = pi.height;
+	if ((err = mipng_data(img, dat, &pi)))
+		{
+			mlx_destroy_image(xvar, img);
+			warnx("mlx PNG error : %s", mipng_err[err]);
+			return ((void *)0);
+		}
+	return (img);
 }
 
 
@@ -407,25 +407,25 @@ void	*mlx_int_parse_png(void *xvar, unsigned char *fptr, int size, int *width, i
 
 void	*mlx_png_file_to_image(void *xvar, char *file, int *width, int *height)
 {
-  int			fd;
-  int			size;
-  unsigned char		*ptr;
-  void                  *img;
+	int										fd;
+	int										size;
+	unsigned char					*ptr;
+	void									*img;
 
-  if ((fd = open(file, O_RDONLY)) == -1 || (size = lseek(fd, 0, SEEK_END)) == -1 ||
-      (ptr = mmap(0, size, PROT_READ, MAP_PRIVATE, fd, 0)) == (void *)MAP_FAILED)
-    {
-      if (fd >= 0)
-        close(fd);
-      warnx("Can't map png file '%s'", file);
-      return ((void *)0);
-    }
-  if (!(img = mlx_int_parse_png(xvar, ptr, size, width, height)))
-    {
-      *width = 0;
-      *height = 0;
-    }
-  munmap(ptr,size);
-  close(fd);
-  return (img);
+	if ((fd = open(file, O_RDONLY)) == -1 || (size = lseek(fd, 0, SEEK_END)) == -1 ||
+			(ptr = mmap(0, size, PROT_READ, MAP_PRIVATE, fd, 0)) == (void *)MAP_FAILED)
+		{
+			if (fd >= 0)
+				close(fd);
+			warnx("Can't map png file '%s'", file);
+			return ((void *)0);
+		}
+	if (!(img = mlx_int_parse_png(xvar, ptr, size, width, height)))
+		{
+				*width = 0;
+				*height = 0;
+		}
+	munmap(ptr, size);
+	close(fd);
+	return (img);
 }

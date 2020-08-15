@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/11 12:19:57 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/15 21:41:35 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ RAYCAST =	srcs/raycasting/setup_raycasting.c \
 			srcs/raycasting/raycasting.c \
 			srcs/raycasting/calc.c \
 			srcs/raycasting/key_input.c \
-			srcs/raycasting/movement.c
+			srcs/raycasting/movement.c \
+			srcs/raycasting/background.c \
+			srcs/raycasting/giant_fucking_function.c
 
 #CBONUS =
 

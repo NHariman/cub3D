@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/24 20:07:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/12 19:39:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/13 22:20:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int		print_even_more_errors(int num)
 		ft_printf("Error\n%i: Empty file/file too short to be valid.\n", num);
 	else if (num == 24)
 		ft_printf("Error\n%i: Unable to load texture\n", num);
+	else if (num == 25)
+		ft_printf("Error\n%i: Unable to open fd.\n", num);
 	return (0);
 }
 

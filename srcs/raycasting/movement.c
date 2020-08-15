@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/10 19:21:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/13 19:03:38 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/14 02:09:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,22 @@ void				rotate(t_camera *cam, int type)
 		ft_printf("\nLEFT\n");
 	if (type == RIGHT)
 		ft_printf("\nRIGHT\n");
+}
+
+void			ft_movement(t_camera *cam)
+{
+	cam->movespeed = 0.07;
+	cam->rotspeed = 0.05;
+	if (cam->keys.w)
+		move_vertical(cam, W);
+	if (cam->keys.s)
+		move_vertical(cam, S);
+	if (cam->keys.d)
+		move_horizontal(cam, D);
+	if (cam->keys.a)
+		move_horizontal(cam, A);
+	if (cam->keys.left)
+		rotate(cam, LEFT);
+	if (cam->keys.right)
+		rotate(cam, RIGHT);
 }

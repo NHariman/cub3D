@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/04 13:51:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/13 20:05:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/15 21:33:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void			setup_camray(t_camera *cam)
 {
 	int x;
-	int i;
 
 	x = 0;
-	i = 0;
 	while (x < cam->cub->res_x)
 	{
 		cam->camerax = 2 * x / (double)cam->cub->res_x - 1;
@@ -36,6 +34,7 @@ void			setup_camray(t_camera *cam)
 		calc_camwalldist(cam);
 		calc_line(cam, cam->cub->res_y);
 		calc_textures(cam, x);
+		//add zbuffer later for sprite management
 		x++;
 	}
 }
