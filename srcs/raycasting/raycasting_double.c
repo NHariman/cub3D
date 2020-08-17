@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 03:21:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 01:26:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 01:49:17 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void		ft_raycasting_double(t_cub *cub)
 			int texy;
 			texy = (int)texpos & (cub->text[pov].height - 1);
 			texpos += d_step;
-			colour = *(int *)cub->text[pov].addr[cub->text[pov].height * texy + texx];
+			colour = (int *)cub->text[pov].addr[cub->text[pov].height * texy + texx];
 			if (cub->side.side == 1)
 				colour = (colour >> 1) & 8355711;
 			my_mlx_pixel_put(&cub->mlx, x, drawstart, colour);
