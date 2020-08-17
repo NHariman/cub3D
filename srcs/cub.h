@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/05 22:44:59 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/17 19:27:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,106 +29,133 @@
 # define WE 3
 # define SP 4
 
-typedef	struct	s_rgb
-{
-	int			r;
-	int			g;
-	int			b;
-}				t_rgb;
+# define PNG 15
+# define XPM 16
 
-typedef	struct	s_texture
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+
+# define ESC 53
+
+# define LEFT 123
+# define RIGHT 124
+
+typedef	struct	s_keys
 {
-	void	*texture;
-	char	*path;
-	int		width;
-	int		height;
-	int		endian;
-}				t_texture;
+	int				w;
+	int				a;
+	int				s;
+	int				d;
+	int				left;
+	int				right;
+}				t_keys;
+
+typedef struct	s_mlx
+{
+	void			*mlx;
+	void			*img;
+	void			*win;
+	char			*img_addr;
+	int				img_bits_per_pixel;
+	int				line_length;
+	int				endian;
+}				t_mlx;
 
 typedef	struct	s_ray
 {
-	int			mapx;
-	int			mapy;
-	double		sidedistx;
-	double		sidedisty;
-	double		deltadistx;
-	double		deltadisty;
-	double		perpwalldist;
-	int			stepx;
-	int			stepy;
-	int			hit;
-	int			side;
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	int		mapx;
+	int		mapy;
+	double	deltadistx;
+	double	deltadisty;
+	int		hit;
 }				t_ray;
 
-typedef struct	s_draw
+typedef	struct	s_side
 {
-	int			lineheight;
-	int			start;
-	int			end;
-}				t_draw;
+	int		stepx;
+	int		stepy;
+	double	sidedistx;
+	double	sidedisty;
+	int		side;
+}				t_side;
 
-typedef struct	s_wall
+typedef struct	s_set
 {
-	double		wallx;
-	int			texx;
-}				t_wall;
+	double			camerax;
+	double			posx;
+	double			posy;
+	double			dirx;
+	double			diry;
+	double			planex;
+	double			planey;
+}				t_set;
 
-typedef	struct	s_camera
+typedef	struct	s_text
 {
-	t_ray		ray;
-	t_draw		draw;
-	t_wall		wall;
-	double		posx;
-	double		posy;
-	double		dirx;
-	double		diry;
-	double		raydirx;
-	double		raydiry;
-	double		planex;
-	double		planey;
-	double		time;
-	double		prev_time;
-	double		camerax;
-	double		step;
-	double		texpos;
-}				t_camera;
+	void			*img;
+	char			*addr;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+
+}				t_text;
 
 typedef struct	s_cub
 {
-	t_texture	textures[5];
-	char		*path;
-	int			save;
-	char		*file;
-	char		**filearr;
-	int			filesize;
-	char		spawn_pos;
-	int			spawn_x;
-	int			spawn_y;
-	int			res_x;
-	int			res_y;
-	int			floor;
-	int			cling;
-	char		**map;
-	char		**cpmap;
+	t_keys			keys;
+	t_set			set;
+	t_mlx			mlx;
+	t_ray			ray;
+	t_side			side;
+	t_text			*text[5];
+	char			*textures[5];
+	char			*path;
+	int				save;
+	char			*file;
+	char			**filearr;
+	int				filesize;
+	char			spawn_pos;
+	int				spawn_x;
+	int				spawn_y;
+	int				res_x;
+	int				res_y;
+	int				floor;
+	int				cling;
+	char			**map;
+	char			**cpmap;
 }				t_cub;
+
+typedef struct	s_rgb
+{
+	int				r;
+	int				g;
+	int				b;
+}				t_rgb;
 
 typedef	struct	s_check
 {
-	int		north;
-	int		south;
-	int		east;
-	int		west;
-	int		sprite;
-	int		floor;
-	int		ceiling;
-	int		res;
+	int				north;
+	int				south;
+	int				east;
+	int				west;
+	int				sprite;
+	int				floor;
+	int				ceiling;
+	int				res;
 }				t_check;
 
 typedef struct	s_gnl
 {
-	int			bytes_read;
-	int			fd;
-	char		*line_read;
+	int				bytes_read;
+	int				fd;
+	char			*line_read;
 }				t_gnl;
 
 /*
@@ -159,11 +186,11 @@ char			*ft_strlower(char *str);
 ** functions that save data into struct
 ** found in savers.c, folder: SRCS
 */
-char			*save_path(char *str, int i, t_check *check, t_cub *cub);
+char			*save_path(char *str, int i, t_check *check);
 int				save_texture(char *str, t_cub *cub, t_check *check);
 int				save_res(const char *str, t_cub *cub, t_check *check);
 int				save_colours(const char *str, t_cub *cub, t_check *check);
-int				save_rgb(const char *str, t_cub *cub, t_rgb *rgb);
+int				save_rgb(const char *str, t_rgb *rgb);
 
 /*
 ** functions that check if input is valid
@@ -193,27 +220,16 @@ void			show_map(char **map);
 int				show_file_error(char **file, int error);
 
 /*
-** raycasting time baybeeeeee
-** found in setup_raycasting.c
-** folder: RAYCASTING/
+** raycasting functions
 */
-int				ray_time(t_cub *cub);
-
-/*
-** these functions calculate various stuff for rays
-** found in: calc.c and raycasting.c
-** folder: RAYCASTING/
-*/
-void			setup_camray(t_cub *cub, t_camera *cam, int *buf);
-void			calc_step_and_sidedist(t_camera *cam);
-void			calc_dda(t_camera *cam, t_cub *cub);
-void			calc_camwalldist(t_camera *cam);
-void			calc_line(t_camera *cam, int y);
-
-/*
-** get and calculate textures.
-** found in textures.c
-** folder: RAYCASTING/
-*/
-int				get_textures(void *mlx, t_cub *cub);
+void			start_mlx(t_cub *cub);
+int				set_textures(t_cub *cub);
+void			get_key_input(t_cub *cub);
+void			my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+void			ft_colour_background(t_cub *cub);
+void			ft_raycasting(t_cub *cub);
+void			ft_movement(t_cub *cub);
+void			ft_calc_side(t_cub *cub);
+void			save_bmp(t_cub *cub);
+void			print_struct(t_cub *cub);
 #endif
