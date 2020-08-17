@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 20:14:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/17 22:56:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	get_window_size(void *mlx, t_cub *cub)
 		check = 1;
 	}
 	if (check)
-		ft_printf("Modified screen resolution to fit screen.\n");
+		ft_printf("Modified window resolution to fit screen.\n");
 }
 
 static void	create_img(t_cub *cub)
@@ -50,7 +50,9 @@ static int	render_next_frame(t_cub *cub)
 	mlx_put_image_to_window(cub->mlx.mlx,
 		cub->mlx.win, cub->mlx.img, 0, 0);
 	mlx_destroy_image(cub->mlx.mlx, cub->mlx.img);
+	//mlx_sync(2, cub->mlx.img);
 	create_img(cub);
+	//mlx_sync(1, cub->mlx.img);
 	return (1);
 }
 
@@ -75,8 +77,9 @@ void		start_mlx(t_cub *cub)
 	if (!cub->mlx.win)
 		exit(print_error(20));
 	create_img(cub);
-	if (!set_textures(cub))
-		exit(1);
+	//mlx_sync(1, cub->mlx.img);
+	// if (!set_textures(cub))
+	// 	exit(1);
 	get_key_input(cub);
 	ft_set_start_values(cub);
 	mlx_loop_hook(cub->mlx.mlx, render_next_frame, cub);

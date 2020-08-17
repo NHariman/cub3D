@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/10 20:36:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/17 22:41:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,26 @@ static int			find_spawnpoint(t_cub *cub)
 	return (print_error(10));
 }
 
+void				count_sprites(t_cub *cub)
+{
+	int y;
+	int x;
+
+	y = 0;
+	x = 0;
+	while (cub->cpmap[y][0] != '\0')
+	{
+		while (cub->cpmap[y][x] != '\0')
+		{
+			if (cub->cpmap[y][x] == '2')
+				cub->sprites++;
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
 int					valid_map(t_cub *cub)
 {
 	int success;
@@ -83,6 +103,7 @@ int					valid_map(t_cub *cub)
 		show_map(cub->map);
 		return (0);
 	}
+	count_sprites(cub);
 	cub->map[cub->spawn_x][cub->spawn_y] = cub->spawn_pos;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 19:27:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/17 22:44:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,13 @@ typedef	struct	s_text
 
 }				t_text;
 
+typedef struct	s_sprite
+{
+	double		*zbuffer;
+	int			*sp_order;
+	double		*sp_dist;
+}				t_sprite;
+
 typedef struct	s_cub
 {
 	t_keys			keys;
@@ -115,12 +122,14 @@ typedef struct	s_cub
 	t_ray			ray;
 	t_side			side;
 	t_text			*text[5];
+	t_sprite		sp;
 	char			*textures[5];
 	char			*path;
 	int				save;
 	char			*file;
 	char			**filearr;
 	int				filesize;
+	int				sprites;
 	char			spawn_pos;
 	int				spawn_x;
 	int				spawn_y;
@@ -174,7 +183,6 @@ char			**create_array(char *str, int len);
 ** found in clear_structs.c, folder: ERRORS
 */
 void			empty_check(t_check *check);
-int				free_struct(t_cub *cub);
 
 /*
 ** input sanitation
