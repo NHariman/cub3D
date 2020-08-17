@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 00:29:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 01:27:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	create_img(t_cub *cub)
 static int	render_next_frame(t_cub *cub)
 {
 	ft_colour_background(cub);
-	ft_raycasting(cub);
+	ft_raycasting_double(cub);
 	mlx_put_image_to_window(cub->mlx.mlx,
 		cub->mlx.win, cub->mlx.img, 0, 0);
 	mlx_destroy_image(cub->mlx.mlx, cub->mlx.img);

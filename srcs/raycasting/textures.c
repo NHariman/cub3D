@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 19:04:31 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 00:39:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 01:22:54 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int		fill_text(t_cub *cub, int pov, int type)
 			&cub->text[pov].endian);
 	return (1);
 }
-int			set_textures(t_cub *cub)
+
+int				set_textures(t_cub *cub)
 {
 	int pov;
 
