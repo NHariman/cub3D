@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/10 23:57:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/17 03:27:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ int				main(int argc, char **argv)
 		return (0);
 	show_map(cub->map);
 	if (cub->save)
-		ft_printf("boop\n"); //save_bmp(cub);
-	ray_time(cub);
+		save_bmp(cub);
+	//print_struct(cub);
+	start_mlx(cub);
 	return (0);
 }
 	// while (1) {;}

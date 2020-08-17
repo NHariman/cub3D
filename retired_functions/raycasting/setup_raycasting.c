@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/01 23:05:57 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/15 21:41:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/15 23:08:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-static void		set_spawnpoint(t_cub *cub, t_camera *cam)
+void			set_spawnpoint(t_cub *cub, t_camera *cam)
 {
 	cam->posx = (double)cub->spawn_y;
 	cam->posy = (double)cub->spawn_x;
@@ -32,7 +32,7 @@ static int		render_next_frame(t_camera *cam)
 {
 	//ft_movement(cam);
 	ft_background(cam);
-	giant_fucking_function(cam);
+	//giant_fucking_function(cam);
 	//setup_camray(cam);
 	mlx_put_image_to_window(cam->mlx.mlx,
 		cam->mlx.mlx_win, cam->mlx.img.texture, 0, 0);

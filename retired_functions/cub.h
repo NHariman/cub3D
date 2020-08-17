@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 04:33:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/15 22:57:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,42 +44,75 @@
 
 typedef	struct	s_keys
 {
-	int				w;
-	int				a;
-	int				s;
-	int				d;
-	int				left;
-	int				right;
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
 }				t_keys;
 
-typedef struct	s_mlx
+typedef struct	s_data {
+	void		*texture;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
+}				t_data;
+
+typedef	struct	s_mlx
 {
 	void			*mlx;
-	void			*img;
-	void			*win;
-	char			*img_addr;
-	int				img_bits_per_pixel;
-	int				line_length;
-	int				endian;
+	void			*mlx_win;
+	t_data			img;
 }				t_mlx;
 
-typedef struct	s_setup
+typedef	struct	s_rgb
 {
-	double			posx;
-	double			posy;
-	double			dirx;
-	double			diry;
-	double			planex;
-	double			planey;
+	int				r;
+	int				g;
+	int				b;
+}				t_rgb;
+
+typedef	struct	s_texture
+{
+	char			*path;
+}				t_texture;
+
+typedef	struct	s_ray
+{
+	int				mapx;
+	int				mapy;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+	double			perpwalldist;
+	int				stepx;
+	int				stepy;
 	int				hit;
-}				t_setup;
+	int				side;
+}				t_ray;
+
+typedef struct	s_draw
+{
+	int				lineheight;
+	int				start;
+	int				end;
+}				t_draw;
+
+typedef struct	s_wall
+{
+	double			wallx;
+	int				texx;
+	int				texy;
+}				t_wall;
 
 typedef struct	s_cub
 {
-	t_keys			keys;
-	t_setup			setup;
-	t_mlx			mlx;
-	char			*textures[5];
+	t_texture		textures[5];
 	char			*path;
 	int				save;
 	char			*file;
@@ -96,12 +129,34 @@ typedef struct	s_cub
 	char			**cpmap;
 }				t_cub;
 
-typedef struct	s_rgb
+typedef	struct	s_camera
 {
-	int				r;
-	int				g;
-	int				b;
-}				t_rgb;
+	t_mlx			mlx;
+	t_data			tex[5];
+	t_ray			ray;
+	t_draw			draw;
+	t_wall			wall;
+	t_keys			keys;
+	double			posx;
+	double			posy;
+	double			dirx;
+	double			diry;
+	double			raydirx;
+	double			raydiry;
+	double			planex;
+	double			planey;
+	double			time;
+	double			prev_time;
+	double			frametime;
+	double			camerax;
+	double			step;
+	double			texpos;
+	double			movespeed;
+	double			rotspeed;
+	double			olddirx;
+	double			oldplanex;
+	t_cub			*cub;
+}				t_camera;
 
 typedef	struct	s_check
 {
@@ -184,13 +239,49 @@ void			show_map(char **map);
 int				show_file_error(char **file, int error);
 
 /*
-** raycasting functions
+** raycasting time baybeeeeee
+** found in setup_raycasting.c
+** folder: RAYCASTING/
 */
-void			start_mlx(t_cub *cub);
-void			get_key_input(t_cub *cub);
-void			my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
-void			ft_colour_background(t_cub *cub);
-void			ft_raycasting(t_cub *cub);
-void			save_bmp(t_cub *cub);
-void			print_struct(t_cub *cub);
+int				ray_time(t_cub *cub);
+
+/*
+** these functions calculate various stuff for rays
+** found in: calc.c and raycasting.c
+** folder: RAYCASTING/
+*/
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void        	ft_background(t_camera *cam);
+void			set_window_size(t_camera *cam);
+int				mlx_exit(void *mlx, void *mlx_win, int error);
+void			set_img(t_camera *cam);
+void			setup_camray(t_camera *cam);
+void			calc_camray(t_camera *cam);
+void			calc_step_and_sidedist(t_camera *cam);
+void			calc_dda(t_camera *cam);
+void			calc_camwalldist(t_camera *cam);
+void			calc_line(t_camera *cam, int y);
+void			calc_textures(t_camera *cam, int x);
+
+/*
+** get and calculate textures.
+** found in textures.c
+** folder: RAYCASTING/
+*/
+int				get_textures(t_camera *cam);
+
+/*
+** get keyboard input, found in key_input.c and movement.c
+** folder: RAYCASSTING/
+*/
+int				exit_program(t_camera *cam);
+void			get_key_input(t_camera *cam);
+void			move_vertical(t_camera *cam, int type);
+void			move_horizontal(t_camera *cam, int type);
+void			rotate(t_camera *cam, int type);
+void			ft_movement(t_camera *cam);
+
+void        	giant_fucking_function(t_camera *cam);
+void			bmp_start(t_cub *cub);
+void			set_spawnpoint(t_cub *cub, t_camera *cam);
 #endif

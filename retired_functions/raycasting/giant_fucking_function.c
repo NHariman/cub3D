@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/15 21:09:28 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/15 21:50:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/15 23:19:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void        giant_fucking_function(t_camera *cam)
 		//calc_texty
 		while (cam->draw.start < cam->draw.end)
 		{
-			my_mlx_pixel_put(&cam->mlx.img, x, cam->draw.start, 14443600);
+			ft_printf("lol");
+			//my_mlx_pixel_put(&cam->mlx.img, x, cam->draw.start, 14443600);
 			cam->draw.start++;
 		}
 		//add zbuffer later for sprite management

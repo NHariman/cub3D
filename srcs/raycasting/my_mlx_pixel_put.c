@@ -1,42 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   background.c                                       :+:    :+:            */
+/*   my_mlx_pixel_put.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/17 03:15:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 03:16:03 by nhariman      ########   odam.nl         */
+/*   Created: 2020/08/17 03:50:46 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/08/17 03:51:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void		ft_colour_background(t_cub *cub)
+void			my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
-	int x;
-	int y;
+	char	*dst;
 
-	x = 0;
-	y = 0;
-	while (y < cub->res_y / 2)
-	{
-		while (x < cub->res_x)
-		{
-			my_mlx_pixel_put(&cub->mlx, x, y, cub->cling);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	while (y < cub->res_y)
-	{
-		while (x < cub->res_x)
-		{
-			my_mlx_pixel_put(&cub->mlx, x, y, cub->floor);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
+	dst = data->img_addr +
+	(y * data->line_length + x * (data->img_bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }

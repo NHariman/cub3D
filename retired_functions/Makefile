@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/17 05:05:30 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/15 23:03:03 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,16 @@ ERROR =		srcs/errors/error_messages.c \
 			srcs/errors/more_errors.c \
 			srcs/errors/clear_structs.c
 
-RAYCAST =	srcs/raycasting/mlx.c \
-			srcs/raycasting/key_input.c \
-			srcs/raycasting/background.c \
-			srcs/raycasting/my_mlx_pixel_put.c \
+RAYCAST =	srcs/raycasting/setup_raycasting.c \
+			srcs/raycasting/window.c \
+			srcs/raycasting/textures.c \
 			srcs/raycasting/raycasting.c \
-			srcs/raycasting/bmp.c \
-			srcs/raycasting/print_struct.c
+			srcs/raycasting/calc.c \
+			srcs/raycasting/key_input.c \
+			srcs/raycasting/movement.c \
+			srcs/raycasting/background.c \
+			srcs/raycasting/giant_fucking_function.c \
+			srcs/raycasting/bmp.c
 
 #CBONUS =
 
@@ -98,8 +101,7 @@ srcs/libft/libft.a:
 	@$(COMPILE) -c $(FLAGS) -o $@ -c $<
 
 clean:
-	@$(RM) $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) $(ORAYCAST) screen.bmp 
-	@$(RM) srcs/mlx/mlx_image.swiftsourceinfo srcs/mlx/mlx_init.swiftsourceinfo srcs/mlx/mlx_window.swiftsourceinfo
+	@$(RM) $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) $(ORAYCAST) screen.bmp
 	@cd srcs/libft && $(MAKE) clean
 	@cd srcs/mlx && $(MAKE) clean
 

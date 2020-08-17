@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/11 00:02:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/17 01:58:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ char	*save_path(char *str, int i, t_check *check)
 int		save_texture(char *str, t_cub *cub, t_check *check)
 {
 	if (!ft_strncmp(str, "NO", 2) && !check->north)
-		cub->textures[NO].path = save_path(str + 2, NO, check);
+		cub->textures[NO] = save_path(str + 2, NO, check);
 	else if (!ft_strncmp(str, "SO", 2) && !check->south)
-		cub->textures[SO].path = save_path(str + 2, SO, check);
+		cub->textures[SO] = save_path(str + 2, SO, check);
 	else if (!ft_strncmp(str, "WE", 2) && !check->west)
-		cub->textures[WE].path = save_path(str + 2, WE, check);
+		cub->textures[WE] = save_path(str + 2, WE, check);
 	else if (!ft_strncmp(str, "EA", 2) && !check->east)
-		cub->textures[EA].path = save_path(str + 2, EA, check);
+		cub->textures[EA] = save_path(str + 2, EA, check);
 	else if (!ft_strncmp(str, "S", 1) && !check->sprite)
-		cub->textures[SP].path = save_path(str + 1, SP, check);
+		cub->textures[SP] = save_path(str + 1, SP, check);
 	else
 		return (print_error(1));
 	return (1);
@@ -96,12 +96,12 @@ int		save_colours(const char *str, t_cub *cub, t_check *check)
 	if (!valid_rgb_values(&rgb))
 		return (print_error(5));
 	hex = get_hex(rgb.r, rgb.g, rgb.b);
-	if (ft_strncmp(str, "F", 1) && !check->floor)
+	if (!ft_strncmp(str, "F", 1) && !check->floor)
 	{
 		cub->floor = hex;
 		check->floor = 1;
 	}
-	else if (ft_strncmp(str, "C", 1) && !check->floor)
+	else if (!ft_strncmp(str, "C", 1) && !check->ceiling)
 	{
 		cub->cling = hex;
 		check->ceiling = 1;
