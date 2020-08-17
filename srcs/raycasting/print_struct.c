@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 23:43:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/16 23:59:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 00:08:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		print_struct(t_cub *cub)
 	show_map(cub->filearr);
 	ft_printf("\nfilesize: %i!\nspawn_pos: %c!\nspawn_x: %i!\nspawn_y: %i!\n",
 		cub->filesize, cub->spawn_pos, cub->spawn_x, cub->spawn_y);
+	ft_printf("sprites: %i!\n", cub->sprites);
 	ft_printf("res_x: %i!\nres_y: %i!\nfloor int: %i!\nceiling int: %i!\n",
 		cub->res_x, cub->res_y, cub->floor, cub->cling);
 	ft_printf("map:\n");

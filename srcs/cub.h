@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 22:44:47 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 00:17:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ typedef struct	s_cub
 	t_mlx			mlx;
 	t_ray			ray;
 	t_side			side;
-	t_text			*text[5];
+	t_text			text[5];
 	t_sprite		sp;
 	char			*textures[5];
 	char			*path;

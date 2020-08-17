@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 22:56:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 00:29:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void		start_mlx(t_cub *cub)
 		exit(print_error(20));
 	create_img(cub);
 	//mlx_sync(1, cub->mlx.img);
-	// if (!set_textures(cub))
-	// 	exit(1);
+	if (!set_textures(cub))
+		exit(1);
 	get_key_input(cub);
 	ft_set_start_values(cub);
 	mlx_loop_hook(cub->mlx.mlx, render_next_frame, cub);
