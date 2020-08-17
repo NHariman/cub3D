@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   raycasting.c                                       :+:    :+:            */
+/*   raycasting_double.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 03:21:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 19:58:47 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/17 20:04:31 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,45 @@ void		ft_raycasting(t_cub *cub)
 		drawend = lineheight / 2 + cub->res_y / 2;
 		if (drawend >= cub->res_y)
 			drawend = cub->res_y - 1;
-		colour = 0;
+		// int pov;
+		// if (cub->side.side == 0)
+		// {
+		// 	if (cub->set.posx < cub->ray.mapx)
+		// 		pov = SO;
+		// 	else
+		// 		pov = NO;
+		// }
+		// else
+		// {
+		// 	if (cub->set.posy < cub->ray.mapy)
+		// 		pov = WE;
+		// 	else
+		// 		pov = EA;
+		// }
+		// double wallx;
+		// if (cub->side.side == 0)
+		// 	wallx = cub->set.posy + perpwalldist * cub->ray.raydiry;
+		// else
+		// 	wallx = cub->set.posx + perpwalldist * cub->ray.raydirx;
+		// wallx -= floor(wallx);
+		// int texx;
+		// texx = (int)(wallx * (double)cub->text[pov]->width);
+		// if (cub->side.side == 0 && cub->ray.raydirx > 0)
+		// 	texx = cub->text[pov]->width;
+		// if (cub->side.side == 1 && cub->ray.raydiry < 0)
+		// 	texx = cub->text[pov]->width;
+		// double d_step;
+		// d_step = 1.0 * cub->text[pov]->height / lineheight;
+		// double texpos = (drawstart - cub->res_y / 2 + lineheight / 2) * d_step;
+		
 		while (drawstart < drawend)
 		{
+			// int texy;
+			// texy = (int)texpos & (cub->text[pov]->height - 1);
+			// texpos += d_step;
+			colour = 0;//*(int *)cub->text[pov]->addr[cub->text[pov]->height * texy + texx];
+			// if (cub->side.side == 1)
+			// 	colour = (colour >> 1) & 8355711;
 			my_mlx_pixel_put(&cub->mlx, x, drawstart, colour);
 			drawstart++;
 		}

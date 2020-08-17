@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 04:52:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/17 20:14:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ static int	render_next_frame(t_cub *cub)
 
 static void	ft_set_start_values(t_cub *cub)
 {
-	cub->setup.posx = cub->spawn_y;
-	cub->setup.posy = cub->spawn_x;
-	cub->setup.planex = 0;
-	cub->setup.planey = 0.66;
-	cub->setup.dirx = -1;
-	cub->setup.diry = 0;
+	cub->set.posx = cub->spawn_y;
+	cub->set.posy = cub->spawn_x;
+	cub->set.planex = 0;
+	cub->set.planey = 0.66;
+	cub->set.dirx = -1;
+	cub->set.diry = 0;
 }
 
 void		start_mlx(t_cub *cub)
@@ -75,6 +75,8 @@ void		start_mlx(t_cub *cub)
 	if (!cub->mlx.win)
 		exit(print_error(20));
 	create_img(cub);
+	if (!set_textures(cub))
+		exit(1);
 	get_key_input(cub);
 	ft_set_start_values(cub);
 	mlx_loop_hook(cub->mlx.mlx, render_next_frame, cub);
