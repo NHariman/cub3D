@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   raycasting_double.c                                :+:    :+:            */
+/*   raycasting.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 03:21:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 02:08:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 20:29:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_setup(t_cub *cub)
 	cub->ray.deltadisty = fabs(1 / cub->ray.raydiry);
 }
 
-void		ft_raycasting_double(t_cub *cub)
+void		ft_raycasting(t_cub *cub)
 {
 	int		x;
 	double	perpwalldist;

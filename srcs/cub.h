@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 02:18:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 21:36:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,19 @@ typedef	struct	s_text
 
 }				t_text;
 
+typedef struct	s_sp_lst
+{
+	double			x;
+	double			y;
+}				t_sp_lst;
+
 typedef struct	s_sprite
 {
-	double		*zbuffer;
-	int			*sp_order;
-	double		*sp_dist;
+	double			*zbuffer;
+	int				*sp_order;
+	double			*sp_dist;
+	int				num;
+	t_sp_lst		*sprites;
 }				t_sprite;
 
 typedef struct	s_cub
@@ -216,7 +224,21 @@ int				complete_input_data(t_check *check);
 ** found in floodfill.c, folder VALID_INPUT
 */
 void			floodfill_map(char **map, int *success, int x, int y);
+
+/*
+** actually gets int value of rgb
+*/
 int				get_hex(int r, int g, int b);
+
+/*
+** sprite handling, finds sprites and puts them in an array
+** from furthest sprite to closest based on POV
+*/
+void			count_sprites(t_cub *cub);
+void			floodfill_no(t_cub *cub, int x, int y, int nb);
+void			floodfill_so(t_cub *cub, int x, int y, int nb);
+void			floodfill_ea(t_cub *cub, int x, int y, int nb);
+void			floodfill_we(t_cub *cub, int x, int y, int nb);
 /*
 ** error messages, found in error_messages.c, map_errors.c
 ** folder ERRORS/

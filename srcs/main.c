@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 00:30:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 20:38:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int				main(int argc, char **argv)
 	if (!data_parser(cub))
 		return (0);
 	show_map(cub->map);
-	//print_struct(cub);
+	print_struct(cub);
 	if (cub->save)
 		save_bmp(cub);
-	start_mlx(cub);
+	//start_mlx(cub);
 	return (0);
 }
