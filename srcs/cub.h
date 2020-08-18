@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 02:08:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 02:18:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,6 @@ void			get_key_input(t_cub *cub);
 void			my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void			ft_colour_background(t_cub *cub);
 void			ft_raycasting(t_cub *cub);
-void			ft_raycasting_double(t_cub *cub);
 void			ft_movement(t_cub *cub);
 void			ft_calc_side(t_cub *cub);
 void			save_bmp(t_cub *cub);

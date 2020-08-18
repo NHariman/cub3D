@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/18 01:46:04 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/18 02:18:57 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,7 @@ RAYCAST =	srcs/raycasting/mlx.c \
 			srcs/raycasting/bmp.c \
 			srcs/raycasting/movement.c \
 			srcs/raycasting/calc.c \
-			srcs/raycasting/print_struct.c \
-			srcs/raycasting/raycasting_double.c
+			srcs/raycasting/print_struct.c
 
 #CBONUS =
 
