@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 03:21:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 00:53:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 01:01:02 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void		ft_raycasting(t_cub *cub)
 		int stripe;
 
 		stripe = 0;
-		while(stripe < cub->sp.drawendx)
+		while (stripe < cub->sp.drawendx)
 		{
 			cub->sp.texx = (int)(256 * (stripe - (-cub->sp.spritewidth / 2 + cub->sp.spritescreenx)) * cub->text[SP].width / cub->sp.spritewidth) / 256;
 			if (cub->sp.transformy > 0 && stripe > 0 && stripe < cub->res_x && cub->sp.transformy < cub->sp.zbuffer[stripe])
