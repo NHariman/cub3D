@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 21:36:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 00:17:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,18 @@ typedef struct	s_sprite
 	double			*zbuffer;
 	int				*sp_order;
 	double			*sp_dist;
-	int				num;
+	double			spritex;
+	double			spritey;
+	double			invdet;
+	double			transformx;
+	double			transformy;
+	int				spritescreenx;
+	int				spriteheight;
+	int				drawstarty;
+	int				drawendy;
+	int				spritewidth;
+	int				drawstartx;
+	int				drawendx;
 	t_sp_lst		*sprites;
 }				t_sprite;
 

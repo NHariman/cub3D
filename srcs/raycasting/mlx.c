@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 20:27:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 21:55:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ static int	render_next_frame(t_cub *cub)
 	mlx_put_image_to_window(cub->mlx.mlx,
 		cub->mlx.win, cub->mlx.img, 0, 0);
 	mlx_destroy_image(cub->mlx.mlx, cub->mlx.img);
-	//mlx_sync(2, cub->mlx.img);
 	create_img(cub);
-	//mlx_sync(1, cub->mlx.img);
 	return (1);
 }
 
