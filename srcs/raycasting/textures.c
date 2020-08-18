@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 19:04:31 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 01:22:54 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 02:08:54 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		fill_text(t_cub *cub, int pov, int type)
 	ft_printf("no crash on png?\n");
 	if (!cub->text[pov].img)
 		return (print_error(24));
-	cub->text[pov].addr = mlx_get_data_addr(cub->text[pov].img,
+	cub->text[pov].addr = (int *)mlx_get_data_addr(cub->text[pov].img,
 		&cub->text[pov].bits_per_pixel, &cub->text[pov].line_length,
 			&cub->text[pov].endian);
 	return (1);

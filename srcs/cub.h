@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 01:27:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/18 02:08:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct	s_set
 typedef	struct	s_text
 {
 	void			*img;
-	char			*addr;
+	int				*addr;
 	int				width;
 	int				height;
 	int				bits_per_pixel;
