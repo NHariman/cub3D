@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 19:04:31 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 02:08:54 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 00:59:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int		fill_text(t_cub *cub, int pov, int type)
 	fd = open(cub->textures[pov], O_RDONLY);
 	if (fd == -1)
 		return (print_error(25));
-	ft_printf("crash on png?\n");
 	if (type == PNG)
 	{
 		cub->text[pov].img = mlx_png_file_to_image(cub->mlx.mlx,
@@ -32,7 +31,6 @@ static int		fill_text(t_cub *cub, int pov, int type)
 			cub->textures[pov], &cub->text[pov].width,
 				&cub->text[pov].height);
 	}
-	ft_printf("no crash on png?\n");
 	if (!cub->text[pov].img)
 		return (print_error(24));
 	cub->text[pov].addr = (int *)mlx_get_data_addr(cub->text[pov].img,
