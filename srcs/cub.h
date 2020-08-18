@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 00:17:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 00:51:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,9 @@ typedef struct	s_sprite
 	int				spritewidth;
 	int				drawstartx;
 	int				drawendx;
+	int				texx;
+	int				texy;
+	int				colour;
 	t_sp_lst		*sprites;
 }				t_sprite;
 

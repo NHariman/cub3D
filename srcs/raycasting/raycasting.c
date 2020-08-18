@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 03:21:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 00:48:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 00:53:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,19 @@ static void	ft_setup(t_cub *cub)
 	cub->ray.deltadisty = fabs(1 / cub->ray.raydiry);
 }
 
+void			get_sprites(t_cub *cub)
+{
+	cub->sp.zbuffer = ft_calloc(cub->res_x, sizeof(double));
+	cub->sp.sp_order = ft_calloc(cub->sprites, sizeof(int));
+	cub->sp.sp_dist = ft_calloc(cub->sprites, sizeof(double));
+}
+
 /*
 ** sort sprites:
 ** the bigger the distance, the more it must be put forward
 */
 
-void	sortsprites(t_cub *cub)
+static void	sortsprites(t_cub *cub)
 {
 	double		tmp_dist;
 	int			tmp_order;
@@ -196,11 +203,12 @@ void		ft_raycasting(t_cub *cub)
 					d = (y) * 256 - cub->res_y * 128 + cub->sp.spriteheight * 128;
 					cub->sp.texy = ((d * cub->text[SP].height) / cub->sp.spriteheight) / 256;
 					cub->sp.colour = cub->text[SP].addr[cub->text[SP].width * cub->sp.texy + cub->sp.texx];
-					if (cub->sp.colour & 0x00FFFFFF != 0)
+					if ((cub->sp.colour & 0x00FFFFFF) != 0)
 						my_mlx_pixel_put(&cub->mlx, y, stripe, cub->sp.colour);
 					y++;
 				}
 			}
 			stripe++;
 		}
+	}
 }
