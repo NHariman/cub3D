@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/17 19:49:58 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/18 20:20:35 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ PARSER = 	srcs/main.c \
 VALID =		srcs/valid_input/valid_input.c \
 			srcs/valid_input/valid_map.c \
 			srcs/valid_input/floodfill.c \
-			srcs/valid_input/colour.c 
+			srcs/valid_input/colour.c \
+			srcs/valid_input/sprite_list.c
 
 ERROR =		srcs/errors/error_messages.c \
 			srcs/errors/map_errors.c \
@@ -95,7 +96,7 @@ libmlx.dylib:
 	@cd srcs/mlx && $(MAKE) && mv libmlx.dylib ../../
 
 srcs/libft/libft.a:
-	@cd srcs/libft && $(MAKE)
+	@cd srcs/libft && $(MAKE) bonus
 
 %.o: %.c srcs/cub.h
 	@$(COMPILE) -c $(FLAGS) -o $@ -c $<

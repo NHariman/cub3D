@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 21:48:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 04:05:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 20:46:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ static int			press_keys(int keycode, t_cub *cub)
 		cub->keys.left = 1;
 	if (keycode == RIGHT && cub->keys.left != 1)
 		cub->keys.right = 1;
+	if ((cub->keys.w || cub->keys.a || cub->keys.s || cub->keys.d ||
+			cub->keys.left || cub->keys.right))
+		cub->keys.confirm_press = 1;
 	return (0);
 }
 
@@ -51,12 +54,15 @@ static int			release_keys(int keycode, t_cub *cub)
 		cub->keys.left = 0;
 	if (keycode == RIGHT)
 		cub->keys.right = 0;
+	if ((!cub->keys.w && !cub->keys.a && !cub->keys.s && !cub->keys.d &&
+			!cub->keys.left && !cub->keys.right))
+		cub->keys.confirm_press = 0;
 	return (0);
 }
 
 void				get_key_input(t_cub *cub)
 {
-	mlx_hook(cub->mlx.win, 2, 1L << 0, press_keys, cub);
+	mlx_hook(cub->mlx.win, 2, 1L << 1, press_keys, cub);
 	mlx_hook(cub->mlx.win, 3, 1L << 1, release_keys, cub);
 	mlx_hook(cub->mlx.win, 17, 1L << 0, exit_program, cub);
 }

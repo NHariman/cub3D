@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 19:27:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 18:15:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef	struct	s_keys
 	int				d;
 	int				left;
 	int				right;
+	int				confirm_press;
 }				t_keys;
 
 typedef struct	s_mlx
@@ -61,6 +62,7 @@ typedef struct	s_mlx
 	int				img_bits_per_pixel;
 	int				line_length;
 	int				endian;
+	void			*old_img;
 }				t_mlx;
 
 typedef	struct	s_ray
@@ -98,7 +100,7 @@ typedef struct	s_set
 typedef	struct	s_text
 {
 	void			*img;
-	char			*addr;
+	int				*addr;
 	int				width;
 	int				height;
 	int				bits_per_pixel;
@@ -107,6 +109,35 @@ typedef	struct	s_text
 
 }				t_text;
 
+typedef struct	s_sp_lst
+{
+	int				x;
+	int				y;
+}				t_sp_lst;
+
+typedef struct	s_sprite
+{
+	double			*zbuffer;
+	int				*sp_order;
+	double			*sp_dist;
+	double			spritex;
+	double			spritey;
+	double			invdet;
+	double			transformx;
+	double			transformy;
+	int				spritescreenx;
+	int				spriteheight;
+	int				drawstarty;
+	int				drawendy;
+	int				spritewidth;
+	int				drawstartx;
+	int				drawendx;
+	int				texx;
+	int				texy;
+	int				colour;
+	t_sp_lst		*sprites;
+}				t_sprite;
+
 typedef struct	s_cub
 {
 	t_keys			keys;
@@ -114,13 +145,15 @@ typedef struct	s_cub
 	t_mlx			mlx;
 	t_ray			ray;
 	t_side			side;
-	t_text			*text[5];
+	t_text			text[5];
+	t_sprite		sp;
 	char			*textures[5];
 	char			*path;
 	int				save;
 	char			*file;
 	char			**filearr;
 	int				filesize;
+	int				sprites;
 	char			spawn_pos;
 	int				spawn_x;
 	int				spawn_y;
@@ -174,7 +207,6 @@ char			**create_array(char *str, int len);
 ** found in clear_structs.c, folder: ERRORS
 */
 void			empty_check(t_check *check);
-int				free_struct(t_cub *cub);
 
 /*
 ** input sanitation
@@ -208,7 +240,21 @@ int				complete_input_data(t_check *check);
 ** found in floodfill.c, folder VALID_INPUT
 */
 void			floodfill_map(char **map, int *success, int x, int y);
+
+/*
+** actually gets int value of rgb
+*/
 int				get_hex(int r, int g, int b);
+
+/*
+** sprite handling, finds sprites and puts them in an array
+** from furthest sprite to closest based on POV
+*/
+void			count_sprites(t_cub *cub);
+void			floodfill_no(t_cub *cub, int x, int y, int nb);
+void			floodfill_so(t_cub *cub, int x, int y, int nb);
+void			floodfill_ea(t_cub *cub, int x, int y, int nb);
+void			floodfill_we(t_cub *cub, int x, int y, int nb);
 /*
 ** error messages, found in error_messages.c, map_errors.c
 ** folder ERRORS/
@@ -232,4 +278,6 @@ void			ft_movement(t_cub *cub);
 void			ft_calc_side(t_cub *cub);
 void			save_bmp(t_cub *cub);
 void			print_struct(t_cub *cub);
+void			printsort(t_cub *cub);
+void			get_sprites(t_cub *cub);
 #endif

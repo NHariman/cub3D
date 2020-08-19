@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/10 20:36:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 16:48:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ static int			find_spawnpoint(t_cub *cub)
 	return (print_error(10));
 }
 
+static void			get_sprite_locations(t_cub *cub)
+{
+	if (cub->spawn_pos == 'N')
+		floodfill_no(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
+	else if (cub->spawn_pos == 'S')
+		floodfill_so(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
+	else if (cub->spawn_pos == 'W')
+		floodfill_we(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
+	else if (cub->spawn_pos == 'E')
+		floodfill_ea(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
+}
+
 int					valid_map(t_cub *cub)
 {
 	int success;
@@ -83,6 +95,10 @@ int					valid_map(t_cub *cub)
 		show_map(cub->map);
 		return (0);
 	}
+	count_sprites(cub);
+	ft_printf("sprites: %i\n", cub->sprites);
+	cub->sp.sprites = ft_calloc(cub->sprites, sizeof(t_sp_lst));
+	get_sprite_locations(cub);
 	cub->map[cub->spawn_x][cub->spawn_y] = cub->spawn_pos;
 	return (1);
 }

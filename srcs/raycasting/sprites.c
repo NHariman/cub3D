@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   clear_structs.c                                    :+:    :+:            */
+/*   sprites.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 22:44:39 by nhariman      ########   odam.nl         */
+/*   Created: 2020/08/17 22:25:46 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/08/19 00:55:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void		empty_check(t_check *check)
+void			get_sprites(t_cub *cub)
 {
-	check->res = 0;
-	check->north = 0;
-	check->south = 0;
-	check->east = 0;
-	check->west = 0;
-	check->sprite = 0;
-	check->floor = 0;
-	check->ceiling = 0;
+	cub->sp.zbuffer = ft_calloc(cub->res_x, sizeof(double));
+	cub->sp.sp_order = ft_calloc(cub->sprites, sizeof(int));
+	cub->sp.sp_dist = ft_calloc(cub->sprites, sizeof(double));
 }
