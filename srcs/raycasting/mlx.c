@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 21:55:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 20:56:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,26 @@ static void	create_img(t_cub *cub)
 
 static int	render_next_frame(t_cub *cub)
 {
+	if (cub->keys.confirm_press == 0)
+		return (0);
+	ft_movement(cub);
+	if (cub->mlx.img)
+	{
+		cub->mlx.old_img = cub->mlx.img;
+		mlx_put_image_to_window(cub->mlx.mlx,
+			cub->mlx.win, cub->mlx.old_img, 0, 0);
+	}
+	create_img(cub);
 	ft_colour_background(cub);
 	ft_raycasting(cub);
 	mlx_put_image_to_window(cub->mlx.mlx,
-		cub->mlx.win, cub->mlx.img, 0, 0);
-	mlx_destroy_image(cub->mlx.mlx, cub->mlx.img);
-	create_img(cub);
-	return (1);
+			cub->mlx.win, cub->mlx.img, 0, 0);
+	if (cub->mlx.old_img)
+	{
+		mlx_destroy_image(cub->mlx.mlx, cub->mlx.old_img);
+		cub->mlx.old_img = NULL;
+	}
+	return (0);
 }
 
 static void	ft_set_start_values(t_cub *cub)
@@ -62,6 +75,7 @@ static void	ft_set_start_values(t_cub *cub)
 	cub->set.planey = 0.66;
 	cub->set.dirx = -1;
 	cub->set.diry = 0;
+	get_sprites(cub);
 }
 
 void		start_mlx(t_cub *cub)
@@ -75,11 +89,15 @@ void		start_mlx(t_cub *cub)
 	if (!cub->mlx.win)
 		exit(print_error(20));
 	create_img(cub);
-	//mlx_sync(1, cub->mlx.img);
 	if (!set_textures(cub))
 		exit(1);
-	get_key_input(cub);
 	ft_set_start_values(cub);
+	ft_movement(cub);
+	ft_colour_background(cub);
+	ft_raycasting(cub);
+	mlx_put_image_to_window(cub->mlx.mlx,
+			cub->mlx.win, cub->mlx.img, 0, 0);
+	get_key_input(cub);
 	mlx_loop_hook(cub->mlx.mlx, render_next_frame, cub);
 	mlx_loop(cub->mlx.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 20:24:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 16:48:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int					valid_map(t_cub *cub)
 		return (0);
 	}
 	count_sprites(cub);
+	ft_printf("sprites: %i\n", cub->sprites);
 	cub->sp.sprites = ft_calloc(cub->sprites, sizeof(t_sp_lst));
 	get_sprite_locations(cub);
 	cub->map[cub->spawn_x][cub->spawn_y] = cub->spawn_pos;

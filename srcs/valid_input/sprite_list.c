@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/18 18:52:04 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/18 21:36:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 16:50:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void				floodfill_no(t_cub *cub, int x, int y, int nb)
 	{
 		while (cub->sp.sprites[nb].y && cub->sp.sprites[nb].x)
 			nb--;
-		cub->sp.sprites[nb].y = (double)x;
-		cub->sp.sprites[nb].x = (double)y;
+		cub->sp.sprites[nb].y = x;
+		cub->sp.sprites[nb].x = y;
 		nb--;
 	}
 	cub->map[x][y] = cub->map[x][y] == 'I' ? '2' : '0';
@@ -64,8 +64,8 @@ void				floodfill_so(t_cub *cub, int x, int y, int nb)
 	{
 		while (cub->sp.sprites[nb].y && cub->sp.sprites[nb].x)
 			nb--;
-		cub->sp.sprites[nb].y = (double)x;
-		cub->sp.sprites[nb].x = (double)y;
+		cub->sp.sprites[nb].y = x;
+		cub->sp.sprites[nb].x = y;
 		nb--;
 	}
 	cub->map[x][y] = cub->map[x][y] == 'I' ? '2' : '0';
@@ -86,8 +86,8 @@ void				floodfill_ea(t_cub *cub, int x, int y, int nb)
 	{
 		while (cub->sp.sprites[nb].y && cub->sp.sprites[nb].x)
 			nb--;
-		cub->sp.sprites[nb].y = (double)x;
-		cub->sp.sprites[nb].x = (double)y;
+		cub->sp.sprites[nb].y = x;
+		cub->sp.sprites[nb].x = y;
 		nb--;
 	}
 	cub->map[x][y] = cub->map[x][y] == 'I' ? '2' : '0';
@@ -108,8 +108,8 @@ void				floodfill_we(t_cub *cub, int x, int y, int nb)
 	{
 		while (cub->sp.sprites[nb].y && cub->sp.sprites[nb].x)
 			nb--;
-		cub->sp.sprites[nb].y = (double)x;
-		cub->sp.sprites[nb].x = (double)y;
+		cub->sp.sprites[nb].y = x;
+		cub->sp.sprites[nb].x = y;
 		nb--;
 	}
 	cub->map[x][y] = cub->map[x][y] == 'I' ? '2' : '0';

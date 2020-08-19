@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 00:51:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 18:15:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef	struct	s_keys
 	int				d;
 	int				left;
 	int				right;
+	int				confirm_press;
 }				t_keys;
 
 typedef struct	s_mlx
@@ -61,6 +62,7 @@ typedef struct	s_mlx
 	int				img_bits_per_pixel;
 	int				line_length;
 	int				endian;
+	void			*old_img;
 }				t_mlx;
 
 typedef	struct	s_ray
@@ -109,8 +111,8 @@ typedef	struct	s_text
 
 typedef struct	s_sp_lst
 {
-	double			x;
-	double			y;
+	int				x;
+	int				y;
 }				t_sp_lst;
 
 typedef struct	s_sprite
@@ -276,4 +278,6 @@ void			ft_movement(t_cub *cub);
 void			ft_calc_side(t_cub *cub);
 void			save_bmp(t_cub *cub);
 void			print_struct(t_cub *cub);
+void			printsort(t_cub *cub);
+void			get_sprites(t_cub *cub);
 #endif
