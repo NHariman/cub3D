@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 20:56:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/19 22:44:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	render_next_frame(t_cub *cub)
 	if (cub->mlx.img)
 	{
 		cub->mlx.old_img = cub->mlx.img;
+		cub->mlx.img = NULL;
 		mlx_put_image_to_window(cub->mlx.mlx,
 			cub->mlx.win, cub->mlx.old_img, 0, 0);
 	}
