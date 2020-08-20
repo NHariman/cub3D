@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 03:21:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 22:36:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/20 03:30:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	sortsprites(t_cub *cub)
 	tmp_dist = 0.0;
 	tmp_order = 0;
 	i = 0;
-	while (i < cub->sprites)
+	while (i < cub->sprites - 1)
 	{
 		if (cub->sp.sp_dist[i] < cub->sp.sp_dist[i + 1])
 		{
@@ -55,6 +55,7 @@ static void	sortsprites(t_cub *cub)
 			cub->sp.sp_order[i] = cub->sp.sp_order[i + 1];
 			cub->sp.sp_dist[i + 1] = tmp_dist;
 			cub->sp.sp_order[i + 1] = tmp_order;
+			i = 0;
 		}
 		i++;
 	}
