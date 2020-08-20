@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/20 22:25:54 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/21 00:43:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define CUB_H
 
-# include "mlx/mlx.h"
+# include "mlx_beta/mlx.h"
 # include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
