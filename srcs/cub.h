@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 18:15:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/20 22:25:54 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@
 # define LEFT 123
 # define RIGHT 124
 
+# define UDIV 1
+# define VDIV 1
+# define VMOVE 0.0
+
 typedef	struct	s_keys
 {
 	int				w;
@@ -67,23 +71,39 @@ typedef struct	s_mlx
 
 typedef	struct	s_ray
 {
-	double	camerax;
-	double	raydirx;
-	double	raydiry;
-	int		mapx;
-	int		mapy;
-	double	deltadistx;
-	double	deltadisty;
-	int		hit;
+	double			camerax;
+	double			raydirx;
+	double			raydiry;
+	int				mapx;
+	int				mapy;
+	double			deltadistx;
+	double			deltadisty;
+	int				hit;
 }				t_ray;
+
+typedef	struct	s_draw
+{
+	double			perpwalldist;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
+}				t_draw;
+
+typedef	struct	s_texxy
+{
+	double			wallx;
+	int				texx;
+	double			step;
+	double			texpos;
+}				t_texxy;
 
 typedef	struct	s_side
 {
-	int		stepx;
-	int		stepy;
-	double	sidedistx;
-	double	sidedisty;
-	int		side;
+	int				stepx;
+	int				stepy;
+	double			sidedistx;
+	double			sidedisty;
+	int				side;
 }				t_side;
 
 typedef struct	s_set
@@ -111,8 +131,8 @@ typedef	struct	s_text
 
 typedef struct	s_sp_lst
 {
-	int				x;
-	int				y;
+	double			x;
+	double			y;
 }				t_sp_lst;
 
 typedef struct	s_sprite
@@ -145,6 +165,8 @@ typedef struct	s_cub
 	t_mlx			mlx;
 	t_ray			ray;
 	t_side			side;
+	t_draw			draw;
+	t_texxy			texxy;
 	t_text			text[5];
 	t_sprite		sp;
 	char			*textures[5];
@@ -273,11 +295,39 @@ int				set_textures(t_cub *cub);
 void			get_key_input(t_cub *cub);
 void			my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void			ft_colour_background(t_cub *cub);
-void			ft_raycasting(t_cub *cub);
+void			ft_raycast_walls(t_cub *cub);
+void			ft_raycast_sprites(t_cub *cub);
 void			ft_movement(t_cub *cub);
-void			ft_calc_side(t_cub *cub);
+
+/*
+** save bmp image when --save is used
+*/
+
 void			save_bmp(t_cub *cub);
+/*
+** calc components of walls
+*/
+void			ft_calc_side(t_cub *cub);
+void			ft_calc_hit(t_cub *cub);
+void			ft_calc_draw(t_cub *cub);
+int				ft_calc_pov(t_cub *cub);
+void			ft_calc_texxy(t_cub *cub, int pov);
+
+/*
+** calc components of sprites
+*/
+void			ft_calc_sp_dist_and_order(t_cub *cub);
+void			ft_calc_sp_xy(t_cub *cub, int i);
+void			ft_calc_sp_draw(t_cub *cub, int vmovescreen);
+
+/*
+** draw walls and sprites
+*/
+void			ft_draw_walls(t_cub *cub, int pov, int x);
+void			ft_setup_draw_sprites(t_cub *cub, int vmovescreen);
+
 void			print_struct(t_cub *cub);
 void			printsort(t_cub *cub);
-void			get_sprites(t_cub *cub);
+void			setup_sp(t_cub *cub);
+
 #endif

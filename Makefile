@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/20 17:39:40 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/20 22:01:52 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,13 @@ RAYCAST =	srcs/raycasting/mlx.c \
 			srcs/raycasting/key_input.c \
 			srcs/raycasting/background.c \
 			srcs/raycasting/my_mlx_pixel_put.c \
-			srcs/raycasting/raycasting.c \
+			srcs/raycasting/raycast_walls.c \
+			srcs/raycasting/raycast_sprites.c \
 			srcs/raycasting/bmp.c \
 			srcs/raycasting/movement.c \
-			srcs/raycasting/calc.c \
+			srcs/raycasting/calc_walls.c \
+			srcs/raycasting/calc_sprites.c \
+			srcs/raycasting/draw_pixels.c \
 			srcs/raycasting/print_struct.c
 
 #CBONUS =

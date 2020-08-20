@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/15 22:20:36 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 03:31:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/20 21:58:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void			create_image(t_cub *cub, int x, int y)
 		&cub->mlx.img_bits_per_pixel, &cub->mlx.line_length,
 			&cub->mlx.endian);
 	ft_colour_background(cub);
-	ft_raycasting(cub);
+	ft_raycast_walls(cub);
+	ft_raycast_sprites(cub);
 }
 
 static void			save_to_screenshot(t_cub *cub, int fd, int sizex, int sizey)

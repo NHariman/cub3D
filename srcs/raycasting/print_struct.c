@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 23:43:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 16:43:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/20 19:41:21 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		print_struct(t_cub *cub)
 	// ft_printf("show what's in the sprites list:\n");
 	while (i < cub->sprites)
 	{
-		ft_printf("%i: x[%i] // y[%i]\n", i, cub->sp.sprites[i].x, cub->sp.sprites[i].y);
+		printf("%i: x[%f] // y[%f]\n", i, cub->sp.sprites[i].x, cub->sp.sprites[i].y);
 		i++;
 	}
 }
@@ -50,7 +50,7 @@ void		printsort(t_cub *cub)
 	i = 0;
 	while (i < cub->sprites)
 	{
-		ft_printf("order: %i\ndistance: %i\n", cub->sp.sp_order[i], cub->sp.sp_dist[i]);
+		printf("order: %d\ndistance: %f\n", cub->sp.sp_order[i], cub->sp.sp_dist[i]);
 		i++;
 	}
 }

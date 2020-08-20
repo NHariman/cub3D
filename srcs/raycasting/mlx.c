@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/19 22:44:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/20 22:24:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static int	render_next_frame(t_cub *cub)
 	}
 	create_img(cub);
 	ft_colour_background(cub);
-	ft_raycasting(cub);
+	ft_raycast_walls(cub);
+	ft_raycast_sprites(cub);
 	mlx_put_image_to_window(cub->mlx.mlx,
 			cub->mlx.win, cub->mlx.img, 0, 0);
 	if (cub->mlx.old_img)
@@ -70,13 +71,13 @@ static int	render_next_frame(t_cub *cub)
 
 static void	ft_set_start_values(t_cub *cub)
 {
-	cub->set.posx = cub->spawn_y;
-	cub->set.posy = cub->spawn_x;
+	cub->set.posx = (double)cub->spawn_y + 0.5;
+	cub->set.posy = (double)cub->spawn_x - 0.5;
 	cub->set.planex = 0;
 	cub->set.planey = 0.66;
 	cub->set.dirx = -1;
 	cub->set.diry = 0;
-	get_sprites(cub);
+	setup_sp(cub);
 }
 
 void		start_mlx(t_cub *cub)
@@ -95,7 +96,8 @@ void		start_mlx(t_cub *cub)
 	ft_set_start_values(cub);
 	ft_movement(cub);
 	ft_colour_background(cub);
-	ft_raycasting(cub);
+	ft_raycast_walls(cub);
+	ft_raycast_sprites(cub);
 	mlx_put_image_to_window(cub->mlx.mlx,
 			cub->mlx.win, cub->mlx.img, 0, 0);
 	get_key_input(cub);
