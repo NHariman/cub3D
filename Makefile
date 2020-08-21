@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/21 00:35:54 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/21 01:03:53 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,6 @@ clean:
 	@$(RM) $(OPARSER) $(OVALID) $(OERROR) $(OBONUS) $(ORAYCAST) screen.bmp 
 	@$(RM) srcs/mlx_beta/mlx_image.swiftsourceinfo srcs/mlx_beta/mlx_init.swiftsourceinfo srcs/mlx_beta/mlx_window.swiftsourceinfo
 	@cd srcs/libft && $(MAKE) clean
-	@cd srcs/mlx_beta && $(MAKE) clean
 
 fclean: clean
 	@$(RM) $(NAME) libmlx.dylib
