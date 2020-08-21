@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 20:07:12 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/04 12:34:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/22 00:42:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,39 @@ int		valid_res_input(const char *str)
 {
 	int		i;
 	int		j;
+	int		check;
 
 	i = 0;
 	j = 0;
+	check = 0;
 	while (j < 3)
 	{
 		while (str[i] != '\0' && str[i] == ' ')
 			i++;
+		if (str[i] != '\0' && ft_isdigit(str[i]))
+			check++;
 		while (str[i] != '\0' && ft_isdigit(str[i]))
 			i++;
 		j++;
 	}
-	return (str[i] == '\n' ? 1 : -1);
+	return ((str[i] == '\n' && check == 2) ? 1 : -1);
 }
 
 int		valid_rgb_input(const char *str)
 {
 	int		i;
 	int		j;
+	int		check;
 
 	i = 0;
 	j = 0;
+	check = 0;
 	while (j < 4)
 	{
 		while (str[i] != '\0' && str[i] == ' ')
 			i++;
+		if (str[i] != '\0' && ft_isdigit(str[i]))
+			check++;
 		while (str[i] != '\0' && ft_isdigit(str[i]))
 			i++;
 		while (str[i] != '\0' && str[i] == ' ')
@@ -49,7 +57,7 @@ int		valid_rgb_input(const char *str)
 			i++;
 		j++;
 	}
-	return (str[i] == '\n' ? 1 : 0);
+	return ((str[i] == '\n' && check == 3) ? 1 : 0);
 }
 
 int		valid_rgb_values(t_rgb *rgb)

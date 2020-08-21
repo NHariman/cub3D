@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/24 20:07:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/15 22:37:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/22 01:31:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 static int		print_even_more_errors(int num)
 {
-	if (num > 28)
-		return (omg_so_many_errors(num));
-	else if (num == 19)
+	if (num == 19)
 	{
 		ft_printf("Error\n%i: mlx failed to start.\n", num);
 		return (1);
@@ -32,7 +30,7 @@ static int		print_even_more_errors(int num)
 	else if (num == 24)
 		ft_printf("Error\n%i: Unable to load texture\n", num);
 	else if (num == 25)
-		ft_printf("Error\n%i: Unable to open fd.\n", num);
+		ft_printf("Error\n%i: Unable to open fd for texture.\n", num);
 	else if (num == 26)
 		ft_printf("Error\n%i: Unable to create screen.bmp.\n", num);
 	return (0);
@@ -98,11 +96,15 @@ void			show_map(char **map)
 {
 	int		i;
 	char	*tmp;
+	int		len;
 
 	i = 0;
+	len = 0;
 	while (map[i][0] != '\0')
 	{
-		tmp = ft_substr(map[i], 0, ft_strlen(map[i]) - 1);
+		len = ft_strlen(map[i]);
+		len = map[i][len - 1] == '\n' ? len - 1 : len;
+		tmp = ft_substr(map[i], 0, len);
 		ft_printf("%s%%\n", tmp);
 		free(tmp);
 		i++;

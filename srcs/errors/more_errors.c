@@ -6,17 +6,24 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/03 22:05:17 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/06 16:07:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/22 00:21:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int			omg_so_many_errors(int num)
+int			fd_errors(int num, int type)
 {
-	if (num > 28)
-		return (0);
-	else if (num == 19)
-		ft_printf("Error\n%i: Floodfill failed.\n", num);
+	if (type == NO)
+		ft_printf("Error\n%i: Unable to load NORTH (NO) texture.\n", num);
+	if (type == SO)
+		ft_printf("Error\n%i: Unable to load SOUTH (SO) texture.\n", num);
+	if (type == EA)
+		ft_printf("Error\n%i: Unable to load EAST (EA) texture.\n", num);
+	if (type == WE)
+		ft_printf("Error\n%i: Unable to load WEST (WE) texture.\n", num);
+	if (type == SP)
+		ft_printf("Error\n%i: Unable to load SPRITE (SP) texture.\n", num);
+	print_error(num);
 	return (0);
 }

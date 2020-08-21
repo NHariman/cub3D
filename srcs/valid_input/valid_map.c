@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/21 17:56:43 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/22 01:22:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 ** the function should know the map is over and still scan the field to
 ** check for ' ' and 1s as those are still valid even after a map ends.
 ** if only ' ' and '\n' are found that also means the map has ended,
-** if characters are found after that's fine too lol.
+** if characters are found after that's fine too.
 ** WARNING: ONLY THE MAP THE PLAYER AS ACCESS TO HAS TO BE CLOSED. AKA. FLOODFILL
 ** STARTING FROM SPAWN POINT!!
 */

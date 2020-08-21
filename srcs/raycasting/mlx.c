@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/21 20:43:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/22 00:57:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-static void	ft_set_start_values(t_cub *cub)
+void	ft_set_start_values(t_cub *cub)
 {
 	cub->set.posx = (double)cub->spawn_x + 0.5;
 	cub->set.posy = (double)cub->spawn_y + 0.5;

@@ -66,9 +66,10 @@ int		delete(t_vars *vars)
 void	get_keyinput(t_vars *vars)
 {
 	mlx_hook(vars->win, 2, 1L << 0, keys, vars);
-	mlx_hook(vars->win, 4, 1L << 19, warn, vars);
-	mlx_hook(vars->win, 5, 1L << 19, release, vars);
+	//mlx_hook(vars->win, 4, 1L << 19, warn, vars);
+	//mlx_hook(vars->win, 5, 1L << 19, release, vars);
 	//mlx_hook(vars->win, 6, 1L << 19, move, vars);
+	mlx_hook(vars->win, 25)
 	mlx_hook(vars->win, 17, 0L, delete, vars);
 }
 

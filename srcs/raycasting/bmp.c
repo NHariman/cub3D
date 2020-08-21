@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/15 22:20:36 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/20 21:58:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/22 01:06:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ static void			create_image(t_cub *cub, int x, int y)
 	cub->mlx.img_addr = mlx_get_data_addr(cub->mlx.img,
 		&cub->mlx.img_bits_per_pixel, &cub->mlx.line_length,
 			&cub->mlx.endian);
+	ft_set_start_values(cub);
 	ft_colour_background(cub);
 	ft_raycast_walls(cub);
-	ft_raycast_sprites(cub);
+	if (cub->sprites > 0)
+		ft_raycast_sprites(cub);
 }
 
 static void			save_to_screenshot(t_cub *cub, int fd, int sizex, int sizey)
@@ -78,19 +80,19 @@ static void			save_to_screenshot(t_cub *cub, int fd, int sizex, int sizey)
 
 void				save_bmp(t_cub *cub)
 {
-	int			x;
-	int			y;
 	int			fd;
 
 	fd = open("screen.bmp", O_RDWR | O_CREAT, 0666);
 	if (fd < 0)
 		exit(print_error(26));
-	x = cub->res_x > 16384 ? 16384 : cub->res_x;
-	y = cub->res_y > 16384 ? 16384 : cub->res_y;
+	cub->res_x = cub->res_x > 16384 ? 16384 : cub->res_x;
+	cub->res_y = cub->res_y > 16384 ? 16384 : cub->res_y;
 	cub->mlx.mlx = mlx_init();
 	if (!cub->mlx.mlx)
 		exit(print_error(19));
-	create_image(cub, x, y);
-	save_to_screenshot(cub, fd, x, y);
+	if (!set_textures(cub))
+		exit(1);
+	create_image(cub, cub->res_x, cub->res_y);
+	save_to_screenshot(cub, fd, cub->res_x, cub->res_y);
 	exit(0);
 }

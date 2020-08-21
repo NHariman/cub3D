@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/21 20:44:43 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/22 00:58:02 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ void			floodfill_we(t_cub *cub, int x, int y, int nb);
 ** folder ERRORS/
 */
 int				print_error(int num);
-int				omg_so_many_errors(int num);
+int				fd_errors(int num, int type);
 int				check_noise(char **map);
 void			show_map(char **map);
 int				show_file_error(char **file, int error);
@@ -291,6 +291,7 @@ int				show_file_error(char **file, int error);
 ** raycasting functions
 */
 void			start_mlx(t_cub *cub);
+void			ft_set_start_values(t_cub *cub);
 void			ft_set_cam_pov(t_cub *cub);
 void			ft_create_img(t_cub *cub);
 void			get_key_input(t_cub *cub);
