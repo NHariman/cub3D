@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/21 01:03:53 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/21 15:55:39 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ ORAYCAST =	$(RAYCAST:.c=.o)
 
 OBONUS = 	$(CBONUS:.c=.o)
 
-NAME = cub3d
+NAME = cub3D
 
 all: $(NAME)
 

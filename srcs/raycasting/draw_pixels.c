@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/20 21:37:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/20 22:55:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/21 17:01:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	ft_draw_sprites(t_cub *cub, int vmovescreen, int stripe)
 						cub->sp.spriteheight) / 256;
 		colour = cub->text[SP].addr[cub->text[SP].width *
 					cub->sp.texy + cub->sp.texx];
+		if (colour < 0)
+			colour = 0;
 		if (colour > 0)
 			my_mlx_pixel_put(&cub->mlx, stripe, y, colour);
 		y++;

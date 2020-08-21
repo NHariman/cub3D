@@ -1,15 +1,15 @@
 
-NO srcs/pics/angery.png     
+NO srcs/pics/bluestone.png     
 
-SO srcs/pics/crai.png 
-WE            srcs/pics/yike.png
+SO srcs/pics/purplestone.png 
+WE            srcs/pics/greystone.png
 
 R 1920 1080
 
-EA srcs/pics/dead.png
+EA srcs/pics/colorstone.xpm
 
 
-S srcs/pics/sadman.png
+S srcs/pics/boo.png
 
 
 F 252,252,252

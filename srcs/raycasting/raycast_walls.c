@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 03:21:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/20 21:57:59 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/21 15:25:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		ft_setup(t_cub *cub)
 	cub->ray.deltadisty = fabs(1 / cub->ray.raydiry);
 }
 
-void		ft_raycast_walls(t_cub *cub)
+void			ft_raycast_walls(t_cub *cub)
 {
 	int		x;
 	int		pov;
