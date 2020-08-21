@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/21 00:59:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/21 20:44:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,8 +291,11 @@ int				show_file_error(char **file, int error);
 ** raycasting functions
 */
 void			start_mlx(t_cub *cub);
-int				set_textures(t_cub *cub);
+void			ft_set_cam_pov(t_cub *cub);
+void			ft_create_img(t_cub *cub);
 void			get_key_input(t_cub *cub);
+int				set_textures(t_cub *cub);
+void			ft_render_frame(t_cub *cub);
 void			my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void			ft_colour_background(t_cub *cub);
 void			ft_raycast_walls(t_cub *cub);

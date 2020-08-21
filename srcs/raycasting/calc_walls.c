@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 17:51:30 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/21 17:41:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/21 18:48:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		ft_calc_hit(t_cub *cub)
 			cub->ray.mapy += cub->side.stepy;
 			cub->side.side = 1;
 		}
-		if (cub->cpmap[cub->ray.mapy][cub->ray.mapx] == '1')
+		if (cub->cpmap[cub->ray.mapx][cub->ray.mapy] == '1')
 			cub->ray.hit = 1;
 	}
 }
@@ -66,16 +66,16 @@ int			ft_calc_pov(t_cub *cub)
 	if (cub->side.side == 0)
 	{
 		if (cub->set.posx < cub->ray.mapx)
-			return (NO);
+			return (SO);
 		else
-			return (WE);
+			return (NO);
 	}
 	else
 	{
 		if (cub->set.posy < cub->ray.mapy)
 			return (EA);
 		else
-			return (SO);
+			return (WE);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 16:41:21 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 17:16:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/21 18:04:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ static void			ft_move_vertical(t_cub *cub)
 	movespeed = 0.07;
 	if (cub->keys.w == 1)
 	{
-		if (cub->cpmap[(int)cub->set.posy]
-			[(int)(cub->set.posx + cub->set.dirx * movespeed)] != '1')
+		if (cub->cpmap[(int)(cub->set.posx + cub->set.dirx * movespeed)]
+						[(int)cub->set.posy] != '1')
 			cub->set.posx += cub->set.dirx * movespeed;
-		if (cub->cpmap[(int)(cub->set.posy + cub->set.diry * movespeed)]
-			[(int)cub->set.posx] != '1')
+		if (cub->cpmap[(int)cub->set.posx]
+				[(int)(cub->set.posy + cub->set.diry * movespeed)] != '1')
 			cub->set.posy += cub->set.diry * movespeed;
 	}
 	if (cub->keys.s == 1)
 	{
-		if (cub->cpmap[(int)cub->set.posy]
-			[(int)(cub->set.posx - cub->set.dirx * movespeed)] != '1')
+		if (cub->cpmap[(int)(cub->set.posx - cub->set.dirx * movespeed)]
+			[(int)cub->set.posy] != '1')
 			cub->set.posx -= cub->set.dirx * movespeed;
-		if (cub->cpmap[(int)(cub->set.posy - cub->set.diry * movespeed)]
-			[(int)cub->set.posx] != '1')
+		if (cub->cpmap[(int)cub->set.posx]
+			[(int)(cub->set.posy - cub->set.diry * movespeed)] != '1')
 			cub->set.posy -= cub->set.diry * movespeed;
 	}
 }
@@ -44,20 +44,20 @@ static void			ft_move_horizontal(t_cub *cub)
 	movespeed = 0.07;
 	if (cub->keys.a == 1)
 	{
-		if (cub->cpmap[(int)cub->set.posy]
-			[(int)(cub->set.posx - cub->set.planex * movespeed)] != '1')
+		if (cub->cpmap[(int)(cub->set.posx - cub->set.planex * movespeed)]
+				[(int)cub->set.posy] != '1')
 			cub->set.posx -= cub->set.planex * movespeed;
-		if (cub->cpmap[(int)(cub->set.posy - cub->set.planey * movespeed)]
-			[(int)cub->set.posx] != '1')
+		if (cub->cpmap[(int)cub->set.posx]
+				[(int)(cub->set.posy - cub->set.planey * movespeed)] != '1')
 			cub->set.posy -= cub->set.planey * movespeed;
 	}
 	if (cub->keys.d == 1)
 	{
-		if (cub->cpmap[(int)cub->set.posy]
-			[(int)(cub->set.posx + cub->set.planex * movespeed)] != '1')
+		if (cub->cpmap[(int)(cub->set.posx + cub->set.planex * movespeed)]
+				[(int)cub->set.posy] != '1')
 			cub->set.posx += cub->set.planex * movespeed;
-		if (cub->cpmap[(int)(cub->set.posy + cub->set.planey * movespeed)]
-			[(int)cub->set.posx] != '1')
+		if (cub->cpmap[(int)cub->set.posx]
+		[(int)(cub->set.posy + cub->set.planey * movespeed)] != '1')
 			cub->set.posy += cub->set.planey * movespeed;
 	}
 }

@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/21 15:55:39 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/21 20:25:24 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ ERROR =		srcs/errors/error_messages.c \
 			srcs/errors/clear_structs.c
 
 RAYCAST =	srcs/raycasting/mlx.c \
+			srcs/raycasting/raycast_structure.c \
+			srcs/raycasting/set_spawnpoint.c \
 			srcs/raycasting/textures.c \
 			srcs/raycasting/key_input.c \
 			srcs/raycasting/background.c \
