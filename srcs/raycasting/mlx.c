@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/20 22:24:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/21 03:00:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	render_next_frame(t_cub *cub)
 static void	ft_set_start_values(t_cub *cub)
 {
 	cub->set.posx = (double)cub->spawn_y + 0.5;
-	cub->set.posy = (double)cub->spawn_x - 0.5;
+	cub->set.posy = (double)cub->spawn_x + 0.5;
 	cub->set.planex = 0;
 	cub->set.planey = 0.66;
 	cub->set.dirx = -1;
