@@ -1,0 +1,18 @@
+R 2000 4000
+NO srcs/cube_functions/textures/barrel.png
+EA srcs/cube_functions/textures/bluestone.xpm
+WE srcs/cube_functions/textures/greenlight.xpm
+SO srcs/cube_functions/textures/eagle.xpm
+S srcs/cube_functions/textures/barrel.png
+F 100,100,100
+C 00200,00200,00200
+
+11111111111111 1111
+11000000000001 1001
+11000000000001 1E01
+1100000000000111221
+ 1111111110011212211
+ 1111111111111112211
+11100000000000000001
+11000000000001111111
+11111111111111
