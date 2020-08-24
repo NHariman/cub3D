@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/23 18:01:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/03 21:05:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/24 17:29:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int			edgebound(char **map, int i, int j)
 {
-	return (!ft_strchr(" ", map[i][j - 1]) &&
+	return (i != 0 &&
+			!ft_strchr(" ", map[i][j - 1]) &&
 			!ft_strchr(" ", map[i][j]) &&
 			!ft_strchr(" ", map[i][j + 1]) ? 1 : 0);
 }
