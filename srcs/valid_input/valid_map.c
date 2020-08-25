@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/22 02:23:47 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/25 21:15:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int			find_spawnpoint(t_cub *cub)
 		{
 			if (ft_strchr("NSWE", cub->map[x][y]))
 			{
+				if (x == 0)
+					return (print_error(30));
 				fill_spawn_pos(cub, y, x);
 				return (1);
 			}
@@ -79,11 +81,51 @@ static void			get_sprite_locations(t_cub *cub)
 		floodfill_ea(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
 }
 
+int			map_len(char **map, int type)
+{
+	int i;
+	int j;
+	int tmp;
+
+	i = 0;
+	j = 0;
+	tmp = 0;
+	if (type == MAP_HEIGHT)
+	{
+		while (map[i][0] != '\0')
+			i++;
+	}
+	else if (type == MAP_WIDTH)
+	{
+		while (map[i][0] != '\0')
+		{
+			tmp = ft_strlen(map[i]);
+			if (tmp > j)
+				j = tmp;
+			i++;
+		}
+	}
+	return (type == MAP_HEIGHT ? i : j);
+}
+
+static void			find_sprites(t_cub *cub)
+{
+	count_sprites(cub);
+	if (cub->sprites > 0)
+	{
+		cub->sp.sprites = ft_calloc(cub->sprites, sizeof(t_sp_lst));
+		get_sprite_locations(cub);
+	}
+}
+
 int					valid_map(t_cub *cub)
 {
 	int success;
 
 	success = 1;
+	if (map_len(cub->map, MAP_HEIGHT) > 1200 ||
+		map_len(cub->map, MAP_WIDTH) > 1200)
+		return (print_error(29));
 	if (!check_noise(cub->map))
 		return (0);
 	if (!find_spawnpoint(cub))
@@ -94,9 +136,7 @@ int					valid_map(t_cub *cub)
 		show_map(cub->map);
 		return (0);
 	}
-	count_sprites(cub);
-	cub->sp.sprites = ft_calloc(cub->sprites, sizeof(t_sp_lst));
-	get_sprite_locations(cub);
+	find_sprites(cub);
 	cub->map[cub->spawn_x][cub->spawn_y] = cub->spawn_pos;
 	return (1);
 }

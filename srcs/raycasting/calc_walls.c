@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 17:51:30 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/21 18:48:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/25 18:40:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ int			ft_calc_pov(t_cub *cub)
 	if (cub->side.side == 0)
 	{
 		if (cub->set.posx < cub->ray.mapx)
-			return (SO);
-		else
 			return (NO);
+		else
+			return (SO);
 	}
 	else
 	{
 		if (cub->set.posy < cub->ray.mapy)
-			return (EA);
-		else
 			return (WE);
+		else
+			return (EA);
 	}
 }
 

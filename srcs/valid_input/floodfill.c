@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/23 18:01:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/24 20:17:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/25 21:19:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 static int			edgebound(char **map, int i, int j)
 {
-	if (i == 0)
+	if (i == 0 || i == (map_len(map, MAP_HEIGHT) - 1))
 	{
 		return (map[i][j] == '1' &&
 				map[i][j + 1] == '1' &&
 				map[i][j - 1] == '1' ? 1 : 0);
 	}
 	else
-		return (!ft_strchr(" ", map[i][j - 1]) &&
-				!ft_strchr(" ", map[i][j]) &&
-				!ft_strchr(" ", map[i][j + 1]) ? 1 : 0);
+		return (!ft_strchr(" \n", map[i][j - 1]) &&
+				!ft_strchr(" \n", map[i][j]) &&
+				!ft_strchr(" \n", map[i][j + 1]) ? 1 : 0);
 }
 
 static int			midbound(char **map, int i, int j)
 {
-	return (!ft_strchr(" ", map[i][j - 1]) &&
-			!ft_strchr(" ", map[i][j + 1]) ? 1 : 0);
+	return (!ft_strchr(" \n", map[i][j - 1]) &&
+			!ft_strchr(" \n", map[i][j + 1]) ? 1 : 0);
 }
 
 void				floodfill_map(char **map, int *success, int x, int y)

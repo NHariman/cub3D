@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/03 22:05:17 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/22 00:21:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/25 22:03:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,20 @@ int			fd_errors(int num, int type)
 	if (type == SP)
 		ft_printf("Error\n%i: Unable to load SPRITE (SP) texture.\n", num);
 	print_error(num);
+	return (0);
+}
+
+int			you_can_never_print_too_many_errors(int num)
+{
+	if (num == 28)
+		ft_printf("Error\n%i: Invalid type identifier detected.\n", num);
+	else if (num == 29)
+		ft_printf("Error\n%i: Overflow protection, map too large.\n", num);
+	else if (num == 30)
+		ft_printf("Error\n%i: invalid spawnpoint.\n", num);
+	else if (num == 31)
+		ft_printf("Error\n%i: res_x is 0.\n", num);
+	else if (num == 32)
+		ft_printf("Error\n%i: res_y is 0.\n", num);
 	return (0);
 }

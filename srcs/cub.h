@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/24 22:41:30 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/25 21:14:54 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <math.h>
 # include <string.h>
 # include <fcntl.h>
+
+# define MAP_HEIGHT 1
+# define MAP_WIDTH 0
 
 # define NO 0
 # define SO 1
@@ -256,6 +259,7 @@ int				valid_rgb_input(const char *str);
 int				valid_rgb_values(t_rgb *rgb);
 int				valid_map(t_cub *cub);
 int				complete_input_data(t_check *check);
+int				map_len(char **map, int type);
 
 /*
 ** functions that check if the map received is valid
@@ -286,6 +290,7 @@ int				fd_errors(int num, int type);
 int				check_noise(char **map);
 void			show_map(char **map);
 int				show_file_error(char **file, int error);
+int				you_can_never_print_too_many_errors(int num);
 
 /*
 ** raycasting functions, set up raycasting initials

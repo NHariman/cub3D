@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 20:07:12 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/24 21:08:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/25 22:11:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ int		valid_res_input(const char *str)
 int		valid_rgb_input(const char *str)
 {
 	int		i;
-	int		j;
 	int		check;
 
 	i = 0;
-	j = 0;
 	check = 0;
-	while (j < 4)
+	while (check < 5 && str[i] != '\n')
 	{
 		while (str[i] != '\0' && str[i] == ' ')
 			i++;
@@ -54,12 +52,14 @@ int		valid_rgb_input(const char *str)
 		while (str[i] != '\0' && str[i] == ' ')
 			i++;
 		if (str[i] != '\0' && str[i] == ',')
+		{
+			check++;
 			i++;
-		j++;
+		}
+		if (ft_strchr(", ", str[i]) || !ft_isdigit(str[i]))
+			break ;
 	}
-	if (str[i] == '\n')
-		i++;
-	return ((str[i] == '\0' && check == 3) ? 1 : 0);
+	return ((str[i] == '\n' && check == 5) ? 1 : 0);
 }
 
 int		valid_rgb_values(t_rgb *rgb)

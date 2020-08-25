@@ -1,23 +1,16 @@
+R 50 50
+NO ./cub3d_destroyer/wolftex/greystone.png
+SO ./cub3d_destroyer/wolftex/redbrick.png
+EA ./cub3d_destroyer/wolftex/wood.png
+WE ./cub3d_destroyer/wolftex/wood.png
+S ./cub3d_destroyer/wolftex/barrel.png
 
-NO srcs/pics/angery.png     
-
-SO srcs/pics/crai.png 
-WE            srcs/pics/bluestone.png
-
-R 1920 1080
-
-EA srcs/pics/dead.png
-
-
-S srcs/pics/dead.png
-
-
-F 252,252,252
-C 222,30,0
+C 255,200,255
+F 122,122,122
 
         1111111111111111111111111   11111111111111
-        1000000000110000000000001   10000000000001
-        1011000001110000022200001   1220E011110001
+        1N00000000110000000000001   10000000000001
+        1011000001110000022200001   12200011110001
         10010000000000000222000011111220001  10001
 11111111101100000111000002220000000000000011110001
 10000000000000000000000000000000111110000000000001

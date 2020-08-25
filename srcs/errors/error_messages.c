@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/24 20:07:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/24 21:51:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/25 21:07:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int		print_even_more_errors(int num)
 {
+	if (num > 27)
+		you_can_never_print_too_many_errors(num);
 	if (num == 19)
 	{
 		ft_printf("Error\n%i: mlx failed to start.\n", num);
@@ -35,8 +37,6 @@ static int		print_even_more_errors(int num)
 		ft_printf("Error\n%i: Unable to create screen.bmp.\n", num);
 	else if (num == 27)
 		ft_printf("Error\n%i: No map detected.\n", num);
-	else if (num == 28)
-		ft_printf("Error\n%i: Invalid type identifier detected.\n", num);
 	return (0);
 }
 
@@ -92,7 +92,7 @@ int				print_error(int num)
 	else if (num == 8)
 		ft_printf("Error\n%i: Map not very last element in file.\n", num);
 	else if (num == 9)
-		ft_printf("Error\n%i: No spawnpoint in map.\n", num);
+		ft_printf("Error\n%i: No valid spawnpoint in map.\n", num);
 	return (0);
 }
 
