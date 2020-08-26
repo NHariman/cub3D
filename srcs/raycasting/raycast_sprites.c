@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/20 21:53:29 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/25 20:12:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 19:21:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void			setup_sp(t_cub *cub)
+void			ft_setup_sp(t_cub *cub)
 {
 	cub->sp.zbuffer = ft_calloc(cub->res_x, sizeof(double));
 	cub->sp.sp_order = (int *)ft_calloc(cub->sprites, sizeof(int));

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/24 20:07:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/25 21:07:30 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 18:38:36 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int		print_even_more_errors(int num)
 {
 	if (num > 27)
-		you_can_never_print_too_many_errors(num);
+		ft_you_can_never_print_too_many_errors(num);
 	if (num == 19)
 	{
 		ft_printf("Error\n%i: mlx failed to start.\n", num);
@@ -68,7 +68,7 @@ static int		print_more_errors(int num)
 	return (0);
 }
 
-int				print_error(int num)
+int				ft_print_error(int num)
 {
 	if (num > 9)
 		return (print_more_errors(num));
@@ -96,7 +96,7 @@ int				print_error(int num)
 	return (0);
 }
 
-void			show_map(char **map)
+void			ft_show_map(char **map)
 {
 	int		i;
 	char	*tmp;
@@ -115,7 +115,7 @@ void			show_map(char **map)
 	}
 }
 
-int				show_file_error(char **file, int error)
+int				ft_show_file_error(char **file, int error)
 {
 	int j;
 

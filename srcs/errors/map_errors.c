@@ -6,20 +6,37 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/30 17:55:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/24 21:47:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 20:09:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int			ft_maplen(char **map)
+int			ft_map_len(char **map, int type)
 {
 	int i;
+	int j;
+	int tmp;
 
 	i = 0;
-	while (map[i][0] != '\0')
-		i++;
-	return (i);
+	j = 0;
+	tmp = 0;
+	if (type == MAP_HEIGHT)
+	{
+		while (map[i][0] != '\0')
+			i++;
+	}
+	else if (type == MAP_WIDTH)
+	{
+		while (map[i][0] != '\0')
+		{
+			tmp = ft_strlen(map[i]);
+			if (tmp > j)
+				j = tmp;
+			i++;
+		}
+	}
+	return (type == MAP_HEIGHT ? i : j);
 }
 
 static int	check_row(char **map, int i, int j, int *sprite)
@@ -30,15 +47,15 @@ static int	check_row(char **map, int i, int j, int *sprite)
 	{
 		if (*sprite == 1)
 		{
-			show_map(map);
-			return (print_error(16));
+			ft_show_map(map);
+			return (ft_print_error(16));
 		}
 		*sprite = 1;
 	}
 	return (1);
 }
 
-int			check_noise(char **map)
+int			ft_check_noise(char **map)
 {
 	int i;
 	int j;
@@ -49,20 +66,20 @@ int			check_noise(char **map)
 	sprite = 0;
 	while (map[i][0] != '\0')
 	{
-		if (map[i][0] == '\n' && i < ft_maplen(map))
+		if (map[i][0] == '\n' && i < ft_map_len(map, MAP_HEIGHT))
 		{
-			print_error(8);
-			show_map(map);
+			ft_print_error(8);
+			ft_show_map(map);
 			return (0);
 		}
 		while (map[i][j] != '\0')
 		{
 			if (!check_row(map, i, j, &sprite))
-				return (print_error(12));
+				return (ft_print_error(12));
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	return (map[0][0] == '\0' ? print_error(27) : 1);
+	return (map[0][0] == '\0' ? ft_print_error(27) : 1);
 }

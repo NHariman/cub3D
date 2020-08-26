@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/22 15:33:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/25 21:15:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 20:08:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void			fill_spawn_pos(t_cub *cub, int y, int x)
 	cub->map[cub->spawn_x][cub->spawn_y] = '3';
 }
 
-static int			find_spawnpoint(t_cub *cub)
+static int			ft_find_spawnpoint(t_cub *cub)
 {
 	int x;
 	int y;
@@ -57,7 +57,7 @@ static int			find_spawnpoint(t_cub *cub)
 			if (ft_strchr("NSWE", cub->map[x][y]))
 			{
 				if (x == 0)
-					return (print_error(30));
+					return (ft_print_error(30));
 				fill_spawn_pos(cub, y, x);
 				return (1);
 			}
@@ -66,51 +66,24 @@ static int			find_spawnpoint(t_cub *cub)
 		y = 0;
 		x++;
 	}
-	return (print_error(10));
+	return (ft_print_error(10));
 }
 
 static void			get_sprite_locations(t_cub *cub)
 {
 	if (cub->spawn_pos == 'N')
-		floodfill_no(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
+		ft_floodfill_no(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
 	else if (cub->spawn_pos == 'S')
-		floodfill_so(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
+		ft_floodfill_so(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
 	else if (cub->spawn_pos == 'W')
-		floodfill_we(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
+		ft_floodfill_we(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
 	else if (cub->spawn_pos == 'E')
-		floodfill_ea(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
-}
-
-int			map_len(char **map, int type)
-{
-	int i;
-	int j;
-	int tmp;
-
-	i = 0;
-	j = 0;
-	tmp = 0;
-	if (type == MAP_HEIGHT)
-	{
-		while (map[i][0] != '\0')
-			i++;
-	}
-	else if (type == MAP_WIDTH)
-	{
-		while (map[i][0] != '\0')
-		{
-			tmp = ft_strlen(map[i]);
-			if (tmp > j)
-				j = tmp;
-			i++;
-		}
-	}
-	return (type == MAP_HEIGHT ? i : j);
+		ft_floodfill_ea(cub, cub->spawn_x, cub->spawn_y, cub->sprites - 1);
 }
 
 static void			find_sprites(t_cub *cub)
 {
-	count_sprites(cub);
+	ft_count_sprites(cub);
 	if (cub->sprites > 0)
 	{
 		cub->sp.sprites = ft_calloc(cub->sprites, sizeof(t_sp_lst));
@@ -118,22 +91,22 @@ static void			find_sprites(t_cub *cub)
 	}
 }
 
-int					valid_map(t_cub *cub)
+int					ft_valid_map(t_cub *cub)
 {
 	int success;
 
 	success = 1;
-	if (map_len(cub->map, MAP_HEIGHT) > 1200 ||
-		map_len(cub->map, MAP_WIDTH) > 1200)
-		return (print_error(29));
-	if (!check_noise(cub->map))
+	if (ft_map_len(cub->map, MAP_HEIGHT) > 1200 ||
+		ft_map_len(cub->map, MAP_WIDTH) > 1200)
+		return (ft_print_error(29));
+	if (!ft_check_noise(cub->map))
 		return (0);
-	if (!find_spawnpoint(cub))
-		return (print_error(9));
-	floodfill_map(cub->map, &success, cub->spawn_x, cub->spawn_y);
+	if (!ft_find_spawnpoint(cub))
+		return (ft_print_error(9));
+	ft_floodfill_map(cub->map, &success, cub->spawn_x, cub->spawn_y);
 	if (success == 0)
 	{
-		show_map(cub->map);
+		ft_show_map(cub->map);
 		return (0);
 	}
 	find_sprites(cub);

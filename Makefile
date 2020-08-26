@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/08/24 22:01:55 by nhariman      ########   odam.nl          #
+#    Updated: 2020/08/26 00:31:27 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,7 @@ $(NAME): $(OPARSER) $(OVALID) $(OERROR) $(ORAYCAST) srcs/libft/libft.a libmlx.dy
 	@$(COMPILE) $(OPARSER) $(OVALID) $(OERROR) $(ORAYCAST) srcs/libft/libft.a libmlx.dylib -o $@
 
 libmlx.dylib:
-	@cd srcs/mlx_beta && $(MAKE) && mv libmlx.dylib ../../
+	@cd old_cub3d/srcs/mlx_beta && $(MAKE) && mv libmlx.dylib ../../../
 
 srcs/libft/libft.a:
 	@cd srcs/libft && $(MAKE)

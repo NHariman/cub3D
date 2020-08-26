@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/25 21:24:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 18:38:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ char			*ft_strlower(char *str)
 static size_t	input_check(int argc, char **argv, t_cub *cub)
 {
 	if (argc > 3 || argc == 1)
-		return (print_error(13));
+		return (ft_print_error(13));
 	else if (ft_strncmp(cub->path + (ft_strlen(cub->path) - 4), ".cub", 4)
 	&& ft_strncmp(cub->path + (ft_strlen(cub->path) - 5), ".cub/", 5))
-		return (print_error(14));
+		return (ft_print_error(14));
 	if (argc == 3 && (ft_strncmp(argv[2], "--save", 7)))
-		return (print_error(15));
+		return (ft_print_error(15));
 	else if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
 		cub->save = 1;
 	return (1);
@@ -54,13 +54,13 @@ int				main(int argc, char **argv)
 	cub->path = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
 	if (!input_check(argc, argv, cub))
 		return (0);
-	if (!file_parser(cub))
+	if (!ft_file_parser(cub))
 		return (0);
-	if (!data_parser(cub))
+	if (!ft_data_parser(cub))
 		return (0);
-	show_map(cub->map);
+	ft_show_map(cub->map);
 	if (cub->save)
-		save_bmp(cub);
-	start_mlx(cub);
+		ft_save_bmp(cub);
+	ft_start_mlx(cub);
 	return (0);
 }

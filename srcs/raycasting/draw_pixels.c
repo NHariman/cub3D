@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/20 21:37:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/21 17:01:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 22:15:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_draw_walls(t_cub *cub, int pov, int x)
 	{
 		texy = (int)cub->texxy.texpos & (cub->text[pov].height - 1);
 		cub->texxy.texpos += cub->texxy.step;
-		colour = cub->text[pov].addr[cub->text[pov].height * texy +
+		colour = cub->text[pov].addr[(cub->text[pov].line_length * texy / 4) +
 					cub->texxy.texx];
 		if (cub->side.side == 1)
 			colour = (colour >> 1) & 8355711;
@@ -43,8 +43,8 @@ static void	ft_draw_sprites(t_cub *cub, int vmovescreen, int stripe)
 				128 + cub->sp.spriteheight * 128;
 		cub->sp.texy = ((d * cub->text[SP].height) /
 						cub->sp.spriteheight) / 256;
-		colour = cub->text[SP].addr[cub->text[SP].width *
-					cub->sp.texy + cub->sp.texx];
+		colour = cub->text[SP].addr[(cub->text[SP].line_length *
+					cub->sp.texy / 4) + cub->sp.texx];
 		if (colour < 0)
 			colour = 0;
 		if (colour > 0)

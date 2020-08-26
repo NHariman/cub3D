@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 21:48:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/21 21:16:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 20:37:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int			exit_program(t_cub *cub)
 {
 	mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
+	free(cub);
 	exit(0);
 }
 
@@ -60,7 +61,7 @@ static int			release_keys(int keycode, t_cub *cub)
 	return (0);
 }
 
-void				get_key_input(t_cub *cub)
+void				ft_get_key_input(t_cub *cub)
 {
 	mlx_hook(cub->mlx.win, 2, 1L << 1, press_keys, cub);
 	mlx_hook(cub->mlx.win, 3, 1L << 1, release_keys, cub);

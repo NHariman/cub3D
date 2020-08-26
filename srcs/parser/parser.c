@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 22:17:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/07 20:26:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 18:30:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		count_newline(const char *str)
 	return (n);
 }
 
-char			**create_array(char *str, int len)
+char			**ft_create_array(char *str, int len)
 {
 	int		i;
 	int		j;
@@ -63,18 +63,18 @@ char			**create_array(char *str, int len)
 	return (arr);
 }
 
-int				file_parser(t_cub *cub)
+int				ft_file_parser(t_cub *cub)
 {
 	int		fd;
 
 	fd = open(cub->path, O_RDONLY);
 	if (get_next_line(fd, &cub->file) == -1)
-		return (print_error(18));
+		return (ft_print_error(18));
 	cub->filesize = count_newline(cub->file);
 	if (cub->filesize == 1)
-		return (print_error(23));
-	cub->filearr = create_array(cub->file, cub->filesize);
+		return (ft_print_error(23));
+	cub->filearr = ft_create_array(cub->file, cub->filesize);
 	if (cub->filearr == NULL)
-		return (print_error(17));
+		return (ft_print_error(17));
 	return (1);
 }

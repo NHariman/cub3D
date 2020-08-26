@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 17:59:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/17 22:44:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 18:30:28 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void		empty_check(t_check *check)
+void		ft_empty_check(t_check *check)
 {
 	check->res = 0;
 	check->north = 0;

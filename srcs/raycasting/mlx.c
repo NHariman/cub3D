@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/16 17:38:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/24 22:01:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 20:40:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_set_start_values(t_cub *cub)
 	cub->set.posx = (double)cub->spawn_x + 0.5;
 	cub->set.posy = (double)cub->spawn_y + 0.5;
 	ft_set_cam_pov(cub);
-	setup_sp(cub);
+	ft_setup_sp(cub);
 }
 
 static void	ft_get_window_size(void *mlx, t_cub *cub)
@@ -44,7 +44,7 @@ static void	ft_get_window_size(void *mlx, t_cub *cub)
 
 static int	render_next_frame(t_cub *cub)
 {
-	get_key_input(cub);
+	ft_get_key_input(cub);
 	if (cub->keys.confirm_press == 0)
 		return (0);
 	ft_movement(cub);
@@ -65,19 +65,22 @@ static int	render_next_frame(t_cub *cub)
 	return (0);
 }
 
-void		start_mlx(t_cub *cub)
+void		ft_start_mlx(t_cub *cub)
 {
 	cub->mlx.mlx = mlx_init();
 	if (!cub->mlx.mlx)
-		exit(print_error(19));
+		exit(ft_print_error(19));
 	ft_get_window_size(cub->mlx.mlx, cub);
 	cub->mlx.win =
 		mlx_new_window(cub->mlx.mlx, cub->res_x, cub->res_y, "Cub3D");
 	if (!cub->mlx.win)
-		exit(print_error(20));
+		exit(ft_print_error(20));
 	ft_create_img(cub);
-	if (!set_textures(cub))
-		exit(1);
+	ft_printf("WARNING\n");
+	ft_printf(
+	"Not All pngs and xpms from the internet are read correctly by mlx.\n");
+	if (!ft_set_textures(cub))
+		exit(0);
 	ft_set_start_values(cub);
 	ft_render_frame(cub);
 	mlx_loop_hook(cub->mlx.mlx, render_next_frame, cub);

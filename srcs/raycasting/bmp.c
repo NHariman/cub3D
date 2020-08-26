@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/15 22:20:36 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/22 01:06:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 20:39:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void			create_image(t_cub *cub, int x, int y)
 	cub->mlx.img =
 		mlx_new_image(cub->mlx.mlx, x, y);
 	if (!cub->mlx.img)
-		exit(print_error(20));
+		exit(ft_print_error(20));
 	cub->mlx.img_addr = mlx_get_data_addr(cub->mlx.img,
 		&cub->mlx.img_bits_per_pixel, &cub->mlx.line_length,
 			&cub->mlx.endian);
@@ -78,20 +78,20 @@ static void			save_to_screenshot(t_cub *cub, int fd, int sizex, int sizey)
 	}
 }
 
-void				save_bmp(t_cub *cub)
+void				ft_save_bmp(t_cub *cub)
 {
 	int			fd;
 
 	fd = open("screen.bmp", O_RDWR | O_CREAT, 0666);
 	if (fd < 0)
-		exit(print_error(26));
+		exit(ft_print_error(26));
 	cub->res_x = cub->res_x > 16384 ? 16384 : cub->res_x;
 	cub->res_y = cub->res_y > 16384 ? 16384 : cub->res_y;
 	cub->mlx.mlx = mlx_init();
 	if (!cub->mlx.mlx)
-		exit(print_error(19));
-	if (!set_textures(cub))
-		exit(1);
+		exit(ft_print_error(19));
+	if (!ft_set_textures(cub))
+		exit(0);
 	create_image(cub, cub->res_x, cub->res_y);
 	save_to_screenshot(cub, fd, cub->res_x, cub->res_y);
 	exit(0);

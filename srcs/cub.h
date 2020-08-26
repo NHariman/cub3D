@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/06 21:06:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/25 21:14:54 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 18:40:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,15 +223,15 @@ typedef struct	s_gnl
 ** found in checker.c and parser.c, folder: PARSER
 */
 int				get_next_line(int fd, char **line);
-int				file_parser(t_cub *cub);
-int				data_parser(t_cub *cub);
-char			**create_array(char *str, int len);
+int				ft_file_parser(t_cub *cub);
+int				ft_data_parser(t_cub *cub);
+char			**ft_create_array(char *str, int len);
 
 /*
 ** functions that empty and free structs,
 ** found in clear_structs.c, folder: ERRORS
 */
-void			empty_check(t_check *check);
+void			ft_empty_check(t_check *check);
 
 /*
 ** input sanitation
@@ -243,71 +243,71 @@ char			*ft_strlower(char *str);
 ** functions that save data into struct
 ** found in savers.c, folder: SRCS
 */
-char			*save_path(char *str, int i, t_check *check);
-int				save_texture(char *str, t_cub *cub, t_check *check);
-int				save_res(const char *str, t_cub *cub, t_check *check);
-int				save_colours(const char *str, t_cub *cub, t_check *check);
-int				save_rgb(const char *str, t_rgb *rgb);
+char			*ft_save_path(char *str, int i, t_check *check);
+int				ft_save_texture(char *str, t_cub *cub, t_check *check);
+int				ft_save_res(const char *str, t_cub *cub, t_check *check);
+int				ft_save_colours(const char *str, t_cub *cub, t_check *check);
+int				ft_save_rgb(const char *str, t_rgb *rgb);
 
 /*
 ** functions that check if input is valid
 ** found in valid_input.c, folder VALID_INPUT
 */
-int				find_res_y(const char *str);
-int				valid_res_input(const char *str);
-int				valid_rgb_input(const char *str);
-int				valid_rgb_values(t_rgb *rgb);
-int				valid_map(t_cub *cub);
-int				complete_input_data(t_check *check);
-int				map_len(char **map, int type);
+int				ft_find_res_y(const char *str);
+int				ft_valid_res_input(const char *str);
+int				ft_valid_rgb_input(const char *str);
+int				ft_valid_rgb_values(t_rgb *rgb);
+int				ft_valid_map(t_cub *cub);
+int				ft_complete_input_data(t_check *check);
+int				ft_map_len(char **map, int type);
 
 /*
 ** functions that check if the map received is valid
 ** found in floodfill.c, folder VALID_INPUT
 */
-void			floodfill_map(char **map, int *success, int x, int y);
+void			ft_floodfill_map(char **map, int *success, int x, int y);
 
 /*
 ** actually gets int value of rgb
 */
-int				get_hex(int r, int g, int b);
+int				ft_get_hex(int r, int g, int b);
 
 /*
 ** sprite handling, finds sprites and puts them in an array
 ** from furthest sprite to closest based on POV
 */
-void			count_sprites(t_cub *cub);
-void			floodfill_no(t_cub *cub, int x, int y, int nb);
-void			floodfill_so(t_cub *cub, int x, int y, int nb);
-void			floodfill_ea(t_cub *cub, int x, int y, int nb);
-void			floodfill_we(t_cub *cub, int x, int y, int nb);
+void			ft_count_sprites(t_cub *cub);
+void			ft_floodfill_no(t_cub *cub, int x, int y, int nb);
+void			ft_floodfill_so(t_cub *cub, int x, int y, int nb);
+void			ft_floodfill_ea(t_cub *cub, int x, int y, int nb);
+void			ft_floodfill_we(t_cub *cub, int x, int y, int nb);
 /*
 ** error messages, found in error_messages.c, map_errors.c
 ** folder ERRORS/
 */
-int				print_error(int num);
-int				fd_errors(int num, int type);
-int				check_noise(char **map);
-void			show_map(char **map);
-int				show_file_error(char **file, int error);
-int				you_can_never_print_too_many_errors(int num);
+int				ft_print_error(int num);
+int				ft_fd_errors(int num, int type);
+int				ft_check_noise(char **map);
+void			ft_show_map(char **map);
+int				ft_show_file_error(char **file, int error);
+int				ft_you_can_never_print_too_many_errors(int num);
 
 /*
 ** raycasting functions, set up raycasting initials
 ** found in: mlx.c, set_spawnpoint.c
 ** folder RAYCASTING/
 */
-void			start_mlx(t_cub *cub);
+void			ft_start_mlx(t_cub *cub);
 void			ft_set_start_values(t_cub *cub);
 void			ft_set_cam_pov(t_cub *cub);
-void			setup_sp(t_cub *cub);
+void			ft_setup_sp(t_cub *cub);
 void			ft_create_img(t_cub *cub);
 
 /*
 ** finds key input, found in key_input.c
 ** folder RAYCASTING/
 */
-void			get_key_input(t_cub *cub);
+void			ft_get_key_input(t_cub *cub);
 
 /*
 ** components to render image
@@ -315,7 +315,7 @@ void			get_key_input(t_cub *cub);
 ** 				raycast_walls.c
 ** folder RAYCASTING/
 */
-int				set_textures(t_cub *cub);
+int				ft_set_textures(t_cub *cub);
 void			ft_render_frame(t_cub *cub);
 void			my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void			ft_colour_background(t_cub *cub);
@@ -332,7 +332,7 @@ void			ft_movement(t_cub *cub);
 ** save bmp image when --save is used, found in: bmp.c
 ** folder RAYCASTING/
 */
-void			save_bmp(t_cub *cub);
+void			ft_save_bmp(t_cub *cub);
 /*
 ** calc components of walls, found in calc_walls.c
 ** folder RAYCASTING/

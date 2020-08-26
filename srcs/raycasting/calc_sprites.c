@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/17 22:25:46 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/20 22:28:43 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 18:10:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void		ft_calc_sp_xy(t_cub *cub, int i)
 	cub->sp.transformy = cub->sp.invdet *
 			(-cub->set.planey * cub->sp.spritex + cub->set.planex *
 				cub->sp.spritey);
-	cub->sp.spritescreenx = (int)(cub->res_x / 2) *
-							(1 + cub->sp.transformx / cub->sp.transformy);
+	cub->sp.spritescreenx = (int)((cub->res_x / 2) *
+							(1 + cub->sp.transformx / cub->sp.transformy));
 }
 
 void		ft_calc_sp_draw(t_cub *cub, int vmovescreen)
 {
-	cub->sp.spriteheight = fabs((int)cub->res_y / (cub->sp.transformy)) / VDIV;
+	cub->sp.spriteheight = abs((int)(cub->res_y / (cub->sp.transformy))) / VDIV;
 	cub->sp.drawstarty = -cub->sp.spriteheight / 2 + cub->res_y / 2
 							+ vmovescreen;
 	if (cub->sp.drawstarty < 0)
@@ -52,7 +52,7 @@ void		ft_calc_sp_draw(t_cub *cub, int vmovescreen)
 	cub->sp.drawendy = cub->sp.spriteheight / 2 + cub->res_y / 2 + vmovescreen;
 	if (cub->sp.drawendy >= cub->res_y)
 		cub->sp.drawendy = cub->res_y - 1;
-	cub->sp.spritewidth = fabs((int)cub->res_y / (cub->sp.transformy)) / UDIV;
+	cub->sp.spritewidth = abs((int)(cub->res_y / (cub->sp.transformy))) / UDIV;
 	cub->sp.drawstartx = -(cub->sp.spritewidth) / 2 + cub->sp.spritescreenx;
 	if (cub->sp.drawstartx < 0)
 		cub->sp.drawstartx = 0;

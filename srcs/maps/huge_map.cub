@@ -1,15 +1,15 @@
 
-NO srcs/pics/angery.png     
+NO ./srcs/pics/angery.png     
 
-SO srcs/pics/crai.png 
-WE            srcs/pics/bluestone.png
+SO ./srcs/pics/crai.png 
+WE            ./srcs/pics/bluestone.png
 
 R 1920 1080
 
-EA srcs/pics/dead.png
+EA ./srcs/pics/dead.png
 
 
-S srcs/pics/dead.png
+S ./srcs/pics/dead.png
 
 
 F 252,252,252

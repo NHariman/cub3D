@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/16 21:03:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/25 22:04:23 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/26 18:39:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-char	*save_path(char *str, int i, t_check *check)
+char	*ft_save_path(char *str, int i, t_check *check)
 {
 	str = ft_strtrim(ft_strlower(str), " \n");
 	if (i == NO)
@@ -28,48 +28,48 @@ char	*save_path(char *str, int i, t_check *check)
 	return (str);
 }
 
-int		save_texture(char *str, t_cub *cub, t_check *check)
+int		ft_save_texture(char *str, t_cub *cub, t_check *check)
 {
 	if (!ft_strncmp(str, "NO ", 3) && !check->north)
-		cub->textures[NO] = save_path(str + 3, NO, check);
+		cub->textures[NO] = ft_save_path(str + 3, NO, check);
 	else if (!ft_strncmp(str, "SO ", 3) && !check->south)
-		cub->textures[SO] = save_path(str + 3, SO, check);
+		cub->textures[SO] = ft_save_path(str + 3, SO, check);
 	else if (!ft_strncmp(str, "WE ", 3) && !check->west)
-		cub->textures[WE] = save_path(str + 3, WE, check);
+		cub->textures[WE] = ft_save_path(str + 3, WE, check);
 	else if (!ft_strncmp(str, "EA ", 3) && !check->east)
-		cub->textures[EA] = save_path(str + 3, EA, check);
+		cub->textures[EA] = ft_save_path(str + 3, EA, check);
 	else if (!ft_strncmp(str, "S ", 2) && !check->sprite)
-		cub->textures[SP] = save_path(str + 1, SP, check);
+		cub->textures[SP] = ft_save_path(str + 1, SP, check);
 	else
-		return (print_error(1));
+		return (ft_print_error(1));
 	return (1);
 }
 
-int		save_res(const char *str, t_cub *cub, t_check *check)
+int		ft_save_res(const char *str, t_cub *cub, t_check *check)
 {
 	int		i;
 
 	i = 0;
 	if (check->res)
-		return (print_error(2));
-	check->res = valid_res_input(str);
+		return (ft_print_error(2));
+	check->res = ft_valid_res_input(str);
 	if (check->res == -1)
-		return (print_error(3));
+		return (ft_print_error(3));
 	cub->res_x = ft_atoi(str);
 	if (cub->res_x == 0)
-		return (print_error(31));
+		return (ft_print_error(31));
 	if (cub->res_x < 0)
 		cub->res_x = 2147483647;
-	i = find_res_y(str);
+	i = ft_find_res_y(str);
 	cub->res_y = ft_atoi(str + i);
 	if (cub->res_y == 0)
-		return (print_error(32));
+		return (ft_print_error(32));
 	if (cub->res_y < 0)
 		cub->res_y = 2147483647;
 	return (1);
 }
 
-int		save_rgb(const char *str, t_rgb *rgb)
+int		ft_save_rgb(const char *str, t_rgb *rgb)
 {
 	int		i;
 
@@ -93,17 +93,17 @@ int		save_rgb(const char *str, t_rgb *rgb)
 	return (1);
 }
 
-int		save_colours(const char *str, t_cub *cub, t_check *check)
+int		ft_save_colours(const char *str, t_cub *cub, t_check *check)
 {
 	int		hex;
 	t_rgb	rgb;
 
-	if (!valid_rgb_input(str + 1))
-		return (print_error(4));
-	save_rgb(str + 1, &rgb);
-	if (!valid_rgb_values(&rgb))
-		return (print_error(5));
-	hex = get_hex(rgb.r, rgb.g, rgb.b);
+	if (!ft_valid_rgb_input(str + 1))
+		return (ft_print_error(4));
+	ft_save_rgb(str + 1, &rgb);
+	if (!ft_valid_rgb_values(&rgb))
+		return (ft_print_error(5));
+	hex = ft_get_hex(rgb.r, rgb.g, rgb.b);
 	if (!ft_strncmp(str, "F", 1) && !check->floor)
 	{
 		cub->floor = hex;
@@ -115,6 +115,6 @@ int		save_colours(const char *str, t_cub *cub, t_check *check)
 		check->ceiling = 1;
 	}
 	else
-		return (print_error(5));
+		return (ft_print_error(5));
 	return (1);
 }
