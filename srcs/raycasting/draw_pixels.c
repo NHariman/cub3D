@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/20 21:37:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/26 22:15:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/08/28 02:39:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,18 @@ void		ft_draw_walls(t_cub *cub, int pov, int x)
 
 	while (cub->draw.drawstart < cub->draw.drawend)
 	{
-		texy = (int)cub->texxy.texpos & (cub->text[pov].height - 1);
+		if (cub->text[pov].width > cub->res_x ||
+			cub->text[pov].height > cub->res_y)
+			texy =
+			((int)cub->texxy.texpos) & (cub->text[pov].line_length - 1) * 4;
+		else
+			texy =
+				((int)cub->texxy.texpos) & ((cub->text[pov].line_length) - 1);
 		cub->texxy.texpos += cub->texxy.step;
 		colour = cub->text[pov].addr[(cub->text[pov].line_length * texy / 4) +
 					cub->texxy.texx];
+		if (colour < 0)
+			colour = 0;
 		if (cub->side.side == 1)
 			colour = (colour >> 1) & 8355711;
 		my_mlx_pixel_put(&cub->mlx, x, cub->draw.drawstart, colour);
@@ -43,8 +51,12 @@ static void	ft_draw_sprites(t_cub *cub, int vmovescreen, int stripe)
 				128 + cub->sp.spriteheight * 128;
 		cub->sp.texy = ((d * cub->text[SP].height) /
 						cub->sp.spriteheight) / 256;
-		colour = cub->text[SP].addr[(cub->text[SP].line_length *
+		if (cub->sp.texx >= 0 && cub->sp.texy >= 0 &&
+			cub->sp.texx < cub->text[SP].width)
+			colour = cub->text[SP].addr[(cub->text[SP].line_length *
 					cub->sp.texy / 4) + cub->sp.texx];
+		else
+			colour = 0;
 		if (colour < 0)
 			colour = 0;
 		if (colour > 0)

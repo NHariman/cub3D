@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/07/06 21:16:18 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/08/26 18:38:56 by nhariman      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub.h"
+
+char			*ft_strlower(char *str)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (str[i])
+	{
+		str[i] = ft_tolower(str[i]);
+		i++;
+	}
+	if (str[ft_strlen(str) - 1] == '/')
+	{
+		tmp = ft_substr(str, 0, ft_strlen(str) - 1);
+		str = tmp;
+		free(tmp);
+	}
+	return (str);
+}
+
+static size_t	input_check(int argc, char **argv, t_cub *cub)
+{
+	if (argc > 3 || argc == 1)
+		return (ft_print_error(13));
+	else if (ft_strncmp(cub->path + (ft_strlen(cub->path) - 4), ".cub", 4)
+	&& ft_strncmp(cub->path + (ft_strlen(cub->path) - 5), ".cub/", 5))
+		return (ft_print_error(14));
+	if (argc == 3 && (ft_strncmp(argv[2], "--save", 7)))
+		return (ft_print_error(15));
+	else if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
+		cub->save = 1;
+	return (1);
+}
+
+int				main(int argc, char **argv)
+{
+	t_cub	*cub;
+
+	cub = ft_calloc(1, sizeof(t_cub));
+	cub->path = argv[1] ? ft_strdup(ft_strlower(argv[1])) : NULL;
+	if (!input_check(argc, argv, cub))
+		return (0);
+	if (!ft_file_parser(cub))
+		return (0);
+	if (!ft_data_parser(cub))
+		return (0);
+	ft_show_map(cub->map);
+	if (cub->save)
+		ft_save_bmp(cub);
+	ft_start_mlx(cub);
+	return (0);
+}
