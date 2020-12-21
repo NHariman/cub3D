@@ -12,7 +12,15 @@ A bmp screenshot can also be made using:<br>
   <code>./cub3D [map_name].cub --save</code></p>
   <h3>Make your own maps</h3>
   <p>
-Maps are made with the extension .cub and must have a minimum format of:<br>
+Maps are made with the extension .cub and must have a minimum format, as sampled below.<br>
+    R = Resolution size, x by y. If bigger than screen or too small to play the screen will autoresize to something playable.<br>
+   NO = North wall texture<br>
+    SO = South wall texture<br>
+    WE = West wall texture<br>
+    EA = East wall texture<br>
+    S = Sprite texture<br>
+    F = floor colour in rgb format, separated by commas.<br>
+    C = ceiling colour in rgb format, separated by commas.<br>
 <code>R 1920 1080</code><br>
 <code>NO ./path_to_the_north_texture</code><br>
 <code>SO ./path_to_the_south_texture</code><br>
@@ -36,3 +44,4 @@ Maps are made with the extension .cub and must have a minimum format of:<br>
 <code>11110111 1110101 101111010001</code><br>
 <code>11111111 1111111 111111111111</code>
   </p>
+  <p>In the event of an error, the program will alert you to where the error in your map is.</p>
